@@ -245,6 +245,7 @@ export default function IslandsPage() {
                 Explore Karragarra Island →
               </div>
             </div>
+            </div>
           </Link>
         </div>
 

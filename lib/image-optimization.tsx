@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 
 /**
  * Image optimization utilities for the Bay Islands
@@ -16,7 +17,7 @@ export interface OptimizedImageProps {
   objectFit?: 'cover' | 'contain' | 'fill' | 'scale-down';
   objectPosition?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 /**

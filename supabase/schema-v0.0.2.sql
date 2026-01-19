@@ -10,7 +10,7 @@ CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 CREATE TABLE IF NOT EXISTS public.users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   email TEXT UNIQUE NOT NULL,
-  username TEXT UNIQUE NOT NULL,
+  username TEXT UNIQUE,
   avatar_url TEXT,
   bio TEXT,
   is_premium BOOLEAN DEFAULT FALSE,
@@ -18,6 +18,33 @@ CREATE TABLE IF NOT EXISTS public.users (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- Sync auth.users → public.users for profile data
+CREATE OR REPLACE FUNCTION public.handle_auth_user()
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO public.users (id, email, username, avatar_url, created_at, updated_at)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    COALESCE(NEW.raw_user_meta_data->>'username', NEW.email),
+    NEW.raw_user_meta_data->>'avatar_url',
+    NOW(),
+    NOW()
+  )
+  ON CONFLICT (id) DO UPDATE
+    SET email = EXCLUDED.email,
+        username = COALESCE(EXCLUDED.username, public.users.username),
+        avatar_url = COALESCE(EXCLUDED.avatar_url, public.users.avatar_url),
+        updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+AFTER INSERT OR UPDATE ON auth.users
+FOR EACH ROW EXECUTE PROCEDURE public.handle_auth_user();
 
 -- Directory listings table (businesses)
 CREATE TABLE IF NOT EXISTS public.directory_listings (
@@ -254,11 +281,20 @@ CREATE POLICY "Comments are viewable by everyone" ON public.comments
 CREATE POLICY "Users can create comments" ON public.comments
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 
+CREATE POLICY "Users can update their own comments" ON public.comments
+  FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own comments" ON public.comments
+  FOR DELETE USING (auth.uid() = user_id);
+
 CREATE POLICY "Favorites are private" ON public.favorites
   FOR SELECT USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can create favorites" ON public.favorites
   FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own favorites" ON public.favorites
+  FOR DELETE USING (auth.uid() = user_id);
 
 -- Saved searches
 CREATE POLICY "Saved searches are private" ON public.saved_searches
@@ -266,3 +302,6 @@ CREATE POLICY "Saved searches are private" ON public.saved_searches
 
 CREATE POLICY "Users can save searches" ON public.saved_searches
   FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own saved searches" ON public.saved_searches
+  FOR DELETE USING (auth.uid() = user_id);

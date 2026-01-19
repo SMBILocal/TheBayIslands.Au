@@ -3,7 +3,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { AuthProvider } from '../lib/AuthContext'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'thebayislands.au – Local hub for SMBI',
   description: 'Articles, jobs, events, business directory and classifieds for the Bay Islands region.'
 }

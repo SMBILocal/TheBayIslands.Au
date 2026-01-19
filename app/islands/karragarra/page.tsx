@@ -1,370 +1,445 @@
-'use client';
+import { generatePageMetadata } from '@/lib/metadata';
 
-import { useState } from 'react';
-import Link from 'next/link';
+export const metadata = generatePageMetadata({
+  title: 'Karragarra Island - Secluded Island Paradise',
+  description: 'Discover Karragarra Island - the smallest inhabited island in South Moreton Bay with 200 residents. Experience peace, seclusion, pristine beaches, and authentic island living. Ferry from Redland Bay.',
+  keywords: [
+    'Karragarra Island',
+    'Karragarra Island Queensland',
+    'Karragarra Island real estate',
+    'Karragarra Island ferry',
+    'smallest SMBI island',
+    'secluded island living',
+    'peaceful Queensland islands',
+    'Moreton Bay islands'
+  ],
+});
 
 export default function KarragarraIslandPage() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'living' | 'attractions' | 'community'>('overview');
-
   return (
-    <main>
+    <main style={{ minHeight: '100vh' }}>
       {/* Hero Section */}
-      <div style={{
-        background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
+      <section style={{ 
+        background: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)', 
+        padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem)',
         color: 'white',
-        padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 20px)',
-        marginBottom: 40
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <h1 style={{ fontSize: 'clamp(2em, 5vw, 48px)', fontWeight: 800, margin: '0 0 16px 0' }}>
-          Karragarra Island 🏝️
-        </h1>
-        <p style={{ fontSize: 'clamp(1em, 2vw, 18px)', opacity: 0.95, margin: '0 0 24px 0', maxWidth: 600 }}>
-          The smallest and most secluded of the bay islands. Ultimate peace, pristine natural beauty, and sophisticated island living for those seeking genuine seclusion and tranquility.
-        </p>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
-            👥 Population: 200 (smallest island)
-          </span>
-          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
-            🚢 70-80 min ferry from Redland Bay
-          </span>
-          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
-            📍 55km from Brisbane CBD
-          </span>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <h1 style={{ 
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)', 
+            fontWeight: 800, 
+            marginBottom: '1.5rem',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+          }}>
+            Karragarra Island
+          </h1>
+          <p style={{ 
+            fontSize: 'clamp(1.125rem, 2.8vw, 1.5rem)', 
+            lineHeight: 1.6,
+            maxWidth: '800px',
+            opacity: 0.95
+          }}>
+            The smallest inhabited island - a secluded paradise with pristine beaches, tight-knit community, and escape from the crowds. Population 200.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
+              🚢 60-70 min ferry from Redland Bay
+            </span>
+            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
+              👨‍👩‍👧‍👦 Population: 200
+            </span>
+            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
+              📍 52km from Brisbane CBD
+            </span>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 20px) clamp(40px, 8vw, 60px)' }}>
+      {/* Tab Navigation */}
+      <nav style={{ 
+        background: '#f7fafc', 
+        borderBottom: '2px solid #e2e8f0',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
+          <div style={{ display: 'flex', gap: '2rem', overflowX: 'auto' }}>
+            {['Overview', 'Living Here', 'Things To Do', 'Community'].map((tab) => (
+              <a
+                key={tab}
+                href={`#${tab.toLowerCase().replace(' ', '-')}`}
+                style={{
+                  padding: '1rem 0.5rem',
+                  fontSize: 'clamp(0.9rem, 2.2vw, 1rem)',
+                  fontWeight: 600,
+                  color: '#2d3748',
+                  textDecoration: 'none',
+                  borderBottom: '3px solid transparent',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {tab}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Content */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem)' }}>
         
-        {/* Breadcrumb */}
-        <div style={{ fontSize: '0.9em', color: '#64748b', marginBottom: 32, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-          <Link href="/" style={{ color: '#7c3aed' }}>Home</Link>
-          <span>/</span>
-          <Link href="/islands" style={{ color: '#7c3aed' }}>Islands</Link>
-          <span>/</span>
-          <span>Karragarra Island</span>
-        </div>
+        {/* Overview */}
+        <section id="overview" style={{ marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
+            Welcome to Karragarra Island
+          </h2>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
+            Karragarra Island is the smallest and most secluded of the four inhabited Southern Moreton Bay Islands. With just 200 permanent residents, it offers an ultra-peaceful lifestyle for those seeking genuine escape from modern life's hustle. The island's pristine white-sand beach, crystal-clear waters, and lack of commercial development make it a true hidden paradise.
+          </p>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
+            This is not the island for those seeking shops, restaurants, or entertainment - Karragarra is for nature lovers, peace seekers, and those who want to know every neighbor by name. The absence of commercial facilities means a self-sufficient, close-knit community where neighbors genuinely help each other.
+          </p>
 
-        {/* Tabs */}
-        <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 16px)', marginBottom: 32, flexWrap: 'wrap', borderBottom: '2px solid #e2e8f0' }}>
-          {(['overview', 'living', 'attractions', 'community'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: '12px 20px',
-                background: 'none',
-                border: 'none',
-                borderBottom: activeTab === tab ? '3px solid #7c3aed' : 'none',
-                color: activeTab === tab ? '#7c3aed' : '#64748b',
-                fontWeight: activeTab === tab ? 600 : 400,
-                cursor: 'pointer',
-                fontSize: 'clamp(0.9em, 1.5vw, 15px)',
-                transition: 'all 0.3s'
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+            {[
+              { icon: '🏝️', title: 'Ultimate Seclusion', desc: 'Just 200 residents - true island solitude' },
+              { icon: '🏖️', title: 'Pristine Beach', desc: 'White sand, clear water, safe swimming enclosure' },
+              { icon: '🤝', title: 'Tight-Knit Community', desc: 'Everyone knows everyone - genuine island spirit' },
+              { icon: '🌅', title: 'Natural Paradise', desc: 'Unspoiled coastal bushland & native wildlife' },
+              { icon: '🔇', title: 'Total Peace', desc: 'No traffic noise, no crowds, no commercial bustle' },
+              { icon: '🏡', title: 'Affordable Entry', desc: 'Most affordable island properties in SMBI' },
+            ].map((feature) => (
+              <div key={feature.title} style={{ 
+                padding: '1.5rem', 
+                background: 'white', 
+                borderRadius: '0.75rem',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{feature.icon}</div>
+                <h3 style={{ fontSize: 'clamp(1.1rem, 2.7vw, 1.25rem)', fontWeight: 600, color: '#2d3748', marginBottom: '0.5rem' }}>
+                  {feature.title}
+                </h3>
+                <p style={{ fontSize: 'clamp(0.9rem, 2.2vw, 1rem)', color: '#4a5568', lineHeight: 1.6 }}>
+                  {feature.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Living Here */}
+        <section id="living-here" style={{ marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
+            Living on Karragarra Island
+          </h2>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🏠 Housing & Real Estate
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            Karragarra offers the most affordable entry to island living in SMBI. Median house prices range <strong>$220,000-$320,000</strong> (2026), with vacant land from $80,000-$150,000.
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Land sizes:</strong> Typically 600-1200m² (generous island blocks)</li>
+            <li><strong>Property types:</strong> Modest 2-3 bedroom homes, weekenders, vacant land</li>
+            <li><strong>Rental market:</strong> Very limited - most residents are owner-occupiers ($200-280/week when available)</li>
+            <li><strong>Water & power:</strong> Mains electricity (reliable), rainwater tanks essential (no town water)</li>
+            <li><strong>Sewerage:</strong> Septic systems (all properties)</li>
+            <li><strong>Building considerations:</strong> Ferry freight costs for materials, limited local trades</li>
+          </ul>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
+            <em><strong>Note:</strong> Karragarra is best suited for those who value peace over convenience. Minimal on-island services means self-sufficiency is essential.</em>
+          </p>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🛒 Shopping & Services (Off-Island)
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            Karragarra has <strong>no shops, restaurants, or commercial facilities</strong>. Residents rely on:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Russell Island:</strong> 15-20 min ferry for groceries (Supa IGA), pharmacy, medical centre, post office</li>
+            <li><strong>Macleay Island:</strong> 20-25 min ferry for additional options</li>
+            <li><strong>Mainland:</strong> Redland Bay, Victoria Point for major shopping (70-90 min total including ferry)</li>
+            <li><strong>Online shopping:</strong> Delivered to Redland Bay Marina for pickup on return ferry</li>
+            <li><strong>Bulk buying:</strong> Most residents shop weekly/fortnightly, stock pantries well</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🏥 Healthcare Access
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Nearest medical centre:</strong> Russell Island Medical Centre (15-20 min ferry)</li>
+            <li><strong>Emergency:</strong> Call 000 - QAS operates on all islands, ferry ambulance transport if required</li>
+            <li><strong>Hospital:</strong> Redland Hospital, Cleveland (1.5-2 hours total travel time)</li>
+            <li><strong>Pharmacy:</strong> Russell Island Pharmacy (15-20 min ferry)</li>
+            <li><strong>Suitability:</strong> Not ideal for those with serious medical conditions requiring frequent specialist care</li>
+            <li><strong>Telehealth:</strong> Good NBN coverage allows online consultations</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🎓 Education (Off-Island)
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            No school on Karragarra. Families with school-age children use:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Primary:</strong> Russell Island State School or Macleay Island State School (ferry + short travel)</li>
+            <li><strong>Secondary:</strong> Cleveland/Victoria Point High Schools (ferry + bus, 70-90 min each way)</li>
+            <li><strong>School transport:</strong> Free student ferry passes, but long daily commute (not ideal for young children)</li>
+            <li><strong>Home schooling:</strong> Popular option among island families</li>
+            <li><strong>Consideration:</strong> Many families with young kids choose Russell or Macleay for easier school access</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🚢 Ferry Access & Transport
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Ferry route:</strong> Redland Bay Marina → Karragarra Island (60-70 minutes) - longest ferry ride of all islands</li>
+            <li><strong>Operators:</strong> Stradbroke Ferries, TransLink SeaLink</li>
+            <li><strong>Frequency:</strong> 3-5 services daily (fewer than larger islands)</li>
+            <li><strong>Fares:</strong> Adult return $40-50, child $25-35, monthly pass $500-700</li>
+            <li><strong>Vehicle access:</strong> Vehicle barge available but expensive ($200-280 return) - book well ahead</li>
+            <li><strong>On-island transport:</strong> Cars, golf carts, bikes, walking (island only 2km × 1.2km)</li>
+            <li><strong>Inter-island ferries:</strong> Can connect to Russell/Macleay for shopping (15-25 min)</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🌐 Internet & Communications
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>NBN:</strong> Fixed Wireless available (good speeds 25-50 Mbps)</li>
+            <li><strong>Mobile coverage:</strong> Telstra (good), Optus (patchy), Vodafone (very limited)</li>
+            <li><strong>Postal services:</strong> Use Russell Island Post Office or Redland Bay</li>
+            <li><strong>Parcel delivery:</strong> Most couriers deliver to Redland Bay Marina only</li>
+          </ul>
+
+          <div style={{ background: '#fff7ed', padding: '1.5rem', borderRadius: '0.5rem', borderLeft: '4px solid #f59e0b', marginTop: '2rem' }}>
+            <h4 style={{ fontSize: 'clamp(1.1rem, 2.7vw, 1.2rem)', fontWeight: 600, color: '#92400e', marginBottom: '0.75rem' }}>
+              ⚠️ Is Karragarra Right for You?
+            </h4>
+            <p style={{ fontSize: 'clamp(0.95rem, 2.3vw, 1.05rem)', lineHeight: 1.7, color: '#78350f' }}>
+              <strong>Best suited for:</strong> Retirees, remote workers, nature lovers, those seeking complete privacy and peace, people comfortable with self-sufficiency.
+              <br /><br />
+              <strong>Not ideal for:</strong> Families with young school children (long commutes), those requiring frequent medical care, people who want walkable shops/restaurants, anyone uncomfortable with isolation.
+              <br /><br />
+              <strong>Consider Russell or Macleay instead if you want:</strong> On-island shops, medical centres, restaurants, schools, or more ferry services.
+            </p>
+          </div>
+        </section>
+
+        {/* Things To Do */}
+        <section id="things-to-do" style={{ marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
+            Things To Do on Karragarra Island
+          </h2>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🏖️ Karragarra Beach & Swimming Enclosure
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            The island's crown jewel - a pristine white-sand beach with:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Netted swimming area:</strong> Safe year-round swimming for all ages</li>
+            <li><strong>Crystal-clear water:</strong> Some of the clearest water in Moreton Bay</li>
+            <li><strong>White sand:</strong> Soft, clean beach perfect for sunbathing</li>
+            <li><strong>Picnic facilities:</strong> Basic BBQs, shelters, toilets (maintained by residents)</li>
+            <li><strong>Low crowds:</strong> Often have entire beach to yourself on weekdays</li>
+            <li><strong>Shallow waters:</strong> Gentle slope, ideal for kids and non-swimmers</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🥾 Karragarra Esplanade Walk
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            A peaceful 2.2km waterfront walking path featuring:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li>Stunning coastal views of Moreton Bay and shipping channels</li>
+            <li>Native coastal vegetation - banksias, she-oaks, pandanus</li>
+            <li>Birdwatching opportunities (sea eagles, ospreys, herons)</li>
+            <li>Historical markers about island settlement</li>
+            <li>Quiet meditation and reflection spots</li>
+            <li>Sunrise and sunset viewpoints</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🎣 Fishing & Boating
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Beach fishing:</strong> Whiting, bream, flathead from shore</li>
+            <li><strong>Rock fishing:</strong> Northern rocky outcrops for bream and trevally</li>
+            <li><strong>Kayak fishing:</strong> Calm protected waters, excellent for kayak anglers</li>
+            <li><strong>Boat ramp access:</strong> Small boat launch on eastern side</li>
+            <li><strong>Crabbing:</strong> Mud crabs in tidal creeks and channels</li>
+            <li><strong>Quiet waters:</strong> Far fewer boats than Russell/Macleay</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🌿 Nature & Wildlife
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Birdwatching:</strong> White-bellied sea eagles, ospreys, pelicans, cormorants, terns</li>
+            <li><strong>Marine life:</strong> Dolphins regularly visit bay, occasional dugong sightings, green turtles</li>
+            <li><strong>Native mammals:</strong> Wallabies, echidnas, possums (less human interaction = more wildlife)</li>
+            <li><strong>Bush walking:</strong> Informal tracks through coastal bushland</li>
+            <li><strong>Stargazing:</strong> Minimal light pollution - exceptional night sky viewing</li>
+            <li><strong>Wildflowers:</strong> Spring coastal heath blooms (Sept-Nov)</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            📚 Peace, Quiet & Reflection
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
+            Karragarra's greatest attraction is what it doesn't have - noise, traffic, crowds, commercialism. It's perfect for:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li>Writers, artists, and creative retreat</li>
+            <li>Meditation and yoga practice</li>
+            <li>Disconnecting from technology</li>
+            <li>Reading, thinking, peaceful living</li>
+            <li>Photography - landscapes, wildlife, astrophotography</li>
+          </ul>
+        </section>
+
+        {/* Community */}
+        <section id="community" style={{ marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
+            Karragarra Island Community
+          </h2>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🤝 Community Spirit
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
+            With just 200 residents, Karragarra has the strongest sense of community in SMBI:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Everyone knows everyone:</strong> Genuine neighborly spirit and mutual support</li>
+            <li><strong>Helping hands:</strong> Residents assist with ferry runs, tool sharing, emergency help</li>
+            <li><strong>Informal gatherings:</strong> Beach BBQs, sunset drinks, impromptu get-togethers</li>
+            <li><strong>Christmas celebrations:</strong> Annual community gathering and carol singing</li>
+            <li><strong>Emergency preparedness:</strong> Residents look out for each other during storms, medical events</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🎉 Community Events (Occasional)
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Beach clean-ups:</strong> Quarterly environmental care days</li>
+            <li><strong>Christmas celebrations:</strong> December community gathering</li>
+            <li><strong>ANZAC Day:</strong> Small memorial service for veterans</li>
+            <li><strong>Informal BBQs:</strong> Resident-organized beach gatherings</li>
+            <li><strong>For more events:</strong> Many residents participate in Russell/Macleay island events (ferry across)</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            📞 Key Contacts & Services
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Emergency Services:</strong> Dial 000 (Police, Fire, Ambulance)</li>
+            <li><strong>Redland City Council:</strong> (07) 3829 8999 | <a href="https://www.redland.qld.gov.au" target="_blank" rel="noopener noreferrer" style={{ color: '#7c3aed', textDecoration: 'underline' }}>redland.qld.gov.au</a></li>
+            <li><strong>Ferry Bookings:</strong> Stradbroke Ferries (07) 3286 1964 | TransLink 13 12 30</li>
+            <li><strong>Nearest medical:</strong> Russell Island Medical Centre (07) 3409 7333 (15-min ferry)</li>
+            <li><strong>Community info:</strong> Check Russell/Macleay community boards or Facebook groups</li>
+          </ul>
+
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
+            🔧 Trades & Services
+          </h3>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1rem' }}>
+            Very few trades based on Karragarra. For services, residents use:
+          </p>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem', marginBottom: '1.5rem' }}>
+            <li><strong>Russell/Macleay tradespeople:</strong> Willing to ferry to Karragarra (expect ferry surcharge)</li>
+            <li><strong>Mainland contractors:</strong> For specialized work (account for ferry time in quotes)</li>
+            <li><strong>DIY culture:</strong> Many residents are handy and self-sufficient</li>
+            <li><strong>Directory:</strong> Browse <a href="/directory?location=karragarra" style={{ color: '#7c3aed', textDecoration: 'underline' }}>The Bay Islands Directory</a> for services</li>
+          </ul>
+        </section>
+
+        {/* CTA Section */}
+        <section style={{ 
+          background: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)', 
+          padding: 'clamp(2rem, 5vw, 3rem)', 
+          borderRadius: '1rem',
+          color: 'white',
+          marginTop: '4rem'
+        }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', fontWeight: 700, marginBottom: '1rem', color: 'white' }}>
+            Experience True Island Solitude
+          </h2>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, marginBottom: '1.5rem', opacity: 0.95 }}>
+            If peace, nature, and community are your priorities, Karragarra Island might be your perfect island home. Explore affordable properties and connect with the small but welcoming community.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            <a 
+              href="/directory?location=karragarra" 
+              style={{ 
+                background: 'white', 
+                color: '#7c3aed', 
+                padding: '0.75rem 1.5rem', 
+                borderRadius: '0.5rem', 
+                fontWeight: 600, 
+                textDecoration: 'none',
+                display: 'inline-block'
               }}
             >
-              {tab === 'overview' && 'Overview'}
-              {tab === 'living' && 'Living Here'}
-              {tab === 'attractions' && 'Things To Do'}
-              {tab === 'community' && 'Community'}
-            </button>
-          ))}
-        </div>
-
-        {/* Overview Tab Content */}
-        {activeTab === 'overview' && (
-          <div style={{ marginBottom: 60 }}>
-            <h2>Welcome to Karragarra Island</h2>
-            <p>Karragarra Island (postcode 4184) is the smallest and most secluded of the four major Redland Bay islands, with only 200 residents. It's a place where genuine seclusion meets sophisticated island living. Perfect for those seeking peace, privacy, and authentic island tranquility away from crowds.</p>
-            <h3>Quick Facts</h3>
-            <ul style={{ columns: 2, gap: '2em' }}>
-              <li>Population: 200 (smallest island)</li>
-              <li>Postcode: 4184</li>
-              <li>Ferry Time: 70-80 mins from Redland Bay</li>
-              <li>Distance: 55km from Brisbane CBD</li>
-              <li>Community Focus: Ultimate seclusion & peace</li>
-              <li>Character: Pristine beaches, self-sufficient lifestyle</li>
-              <li>Lifestyle: Quietest island with genuine tranquility</li>
-              <li>Best For: Those seeking peace & privacy</li>
-            </ul>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(20px, 4vw, 32px)', marginTop: 32, marginBottom: 60 }}>
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🚢 Getting To Karragarra Island</h3>
-                <p><strong>Karragarra is the most remote of the bay islands.</strong> Access is exclusively by ferry:</p>
-                <ul>
-                  <li><strong>Ferry Service:</strong> Stradbroke Ferries operates daily services</li>
-                  <li><strong>Journey Time:</strong> 70-80 minutes from Redland Bay Marina</li>
-                  <li>Ferry frequency: 2-3 daily services (tide & weather dependent)</li>
-                  <li>Return cost: ~$45-55 per adult</li>
-                  <li><strong>Note:</strong> Check timetables due to weather sensitivity</li>
-                  <li><strong>Book ahead:</strong> <a href="https://translink.com.au" target="_blank" rel="noopener" style={{ color: '#7c3aed' }}>TransLink SeaLink</a></li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🏖️ Pristine Natural Beauty</h3>
-                <p><strong>Karragarra's greatest asset is its untouched natural environment:</strong></p>
-                <ul>
-                  <li>Pristine white sandy beaches with few visitors</li>
-                  <li>Crystal clear waters ideal for swimming</li>
-                  <li>Minimal light pollution – ideal stargazing</li>
-                  <li>Protected native vegetation & wildlife habitat</li>
-                  <li>Natural forest reserves for peaceful walks</li>
-                  <li>Secluded picnic & beach spots</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🛒 Shopping & Essential Services</h3>
-                <p><strong>Important:</strong> Services are limited on Karragarra. Plan ahead:</p>
-                <ul>
-                  <li><strong>Limited local store</strong> – basic groceries & supplies</li>
-                  <li>Most residents shop on mainland during ferry trips</li>
-                  <li>No supermarkets – plan grocery needs ahead</li>
-                  <li><strong>General services available:</strong> Post office, limited retail</li>
-                  <li>Ordering groceries & supplies online for island delivery is common</li>
-                  <li><strong>Recommendation:</strong> Weekly mainland shopping trips typical</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🏥 Healthcare & Emergency Services</h3>
-                <p>Healthcare requires mainland access for major services:</p>
-                <ul>
-                  <li><strong>Island Clinic:</strong> Limited basic medical services</li>
-                  <li><strong>Doctor visits:</strong> Scheduled mainland appointments</li>
-                  <li><strong>Emergencies:</strong> QAS helicopter evacuation if needed</li>
-                  <li><strong>Major care:</strong> Redland Hospital (80+ mins via ferry)</li>
-                  <li><strong>Important:</strong> Serious health issues require mainland access</li>
-                  <li><strong>Telehealth:</strong> Limited; unreliable internet at times</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🌿 Environmental Consciousness</h3>
-                <ul>
-                  <li><strong>Self-sufficiency culture:</strong> Water tank systems standard</li>
-                  <li>Solar power widely adopted</li>
-                  <li>Waste minimization & composting emphasis</li>
-                  <li>Strong conservation & environmental protection ethos</li>
-                  <li>Community commitment to preserving pristine environment</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>⚡ Utilities & Infrastructure</h3>
-                <ul>
-                  <li><strong>Electricity:</strong> Island grid with solar supplement common</li>
-                  <li><strong>Water:</strong> Tank-based systems (winter/summer management)</li>
-                  <li><strong>Internet:</strong> Limited; some locations unreliable</li>
-                  <li><strong>Phone:</strong> Mobile coverage inconsistent; landline recommended</li>
-                  <li><strong>Waste:</strong> Limited council collection – self-disposal typical</li>
-                  <li><strong>Note:</strong> Plan utilities carefully before moving</li>
-                </ul>
-              </div>
-            </div>
+              Local Services
+            </a>
+            <a 
+              href="/classifieds?location=karragarra" 
+              style={{ 
+                background: 'rgba(255,255,255,0.2)', 
+                color: 'white', 
+                padding: '0.75rem 1.5rem', 
+                borderRadius: '0.5rem', 
+                fontWeight: 600, 
+                textDecoration: 'none',
+                display: 'inline-block',
+                border: '2px solid white'
+              }}
+            >
+              View Properties
+            </a>
+            <a 
+              href="/islands" 
+              style={{ 
+                background: 'rgba(255,255,255,0.2)', 
+                color: 'white', 
+                padding: '0.75rem 1.5rem', 
+                borderRadius: '0.5rem', 
+                fontWeight: 600, 
+                textDecoration: 'none',
+                display: 'inline-block',
+                border: '2px solid white'
+              }}
+            >
+              Compare All Islands
+            </a>
           </div>
-        )}
+        </section>
 
-        {/* Living Tab */}
-        {activeTab === 'living' && (
-          <div style={{ marginBottom: 60 }}>
-            <h2>Living on Karragarra Island</h2>
-            <div style={{ background: '#fff5e6', padding: '24px', borderRadius: 12, marginBottom: 32, borderLeft: '4px solid #7c3aed' }}>
-              <p style={{ margin: 0 }}>
-                <strong>⚠️ Important Lifestyle Considerations:</strong> Karragarra Island is for those who genuinely value seclusion and are prepared for the challenges of remote island living. Regular mainland access for shopping, healthcare, and services is essential. Not recommended for those needing frequent access to mainland amenities.
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(20px, 4vw, 32px)' }}>
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🏡 Housing & Property</h3>
-                <ul>
-                  <li>Limited housing stock (only 200 residents)</li>
-                  <li>Purchase price: $350k–$500k+ (premium seclusion pricing)</li>
-                  <li>Rental: Limited availability; $400–700/week when available</li>
-                  <li><Link href="/classifieds" style={{ color: '#7c3aed' }}>Browse rentals & sales</Link></li>
-                  <li>Most expensive island per capita</li>
-                  <li>Properties often sited for privacy & ocean views</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>📚 Education</h3>
-                <ul>
-                  <li><strong>Primary:</strong> Russell Island State School (via ferry shuttle)</li>
-                  <li><strong>Secondary:</strong> Mainland schools (requires daily ferry commute)</li>
-                  <li>Family education planning essential</li>
-                  <li>Home schooling considered by many families</li>
-                  <li><strong>Challenge:</strong> 70-80 min daily commute for school-aged children</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>💰 Cost of Living</h3>
-                <p>Karragarra has highest living costs of the islands:</p>
-                <ul>
-                  <li>Groceries: 10-15% higher (limited selection, transport costs)</li>
-                  <li>Services: Premium pricing for island delivery & specialist work</li>
-                  <li>Fuel: Barge transport costs affect pricing</li>
-                  <li>Council rates: Higher for remote island property</li>
-                  <li>Plan for bulk shopping trips to mainland</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🚗 Transport & Ferry Access</h3>
-                <ul>
-                  <li><strong>Ferry:</strong> Only access (70-80 mins each way)</li>
-                  <li><strong>Frequency:</strong> 2-3 daily services (weather dependent)</li>
-                  <li><strong>Redland Bay Marina:</strong> Car park, shuttle services</li>
-                  <li><strong>Vehicle Barge:</strong> Available for vehicle transport</li>
-                  <li><strong>Connectivity:</strong> Plan for ferry cancellations due to weather</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>👥 Community & Social Life</h3>
-                <ul>
-                  <li>Tight-knit community of 200 residents</li>
-                  <li>Very quiet; limited social venues</li>
-                  <li>Community events & gatherings few but meaningful</li>
-                  <li>Island life requires self-entertainment & independence</li>
-                  <li>Social connections form around shared lifestyle values</li>
-                </ul>
-              </div>
-
-              <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                <h3>🔧 Self-Sufficiency Matters</h3>
-                <ul>
-                  <li><strong>Power:</strong> Solar systems common; island grid unreliable</li>
-                  <li><strong>Water:</strong> Rainwater tanks essential; droughts require management</li>
-                  <li><strong>Maintenance:</strong> Skilled trades expensive; DIY culture</li>
-                  <li><strong>Food:</strong> Home gardens & preservation common</li>
-                  <li><strong>Lifestyle:</strong> Preparation & planning are essential</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Attractions Tab */}
-        {activeTab === 'attractions' && (
-          <div style={{ marginBottom: 60 }}>
-            <h2>Things To Do on Karragarra Island</h2>
-            <p>Karragarra Island is a place for contemplation, nature immersion, and peaceful activities. The appeal lies in solitude, natural beauty, and genuine escape from busy mainland life.</p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(20px, 4vw, 32px)', marginBottom: 32 }}>
-              {[
-                { icon: '🏖️', title: 'Pristine Beaches', desc: 'Untouched sandy beaches with crystal clear water – perfect for peaceful swimming and solitude.' },
-                { icon: '🚶', title: 'Nature Walks & Trails', desc: 'Scenic walking trails through native forest with native wildlife and peaceful forest immersion.' },
-                { icon: '🎣', title: 'Fishing & Water Sports', desc: 'Excellent fishing spots, kayaking, and boating in pristine waters away from crowds.' },
-                { icon: '🌅', title: 'Sunrise & Stargazing', desc: 'Minimal light pollution provides exceptional stargazing and stunning sunrises over the bay.' },
-                { icon: '📸', title: 'Photography & Nature', desc: 'Photographer\'s paradise with pristine landscapes, wildlife, and natural light.' },
-                { icon: '🧘', title: 'Meditation & Peace', desc: 'Ultimate retreat for meditation, contemplation, and genuine peaceful solitude.' },
-              ].map((item, i) => (
-                <div key={i} style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12 }}>
-                  <h3 style={{ fontSize: 'clamp(1.1em, 1.8vw, 18px)', margin: '0 0 12px 0' }}>{item.icon} {item.title}</h3>
-                  <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Community Tab */}
-        {activeTab === 'community' && (
-          <div style={{ marginBottom: 60 }}>
-            <h2>Karragarra Island Community</h2>
-            <div style={{ background: '#f1f5f9', padding: 'clamp(20px, 4vw, 24px)', borderRadius: 12, marginBottom: 32 }}>
-              <h3 style={{ marginTop: 0 }}>🤝 Community Character</h3>
-              <p>Karragarra's 200-person community is close-knit, environmentally conscious, and united by a desire for peaceful island living. The community values self-sufficiency, environmental protection, and neighborly support.</p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(20px, 4vw, 32px)' }}>
-              <div>
-                <h3>👥 Social & Community Services</h3>
-                <ul>
-                  <li><strong>Community Hall</strong> – Regular gatherings & events</li>
-                  <li><strong>Island Residents Association</strong> – Advocacy & coordination</li>
-                  <li><strong>Shared Values:</strong> Environmental protection & sustainability</li>
-                  <li><strong>Events:</strong> Monthly community gatherings (limited)</li>
-                  <li><strong>Cooperation:</strong> Strong reciprocal support system</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3>🛍️ Retail & Services</h3>
-                <ul>
-                  <li><strong>General Store</strong> – Limited groceries & supplies</li>
-                  <li><strong>Post Office</strong> – Mail & basic services</li>
-                  <li><strong>Pharmacy:</strong> Limited; mainland prescription pickup typical</li>
-                  <li><strong>Note:</strong> Most services require mainland trips</li>
-                  <li><Link href="/directory?location=karragarra" style={{ color: '#7c3aed' }}>Browse full directory →</Link></li>
-                </ul>
-              </div>
-
-              <div>
-                <h3>⚡ Community Focus</h3>
-                <ul>
-                  <li><strong>Environmental Stewardship</strong> – Strong conservation ethic</li>
-                  <li><strong>Self-Reliance:</strong> DIY culture & mutual help</li>
-                  <li><strong>Sustainability:</strong> Solar/water systems widely adopted</li>
-                  <li><strong>Connection:</strong> Strong bonds among residents</li>
-                  <li><strong>Seclusion Philosophy:</strong> Shared desire for peace & privacy</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3>🌍 Island Lifestyle Philosophy</h3>
-                <ul>
-                  <li><strong>Simplicity:</strong> Embracing simpler, slower lifestyle</li>
-                  <li><strong>Independence:</strong> Self-sufficiency is valued</li>
-                  <li><strong>Nature Connection:</strong> Living harmoniously with environment</li>
-                  <li><strong>Community Values:</strong> Cooperation & mutual support</li>
-                  <li><strong>Peace Priority:</strong> Preserving quiet island character</li>
-                </ul>
-              </div>
-            </div>
-
-            <div style={{ background: '#fff5e6', padding: '24px', borderRadius: 12, marginTop: 32, borderLeft: '4px solid #7c3aed' }}>
-              <h4 style={{ marginTop: 0 }}>Is Karragarra Right For You?</h4>
-              <p><strong>✅ Best if you:</strong> Value peace, privacy, & seclusion over convenience; are prepared for remote island life; enjoy self-sufficiency & independence; want genuine escape from crowds; embrace environmental sustainability</p>
-              <p><strong>❌ May be challenging if you:</strong> Need frequent mainland access; require extensive medical services; want variety of shopping/dining; prefer active social scene; work away from home regularly; struggle with isolation</p>
-            </div>
-          </div>
-        )}
-
-        {/* Related Islands */}
-        <div style={{ background: '#f1f5f9', padding: 'clamp(32px, 8vw, 48px)', borderRadius: 16, marginBottom: 40 }}>
-          <h3 style={{ marginTop: 0, marginBottom: 20 }}>Explore Other Islands</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(16px, 3vw, 24px)' }}>
-            <Link href="/islands/russell" style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: 600, padding: '12px', background: 'white', borderRadius: 8, border: '1px solid #e2e8f0', display: 'block', textAlign: 'center' }}>
-              🏝️ Russell Island
-            </Link>
-            <Link href="/islands/macleay" style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: 600, padding: '12px', background: 'white', borderRadius: 8, border: '1px solid #e2e8f0', display: 'block', textAlign: 'center' }}>
-              🏝️ Macleay Island
-            </Link>
-            <Link href="/islands/lamb" style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: 600, padding: '12px', background: 'white', borderRadius: 8, border: '1px solid #e2e8f0', display: 'block', textAlign: 'center' }}>
-              🏝️ Lamb Island
-            </Link>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)', color: 'white', padding: 'clamp(32px, 8vw, 48px)', borderRadius: 16, textAlign: 'center' }}>
-          <h3 style={{ margin: '0 0 12px 0' }}>Ready for Ultimate Island Seclusion?</h3>
-          <p style={{ margin: '0 0 20px 0', opacity: 0.9 }}>Karragarra Island: Where genuine peace meets pristine natural beauty</p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/classifieds" style={{ background: 'white', color: '#7c3aed', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 600 }}>
-              View Rentals & Sales
-            </Link>
-            <Link href="/jobs" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 600, border: '2px solid white' }}>
-              Browse Remote Work
-            </Link>
-          </div>
-        </div>
+        {/* Related Links */}
+        <section style={{ marginTop: '3rem', padding: '2rem', background: '#f7fafc', borderRadius: '0.5rem', borderLeft: '4px solid #7c3aed' }}>
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginBottom: '1rem' }}>
+            🔗 Related Resources
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem' }}>
+            <li><a href="/islands" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Explore All Bay Islands</a></li>
+            <li><a href="/islands/russell" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Russell Island Guide (more services)</a></li>
+            <li><a href="/islands/macleay" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Macleay Island Guide (golf, dining)</a></li>
+            <li><a href="/islands/lamb" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Lamb Island Guide (family-friendly)</a></li>
+            <li><a href="/articles/transport-on-islands" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Ferry Timetables & Transport</a></li>
+            <li><a href="/articles/tourism-attractions" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Tourist Attractions Across SMBI</a></li>
+          </ul>
+        </section>
       </div>
     </main>
   );

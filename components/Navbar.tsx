@@ -17,11 +17,6 @@ export default function Navbar(){
   return (
     <header className="site-header">
       <div className="container nav">
-        <div className="brand">
-          <Link href="/">
-            <Image src="/logo.svg" alt="The Bay Islands" width={180} height={50} />
-          </Link>
-        </div>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>

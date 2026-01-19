@@ -12,15 +12,26 @@ export default function MacleayIslandPage() {
       <div style={{
         background: 'linear-gradient(135deg, #c85a17 0%, #0066b3 100%)',
         color: 'white',
-        padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 20px)',
+        padding: 'clamp(30px, 6vw, 50px) clamp(16px, 5vw, 20px)',
         marginBottom: 40
       }}>
         <h1 style={{ fontSize: 'clamp(2em, 5vw, 48px)', fontWeight: 800, margin: '0 0 16px 0' }}>
           Macleay Island 🌊
         </h1>
-        <p style={{ fontSize: 'clamp(1em, 2vw, 18px)', opacity: 0.95, margin: 0, maxWidth: 600 }}>
+        <p style={{ fontSize: 'clamp(1em, 2vw, 18px)', opacity: 0.95, margin: '0 0 24px 0', maxWidth: 600 }}>
           A tranquil island retreat with world-class golf, waterfront dining, and natural beauty — perfect for active living and recreation.
         </p>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            👨‍👩‍👧‍👦 Population: 550
+          </span>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            🚢 50-60 min ferry from Redland Bay
+          </span>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            📍 25km from Brisbane CBD
+          </span>
+        </div>
       </div>
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 20px) clamp(40px, 8vw, 60px)' }}>
@@ -331,6 +342,20 @@ export default function MacleayIslandPage() {
               Local Events
             </Link>
           </div>
+        </div>
+
+        {/* Related Resources */}
+        <div style={{ marginTop: '3rem', padding: '2rem', background: '#f7fafc', borderRadius: '0.5rem', borderLeft: '4px solid #c85a17' }}>
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginBottom: '1rem' }}>
+            🔗 Related Resources
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem' }}>
+            <li><Link href="/islands/russell" style={{ color: '#c85a17', textDecoration: 'underline' }}>Russell Island</Link></li>
+            <li><Link href="/islands/lamb" style={{ color: '#c85a17', textDecoration: 'underline' }}>Lamb Island</Link></li>
+            <li><Link href="/islands/karragarra" style={{ color: '#c85a17', textDecoration: 'underline' }}>Karragarra Island</Link></li>
+            <li><Link href="/areas/mainland/redland-bay" style={{ color: '#c85a17', textDecoration: 'underline' }}>Redland Bay (ferry terminal)</Link></li>
+            <li><Link href="/directory?location=macleay" style={{ color: '#c85a17', textDecoration: 'underline' }}>Macleay Island Directory</Link></li>
+          </ul>
         </div>
       </div>
     </main>

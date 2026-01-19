@@ -38,83 +38,95 @@ export default function TopAuthBar() {
           padding: '0 20px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
           gap: '24px',
           minHeight: '32px',
         }}
       >
-        {user ? (
-          <>
-            <span style={{ opacity: 0.7, fontSize: '12px' }}>
-              👤 Logged in: <strong>{user.email}</strong>
-            </span>
-            <button
-              onClick={handleLogout}
-              style={{
-                background: '#f3f4f6',
-                color: '#333',
-                border: '1px solid #d1d5db',
-                padding: '4px 12px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '12px',
-                fontWeight: '500',
-                transition: 'all 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#e5e7eb';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#f3f4f6';
-              }}
+        {/* Logo on left */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <svg width="160" height="44" viewBox="0 0 180 50" style={{ display: 'block' }}>
+            <text x="5" y="32" fontSize="24" fontWeight="800" fill="#0066b3">TheBay</text>
+            <text x="96" y="32" fontSize="24" fontWeight="800" fill="#c85a17">Islands</text>
+            <text x="5" y="45" fontSize="11" fill="#64748b">.Au</text>
+          </svg>
+        </Link>
+
+        {/* Auth links on right */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          {user ? (
+            <>
+              <span style={{ opacity: 0.7, fontSize: '12px' }}>
+                👤 Logged in: <strong>{user.email}</strong>
+              </span>
+              <button
+                onClick={handleLogout}
+                style={{
+                  background: '#f3f4f6',
+                  color: '#333',
+                  border: '1px solid #d1d5db',
+                  padding: '4px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  fontWeight: '500',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#e5e7eb';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#f3f4f6';
+                }}
             >
               🚪 Logout
             </button>
-          </>
-        ) : (
-          <>
-            <Link
-              href="/login"
-              style={{
-                color: '#0066b3',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontWeight: '500',
-                transition: 'opacity 0.2s',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-            >
-              🔑 Login
-            </Link>
-            <div style={{ width: '1px', height: '16px', background: '#d1d5db' }}></div>
-            <Link
-              href="/signup"
-              style={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontWeight: '600',
-                background: '#0066b3',
-                padding: '4px 12px',
-                borderRadius: '4px',
-                transition: 'all 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#005299';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#0066b3';
-              }}
-            >
-              ✨ Sign Up
-            </Link>
-          </>
-        )}
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                style={{
+                  color: '#0066b3',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontWeight: '500',
+                  transition: 'opacity 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+              >
+                🔑 Login
+              </Link>
+              <div style={{ width: '1px', height: '16px', background: '#d1d5db' }}></div>
+              <Link
+                href="/signup"
+                style={{
+                  color: 'white',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontWeight: '600',
+                  background: '#0066b3',
+                  padding: '4px 12px',
+                  borderRadius: '4px',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#005299';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#0066b3';
+                }}
+              >
+                ✨ Sign Up
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

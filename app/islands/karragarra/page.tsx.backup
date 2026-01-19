@@ -19,7 +19,7 @@ export default function KarragarraIslandPage() {
           Karragarra Island 🦘
         </h1>
         <p style={{ fontSize: 'clamp(1em, 2vw, 18px)', opacity: 0.95, margin: '0 0 24px 0', maxWidth: 600 }}>
-          The smallest inhabited island - a secluded paradise with pristine beaches, tight-knit community, and escape from the crowds.
+          The smallest inhabited island - a secluded paradise with pristine beaches, tight-knit community, and escape from the crowds. Population 200.
         </p>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
@@ -70,6 +70,7 @@ export default function KarragarraIslandPage() {
             </button>
           ))}
         </div>
+
         {/* Tab Content - Overview */}
         <div style={{ display: activeTab === 'overview' ? 'block' : 'none', marginBottom: 60 }}>
           <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
@@ -112,7 +113,7 @@ export default function KarragarraIslandPage() {
 
         {/* Tab Content - Living Here */}
         <div style={{ display: activeTab === 'living' ? 'block' : 'none', marginBottom: 60 }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Living on Karragarra Island
           </h2>
 
@@ -213,7 +214,7 @@ export default function KarragarraIslandPage() {
 
         {/* Tab Content - Things To Do */}
         <div style={{ display: activeTab === 'attractions' ? 'block' : 'none', marginBottom: 60 }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Things To Do on Karragarra Island
           </h2>
 
@@ -288,8 +289,8 @@ export default function KarragarraIslandPage() {
 
         {/* Tab Content - Directory */}
         <div style={{ display: activeTab === 'directory' ? 'block' : 'none', marginBottom: 60 }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #7c3aed', paddingBottom: '0.5rem' }}>
-            Karragarra Island Community
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
+            Karragarra Island Community & Directory
           </h2>
 
           <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginTop: '2rem', marginBottom: '1rem' }}>
@@ -342,109 +343,35 @@ export default function KarragarraIslandPage() {
           </ul>
         </div>
 
-        {/* Featured Businesses */}
-        <div style={{ marginBottom: 44, marginTop: 44 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, gap: 12, flexWrap: 'wrap' }}>
-            <h3 style={{ margin: 0, fontSize: 20, fontWeight: 700 }}>Featured Local Services</h3>
-            <Link href="/upgrade" style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>Feature your business →</Link>
-          </div>
-          {/* Top featured - full width */}
-          <div style={{ marginBottom: 14, background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: 24, borderRadius: 12, border: '2px solid #0ea5e9', display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ flex: '0 0 auto' }}>
-              <div style={{ width: 80, height: 80, background: '#0ea5e9', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>
-                ⛴️
-              </div>
-            </div>
-            <div style={{ flex: '1 1 300px' }}>
-              <h4 style={{ margin: '0 0 8px', fontSize: 22, fontWeight: 700, color: '#0c4a6e' }}>Sealink Ferry Service</h4>
-              <p style={{ margin: '0 0 12px', color: '#475569', lineHeight: 1.6 }}>Daily passenger & vehicle ferry service to Southern Moreton Bay Islands. Check timetables and book online.</p>
-              <Link href="/directory/sealink-ferry" style={{ display: 'inline-block', background: '#0ea5e9', color: 'white', padding: '8px 16px', borderRadius: 6, fontWeight: 600, textDecoration: 'none' }}>View Details →</Link>
-            </div>
-          </div>
-          {/* Grid of 4 */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
-            <div style={{ background: '#fef3c7', padding: 18, borderRadius: 12, border: '1px solid #fde68a' }}>
-              <div style={{ fontSize: 32, marginBottom: 8 }}>🏥</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Redland Hospital</h4>
-              <p style={{ margin: '0 0 10px', color: '#713f12', fontSize: 14, lineHeight: 1.5 }}>Emergency & healthcare services in Cleveland</p>
-              <Link href="/directory/redland-hospital" style={{ color: '#854d0e', fontWeight: 700, fontSize: 14 }}>View →</Link>
-            </div>
-            <div style={{ background: '#fee2e2', padding: 18, borderRadius: 12, border: '1px solid #fecaca' }}>
-              <div style={{ fontSize: 32, marginBottom: 8 }}>🚨</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Emergency Services</h4>
-              <p style={{ margin: '0 0 10px', color: '#991b1b', fontSize: 14, lineHeight: 1.5 }}>Dial 000 for Police, Fire, Ambulance</p>
-              <Link href="/articles/community-infrastructure" style={{ color: '#b91c1c', fontWeight: 700, fontSize: 14 }}>Learn More →</Link>
-            </div>
-            <div style={{ background: '#dcfce7', padding: 18, borderRadius: 12, border: '1px solid #bbf7d0' }}>
-              <div style={{ fontSize: 32, marginBottom: 8 }}>🏛️</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Karragarra Community Hall</h4>
-              <p style={{ margin: '0 0 10px', color: '#166534', fontSize: 14, lineHeight: 1.5 }}>Community events & meetings hub</p>
-              <Link href="/directory/karragarra-community-hall" style={{ color: '#15803d', fontWeight: 700, fontSize: 14 }}>View →</Link>
-            </div>
-            <div style={{ background: '#f3e8ff', padding: 18, borderRadius: 12, border: '1px solid #e9d5ff' }}>
-              <div style={{ fontSize: 32, marginBottom: 8 }}>🦘</div>
-              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Wildlife Conservation</h4>
-              <p style={{ margin: '0 0 10px', color: '#6b21a8', fontSize: 14, lineHeight: 1.5 }}>Protected native wildlife habitat</p>
-              <Link href="/articles/tourism-attractions" style={{ color: '#7c3aed', fontWeight: 700, fontSize: 14 }}>Learn More →</Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Explore More Islands */}
-        <div style={{ background: '#f1f5f9', padding: 'clamp(28px, 7vw, 40px)', borderRadius: 14, marginBottom: 44 }}>
-          <h3 style={{ marginTop: 0, marginBottom: 16, fontSize: 20, fontWeight: 700 }}>Explore more Bay Islands</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14 }}>
-            <Link href="/islands/russell" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏝️ Russell Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Island hub</div>
-            </Link>
-            <Link href="/islands/macleay" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏌️ Macleay Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Golf course & beaches</div>
-            </Link>
-            <Link href="/islands/lamb" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🌿 Lamb Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Peace & quiet</div>
-            </Link>
-            <Link href="/islands" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏝️ All Islands</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Compare all</div>
-            </Link>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <section style={{ 
+        {/* CTA Section */} 
           background: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)', 
           padding: 'clamp(2rem, 5vw, 3rem)', 
           borderRadius: '1rem',
           color: 'white',
-          marginTop: '4rem',
-          textAlign: 'center'
+          marginTop: '4rem'
         }}>
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', fontWeight: 700, marginBottom: '1rem', color: 'white' }}>
-            Discover Life on Karragarra Island
+            Experience True Island Solitude
           </h2>
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, marginBottom: '1.5rem', opacity: 0.95 }}>
-            Experience the serenity, community connection, and untouched nature of Queensland's most peaceful island. Explore homes for sale, local businesses, and upcoming community events.
+            If peace, nature, and community are your priorities, Karragarra Island might be your perfect island home. Explore affordable properties and connect with the small but welcoming community.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
-            <Link 
-              href="/events?location=karragarra" 
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            <a 
+              href="/directory?location=karragarra" 
               style={{ 
-                background: 'rgba(255,255,255,0.2)', 
-                color: 'white', 
+                background: 'white', 
+                color: '#7c3aed', 
                 padding: '0.75rem 1.5rem', 
                 borderRadius: '0.5rem', 
                 fontWeight: 600, 
                 textDecoration: 'none',
-                display: 'inline-block',
-                border: '2px solid white'
+                display: 'inline-block'
               }}
             >
-              View Events
-            </Link>
-            <Link 
+              Local Services
+            </a>
+            <a 
               href="/classifieds?location=karragarra" 
               style={{ 
                 background: 'rgba(255,255,255,0.2)', 
@@ -457,57 +384,44 @@ export default function KarragarraIslandPage() {
                 border: '2px solid white'
               }}
             >
-              View Classifieds
-            </Link>
-            <Link 
-              href="/directory?location=karragarra" 
-              style={{ 
-                background: 'white', 
-                color: '#7c3aed', 
-                padding: '0.75rem 1.5rem', 
-                borderRadius: '0.5rem', 
-                fontWeight: 600, 
-                textDecoration: 'none',
-                display: 'inline-block'
-              }}
-            >
-              Browse Local Directory
-            </Link>
+              View Properties
+            </a>
           </div>
-        </section>
+        </div>
 
-        {/* Explore More Islands */}
-        <div style={{ background: '#f1f5f9', padding: 'clamp(28px, 7vw, 40px)', borderRadius: 14, marginBottom: 44 }}>
-          <h3 style={{ marginTop: 0, marginBottom: 16, fontSize: 20, fontWeight: 700 }}>Explore more Bay Islands</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14 }}>
-            <Link href="/islands/russell" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏝️ Russell Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Island hub</div>
+        {/* Explore Other Islands */}
+        <div style={{ marginTop: '4rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 700, color: '#2d3748', marginBottom: '1.5rem', textAlign: 'center' }}>
+            Explore Other Islands
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            <Link href="/islands/russell" style={{ background: 'linear-gradient(135deg, #0066b3 0%, #c85a17 100%)', padding: '1.5rem', borderRadius: '0.75rem', color: 'white', textDecoration: 'none', textAlign: 'center', fontWeight: 600, fontSize: '1.125rem' }}>
+              🏝️ Russell Island
             </Link>
-            <Link href="/islands/macleay" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏌️ Macleay Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Golf course & beaches</div>
+            <Link href="/islands/macleay" style={{ background: 'linear-gradient(135deg, #c85a17 0%, #0066b3 100%)', padding: '1.5rem', borderRadius: '0.75rem', color: 'white', textDecoration: 'none', textAlign: 'center', fontWeight: 600, fontSize: '1.125rem' }}>
+              🏌️ Macleay Island
             </Link>
-            <Link href="/islands/lamb" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🌿 Lamb Island</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Peaceful & quiet</div>
+            <Link href="/islands/lamb" style={{ background: 'linear-gradient(135deg, #0f766e 0%, #134e4a 100%)', padding: '1.5rem', borderRadius: '0.75rem', color: 'white', textDecoration: 'none', textAlign: 'center', fontWeight: 600, fontSize: '1.125rem' }}>
+              🌿 Lamb Island
             </Link>
-            <Link href="/islands" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
-              <div>🏝️ All Islands</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Compare all</div>
+            <Link href="/islands" style={{ background: 'linear-gradient(135deg, #64748b 0%, #334155 100%)', padding: '1.5rem', borderRadius: '0.75rem', color: 'white', textDecoration: 'none', textAlign: 'center', fontWeight: 600, fontSize: '1.125rem' }}>
+              ⚖️ Compare All Islands
             </Link>
           </div>
         </div>
 
         {/* Related Links */}
-        <div style={{ padding: 20, background: '#f8fafc', borderRadius: 12, borderLeft: '4px solid #7c3aed' }}>
-          <h3 style={{ marginTop: 0, marginBottom: 12 }}>Related resources</h3>
-          <ul style={{ margin: 0, paddingLeft: 18, color: '#475569', lineHeight: 1.7 }}>
-            <li><Link href="/islands" style={{ color: '#7c3aed' }}>Explore All Bay Islands</Link></li>
-            <li><Link href="/islands/russell" style={{ color: '#7c3aed' }}>Russell Island Guide</Link></li>
-            <li><Link href="/islands/macleay" style={{ color: '#7c3aed' }}>Macleay Island Guide</Link></li>
-            <li><Link href="/islands/lamb" style={{ color: '#7c3aed' }}>Lamb Island Guide</Link></li>
-            <li><Link href="/articles/transport-on-islands" style={{ color: '#7c3aed' }}>Ferry Timetables & Transport</Link></li>
+        <div style={{ marginTop: '3rem', padding: '2rem', background: '#f7fafc', borderRadius: '0.5rem', borderLeft: '4px solid #7c3aed' }}>
+          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginBottom: '1rem' }}>
+            🔗 Related Resources
+          </h3>
+          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem' }}>
+            <li><Link href="/islands" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Explore All Bay Islands</Link></li>
+            <li><Link href="/islands/russell" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Russell Island Guide (more services)</Link></li>
+            <li><Link href="/islands/macleay" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Macleay Island Guide (golf, dining)</Link></li>
+            <li><Link href="/islands/lamb" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Lamb Island Guide (family-friendly)</Link></li>
+            <li><Link href="/articles/transport-on-islands" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Ferry Timetables & Transport</Link></li>
+            <li><Link href="/articles/tourism-attractions" style={{ color: '#7c3aed', textDecoration: 'underline' }}>Tourist Attractions Across SMBI</Link></li>
           </ul>
         </div>
       </div>

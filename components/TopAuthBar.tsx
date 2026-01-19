@@ -44,11 +44,12 @@ export default function TopAuthBar() {
         }}
       >
         {/* Logo on left */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <svg width="160" height="44" viewBox="0 0 180 50" style={{ display: 'block' }}>
-            <text x="5" y="32" fontSize="24" fontWeight="800" fill="#0066b3">TheBay</text>
-            <text x="96" y="32" fontSize="24" fontWeight="800" fill="#c85a17">Islands</text>
-            <text x="5" y="45" fontSize="11" fill="#64748b">.Au</text>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <svg width="160" height="32" viewBox="0 0 160 32" style={{ display: 'block' }}>
+            <text x="0" y="24" fontSize="20" fontWeight="800" fill="#0066b3">the</text>
+            <text x="35" y="24" fontSize="20" fontWeight="800" fill="#c85a17">bay</text>
+            <text x="70" y="24" fontSize="20" fontWeight="800" fill="#0066b3">islands</text>
+            <text x="140" y="24" fontSize="14" fill="#64748b" fontWeight="600">.au</text>
           </svg>
         </Link>
 

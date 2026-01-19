@@ -2,9 +2,20 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
+import { useEffect, useState } from 'react';
 
 export default function TopAuthBar() {
   const { user, signOut } = useAuth();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) return null;
 
   const handleLogout = async () => {
     await signOut();
@@ -105,15 +116,6 @@ export default function TopAuthBar() {
           </>
         )}
       </div>
-
-      {/* Mobile version - hidden on desktop */}
-      <style>{`
-        @media (max-width: 768px) {
-          div[data-auth-bar="true"] {
-            display: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -40,13 +40,16 @@ export default function Navbar(){
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: 'inherit',
+                fontSize: '14px',
+                fontWeight: '500',
                 fontFamily: 'inherit',
-                padding: '0',
+                padding: '10px 14px',
                 color: 'inherit',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px'
+                gap: '4px',
+                borderRadius: '8px',
+                transition: 'background 0.2s',
               }}
             >
               📍 Areas <span style={{ fontSize: '0.7em' }}>▼</span>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { businessCategories } from '@/lib/businessCategories';
 import BusinessCard from '@/components/BusinessCard';
 import FormModal from '@/components/FormModal';
 
@@ -9,10 +10,12 @@ interface Business {
   slug: string;
   name: string;
   category: string;
-  description: string;
+  description?: string;
   location?: string;
   phone?: string;
   email?: string;
+  status?: 'claimed' | 'unclaimed' | 'featured';
+  image?: string;
 }
 
 export default function DirectoryPage() {
@@ -21,6 +24,8 @@ export default function DirectoryPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showAddBusinessForm, setShowAddBusinessForm] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   useEffect(() => {
     async function fetchBusinesses() {
@@ -36,11 +41,16 @@ export default function DirectoryPage() {
     fetchBusinesses();
   }, []);
 
-  const filteredBusinesses = businesses.filter(biz =>
-    biz.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    biz.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (biz.description && biz.description.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const locations = Array.from(new Set(businesses.map((b) => b.location).filter(Boolean))).sort();
+
+  const filteredBusinesses = businesses
+    .filter(biz =>
+      biz.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      biz.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (biz.description && biz.description.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+    .filter(biz => !selectedCategory || biz.category === selectedCategory)
+    .filter(biz => !selectedLocation || (biz.location || '') === selectedLocation);
 
   return (
     <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
@@ -67,10 +77,86 @@ export default function DirectoryPage() {
               boxSizing: 'border-box'
             }}
           />
+          <select
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+            style={{
+              minWidth: 180,
+              padding: '14px 12px',
+              border: '1px solid #e2e8f0',
+              borderRadius: 12,
+              background: 'white',
+              color: '#0f172a',
+              fontWeight: 600
+            }}
+          >
+            <option value="">All Locations</option>
+            {locations.map(loc => (
+              <option key={loc} value={loc}>{loc}</option>
+            ))}
+          </select>
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            style={{
+              minWidth: 200,
+              padding: '14px 12px',
+              border: '1px solid #e2e8f0',
+              borderRadius: 12,
+              background: 'white',
+              color: '#0f172a',
+              fontWeight: 600
+            }}
+          >
+            <option value="">All Categories</option>
+            {businessCategories.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+          {(selectedCategory || selectedLocation || searchQuery) && (
+            <button
+              onClick={() => { setSelectedCategory(''); setSelectedLocation(''); setSearchQuery(''); }}
+              style={{
+                padding: '12px 14px',
+                background: 'transparent',
+                color: '#0ea5e9',
+                border: '1px solid #0ea5e9',
+                borderRadius: 10,
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              Clear
+            </button>
+          )}
           <div style={{ display: 'flex', gap: 8, background: 'white', padding: 4, borderRadius: 8, border: '1px solid #e2e8f0' }}>
             <button onClick={() => setViewMode('grid')} style={{ padding: '8px 16px', background: viewMode === 'grid' ? '#0ea5e9' : 'transparent', color: viewMode === 'grid' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 14 }}>⊞ Grid</button>
             <button onClick={() => setViewMode('list')} style={{ padding: '8px 16px', background: viewMode === 'list' ? '#0ea5e9' : 'transparent', color: viewMode === 'list' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 14 }}>☰ List</button>
           </div>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
+          {businessCategories.map(cat => {
+            const active = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(active ? '' : cat)}
+                style={{
+                  padding: '10px 14px',
+                  borderRadius: 24,
+                  border: active ? '1px solid #0ea5e9' : '1px solid #e2e8f0',
+                  background: active ? 'rgba(14,165,233,0.12)' : 'white',
+                  color: active ? '#0f172a' : '#475569',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  fontSize: 13
+                }}
+              >
+                {cat}
+              </button>
+            );
+          })}
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(16px, 4vw, 32px)' }}>
@@ -89,8 +175,10 @@ export default function DirectoryPage() {
                     description={biz.description}
                     location={biz.location}
                     phone={biz.phone}
+                    status={biz.status || 'claimed'}
                     href={`/directory/${biz.slug || biz.id}`}
-                    imageSrc={`https://picsum.photos/seed/biz-${biz.id}/400/300`}
+                    claimHref={`/upgrade?business=${biz.slug || biz.id}`}
+                    imageSrc={biz.status === 'unclaimed' ? undefined : biz.image}
                   />
                 ))}
               </div>
@@ -123,9 +211,9 @@ export default function DirectoryPage() {
 
             <div style={{ background: 'white', borderRadius: 12, padding: 'clamp(20px, 5vw, 24px)', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h4 style={{ fontSize: 'clamp(1em, 1.5vw, 16px)', fontWeight: 600, margin: '0 0 12px 0' }}>Popular Categories</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Cafe & Food', 'Marine & Water Sports', 'Healthcare', 'Real Estate', 'Hospitality'].map(cat => (
-                  <div key={cat} style={{ fontSize: 'clamp(0.9em, 1.5vw, 14px)', color: '#475569', padding: '8px 12px', background: '#f8fafc', borderRadius: 6 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 8 }}>
+                {businessCategories.slice(0, 12).map(cat => (
+                  <div key={cat} style={{ fontSize: 'clamp(0.9em, 1.5vw, 14px)', color: '#475569', padding: '10px 12px', background: '#f8fafc', borderRadius: 6 }}>
                     {cat}
                   </div>
                 ))}

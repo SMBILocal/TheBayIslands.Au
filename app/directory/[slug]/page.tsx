@@ -142,6 +142,12 @@ export default function BusinessDetail({ params }: { params: { slug: string } })
             </div>
           </div>
 
+          <button onClick={() => {
+            const url = new URL('/upgrade', window.location.origin);
+            url.searchParams.set('business', business.slug);
+            router.push(url.toString());
+          }} style={{ width: '100%', padding: 12, background: '#10b981', color: 'white', border: 'none', borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: 'pointer', marginBottom: 12 }}>Claim & Manage</button>
+
           <button style={{ width: '100%', padding: 12, background: 'white', color: '#0ea5e9', border: '2px solid #0ea5e9', borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>Share Business</button>
         </div>
       </div>

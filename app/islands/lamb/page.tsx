@@ -1,99 +1,78 @@
-import { generatePageMetadata } from '@/lib/metadata';
+'use client';
 
-export const metadata = generatePageMetadata({
-  title: 'Lamb Island - Community, Heritage & Island Living',
-  description: 'Discover Lamb Island - a peaceful Southern Moreton Bay island with 450 residents, rich pioneer heritage, community spirit, and family-friendly atmosphere. Ferry access from Redland Bay.',
-  keywords: [
-    'Lamb Island',
-    'Lamb Island Queensland',
-    'Lamb Island real estate',
-    'Lamb Island ferry',
-    'Lamb Island community',
-    'SMBI Lamb Island',
-    'island living Queensland',
-    'Moreton Bay islands'
-  ],
-});
+import { useState } from 'react';
+import Link from 'next/link';
 
 export default function LambIslandPage() {
+  const [activeTab, setActiveTab] = useState<'overview' | 'living' | 'attractions' | 'directory'>('overview');
+
   return (
-    <main style={{ minHeight: '100vh' }}>
+    <main>
       {/* Hero Section */}
-      <section style={{ 
-        background: 'linear-gradient(135deg, #0f766e 0%, #134e4a 100%)', 
-        padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem)',
+      <div style={{
+        background: 'linear-gradient(135deg, #0f766e 0%, #134e4a 100%)',
         color: 'white',
-        position: 'relative',
-        overflow: 'hidden'
+        padding: 'clamp(30px, 6vw, 50px) clamp(16px, 5vw, 20px)',
+        marginBottom: 40
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <h1 style={{ 
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)', 
-            fontWeight: 800, 
-            marginBottom: '1.5rem',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
-          }}>
-            Lamb Island
-          </h1>
-          <p style={{ 
-            fontSize: 'clamp(1.125rem, 2.8vw, 1.5rem)', 
-            lineHeight: 1.6,
-            maxWidth: '800px',
-            opacity: 0.95
-          }}>
-            A quiet, family-friendly island community with rich pioneer heritage, peaceful beaches, and close-knit neighbors. Population 450.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
-              🚢 55-65 min ferry from Redland Bay
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
-              👨‍👩‍👧‍👦 Population: 450
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.95rem' }}>
-              📍 48km from Brisbane CBD
-            </span>
-          </div>
+        <h1 style={{ fontSize: 'clamp(2em, 5vw, 48px)', fontWeight: 800, margin: '0 0 16px 0' }}>
+          Lamb Island 🌿
+        </h1>
+        <p style={{ fontSize: 'clamp(1em, 2vw, 18px)', opacity: 0.95, margin: '0 0 24px 0', maxWidth: 600 }}>
+          A quiet, family-friendly island community with rich pioneer heritage, peaceful beaches, and close-knit neighbors.
+        </p>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            👨‍👩‍👧‍👦 Population: 450
+          </span>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            🚢 55-65 min ferry from Redland Bay
+          </span>
+          <span style={{ background: 'rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '6px', fontSize: '0.95rem' }}>
+            📍 48km from Brisbane CBD
+          </span>
         </div>
-      </section>
+      </div>
 
-      {/* Tab Navigation */}
-      <nav style={{ 
-        background: '#f7fafc', 
-        borderBottom: '2px solid #e2e8f0',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
-          <div style={{ display: 'flex', gap: '2rem', overflowX: 'auto' }}>
-            {['Overview', 'Living Here', 'Things To Do', 'Directory'].map((tab) => (
-              <a
-                key={tab}
-                href={`#${tab.toLowerCase().replace(' ', '-')}`}
-                style={{
-                  padding: '1rem 0.5rem',
-                  fontSize: 'clamp(0.9rem, 2.2vw, 1rem)',
-                  fontWeight: 600,
-                  color: '#2d3748',
-                  textDecoration: 'none',
-                  borderBottom: '3px solid transparent',
-                  whiteSpace: 'nowrap',
-                  transition: 'all 0.2s'
-                }}
-              >
-                {tab}
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      {/* Content */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem)' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 20px) clamp(40px, 8vw, 60px)' }}>
         
-        {/* Overview */}
-        <section id="overview" style={{ marginBottom: '4rem' }}>
+        {/* Breadcrumb */}
+        <div style={{ fontSize: '0.9em', color: '#64748b', marginBottom: 32, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          <Link href="/" style={{ color: '#0f766e' }}>Home</Link>
+          <span>/</span>
+          <Link href="/islands" style={{ color: '#0f766e' }}>Islands</Link>
+          <span>/</span>
+          <span>Lamb Island</span>
+        </div>
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 16px)', marginBottom: 32, flexWrap: 'wrap', borderBottom: '2px solid #e2e8f0' }}>
+          {(['overview', 'living', 'attractions', 'directory'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                padding: '12px 20px',
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab ? '3px solid #0f766e' : 'none',
+                color: activeTab === tab ? '#0f766e' : '#64748b',
+                fontWeight: activeTab === tab ? 600 : 400,
+                cursor: 'pointer',
+                fontSize: 'clamp(0.9em, 1.5vw, 15px)',
+                transition: 'all 0.3s'
+              }}
+            >
+              {tab === 'overview' && 'Overview'}
+              {tab === 'living' && 'Living Here'}
+              {tab === 'attractions' && 'Things To Do'}
+              {tab === 'directory' && 'Directory'}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content - Overview */}
+        <div style={{ display: activeTab === 'overview' ? 'block' : 'none', marginBottom: 60 }}>
           <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Welcome to Lamb Island
           </h2>
@@ -130,11 +109,11 @@ export default function LambIslandPage() {
               </div>
             ))}
           </div>
-        </section>
+        </div>
 
-        {/* Living Here */}
-        <section id="living-here" style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #0f766e', paddingBottom: '0.5rem' }}>
+        {/* Tab Content - Living Here */}
+        <div style={{ display: activeTab === 'living' ? 'block' : 'none', marginBottom: 60 }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Living on Lamb Island
           </h2>
 
@@ -218,11 +197,11 @@ export default function LambIslandPage() {
             <li><strong>Postal services:</strong> Use Russell Island Post Office or Redland Bay</li>
             <li><strong>Parcel delivery:</strong> Australia Post, couriers deliver to Redland Bay Marina for pickup</li>
           </ul>
-        </section>
+        </div>
 
-        {/* Things To Do */}
-        <section id="things-to-do" style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #0f766e', paddingBottom: '0.5rem' }}>
+        {/* Tab Content - Things To Do */}
+        <div style={{ display: activeTab === 'attractions' ? 'block' : 'none', marginBottom: 60 }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Things To Do on Lamb Island
           </h2>
 
@@ -298,13 +277,13 @@ export default function LambIslandPage() {
             <li><strong>Clean-up days:</strong> Beach and wetlands environmental care</li>
           </ul>
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, color: '#4a5568', marginBottom: '1.5rem' }}>
-            See our <a href="/articles/island-events-calendar" style={{ color: '#0f766e', textDecoration: 'underline' }}>full events calendar</a> for all SMBI happenings.
+            See our <Link href="/articles/island-events-calendar" style={{ color: '#0f766e', textDecoration: 'underline' }}>full events calendar</Link> for all SMBI happenings.
           </p>
-        </section>
+        </div>
 
-        {/* Directory */}
-        <section id="directory" style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem', borderBottom: '3px solid #0f766e', paddingBottom: '0.5rem' }}>
+        {/* Tab Content - Directory */}
+        <div style={{ display: activeTab === 'directory' ? 'block' : 'none', marginBottom: 60 }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#1a202c', marginBottom: '1.5rem' }}>
             Lamb Island Directory
           </h2>
 
@@ -344,7 +323,55 @@ export default function LambIslandPage() {
             <li><strong>Australia Post:</strong> Postal services, banking - 38 High Street</li>
             <li><strong>Russell Island RSL Club:</strong> Meals, entertainment - (07) 3409 7666</li>
           </ul>
-        </section>
+        </div>
+
+        {/* Featured Businesses */}
+        <div style={{ marginBottom: 44, marginTop: 44 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, gap: 12, flexWrap: 'wrap' }}>
+            <h3 style={{ margin: 0, fontSize: 20, fontWeight: 700 }}>Featured Local Services</h3>
+            <Link href="/upgrade" style={{ color: '#0f766e', fontWeight: 700, textDecoration: 'none' }}>Feature your business →</Link>
+          </div>
+          {/* Top featured - full width */}
+          <div style={{ marginBottom: 14, background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: 24, borderRadius: 12, border: '2px solid #0ea5e9', display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ flex: '0 0 auto' }}>
+              <div style={{ width: 80, height: 80, background: '#0ea5e9', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>
+                ⛴️
+              </div>
+            </div>
+            <div style={{ flex: '1 1 300px' }}>
+              <h4 style={{ margin: '0 0 8px', fontSize: 22, fontWeight: 700, color: '#0c4a6e' }}>Sealink Ferry Service</h4>
+              <p style={{ margin: '0 0 12px', color: '#475569', lineHeight: 1.6 }}>Daily passenger & vehicle ferry service to Southern Moreton Bay Islands. Check timetables and book online.</p>
+              <Link href="/directory/sealink-ferry" style={{ display: 'inline-block', background: '#0ea5e9', color: 'white', padding: '8px 16px', borderRadius: 6, fontWeight: 600, textDecoration: 'none' }}>View Details →</Link>
+            </div>
+          </div>
+          {/* Grid of 4 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
+            <div style={{ background: '#fef3c7', padding: 18, borderRadius: 12, border: '1px solid #fde68a' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🏥</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Redland Hospital</h4>
+              <p style={{ margin: '0 0 10px', color: '#713f12', fontSize: 14, lineHeight: 1.5 }}>Emergency & healthcare services in Cleveland</p>
+              <Link href="/directory/redland-hospital" style={{ color: '#854d0e', fontWeight: 700, fontSize: 14 }}>View →</Link>
+            </div>
+            <div style={{ background: '#fee2e2', padding: 18, borderRadius: 12, border: '1px solid #fecaca' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🚨</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Emergency Services</h4>
+              <p style={{ margin: '0 0 10px', color: '#991b1b', fontSize: 14, lineHeight: 1.5 }}>Dial 000 for Police, Fire, Ambulance</p>
+              <Link href="/articles/community-infrastructure" style={{ color: '#b91c1c', fontWeight: 700, fontSize: 14 }}>Learn More →</Link>
+            </div>
+            <div style={{ background: '#dcfce7', padding: 18, borderRadius: 12, border: '1px solid #bbf7d0' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🏛️</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Lamb Island Community Hall</h4>
+              <p style={{ margin: '0 0 10px', color: '#166534', fontSize: 14, lineHeight: 1.5 }}>Community events & meetings hub</p>
+              <Link href="/directory/lamb-community-hall" style={{ color: '#15803d', fontWeight: 700, fontSize: 14 }}>View →</Link>
+            </div>
+            <div style={{ background: '#f3e8ff', padding: 18, borderRadius: 12, border: '1px solid #e9d5ff' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🏫</div>
+              <h4 style={{ margin: '0 0 6px', fontSize: 17, fontWeight: 700 }}>Island Primary Services</h4>
+              <p style={{ margin: '0 0 10px', color: '#6b21a8', fontSize: 14, lineHeight: 1.5 }}>Education & family support</p>
+              <Link href="/articles/education-schools-islands" style={{ color: '#7c3aed', fontWeight: 700, fontSize: 14 }}>Learn More →</Link>
+            </div>
+          </div>
+        </div>
 
         {/* CTA Section */}
         <section style={{ 
@@ -352,7 +379,8 @@ export default function LambIslandPage() {
           padding: 'clamp(2rem, 5vw, 3rem)', 
           borderRadius: '1rem',
           color: 'white',
-          marginTop: '4rem'
+          marginBottom: '2.75rem',
+          textAlign: 'center'
         }}>
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', fontWeight: 700, marginBottom: '1rem', color: 'white' }}>
             Discover Life on Lamb Island
@@ -360,22 +388,23 @@ export default function LambIslandPage() {
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.7, marginBottom: '1.5rem', opacity: 0.95 }}>
             Experience the peace, community spirit, and natural beauty of Queensland's friendliest island. Explore homes for sale, local businesses, and upcoming community events.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-            <a 
-              href="/directory?location=lamb" 
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+            <Link 
+              href="/events?location=lamb" 
               style={{ 
-                background: 'white', 
-                color: '#0f766e', 
+                background: 'rgba(255,255,255,0.2)', 
+                color: 'white', 
                 padding: '0.75rem 1.5rem', 
                 borderRadius: '0.5rem', 
                 fontWeight: 600, 
                 textDecoration: 'none',
-                display: 'inline-block'
+                display: 'inline-block',
+                border: '2px solid white'
               }}
             >
-              Browse Local Directory
-            </a>
-            <a 
+              View Events
+            </Link>
+            <Link 
               href="/classifieds?location=lamb" 
               style={{ 
                 background: 'rgba(255,255,255,0.2)', 
@@ -389,40 +418,58 @@ export default function LambIslandPage() {
               }}
             >
               View Classifieds
-            </a>
-            <a 
-              href="/islands" 
+            </Link>
+            <Link 
+              href="/directory?location=lamb" 
               style={{ 
-                background: 'rgba(255,255,255,0.2)', 
-                color: 'white', 
+                background: 'white', 
+                color: '#0f766e', 
                 padding: '0.75rem 1.5rem', 
                 borderRadius: '0.5rem', 
                 fontWeight: 600, 
                 textDecoration: 'none',
-                display: 'inline-block',
-                border: '2px solid white'
+                display: 'inline-block'
               }}
             >
-              Compare All Islands
-            </a>
+              Browse Local Directory
+            </Link>
           </div>
         </section>
 
+        {/* Explore More Islands */}
+        <div style={{ background: '#f1f5f9', padding: 'clamp(28px, 7vw, 40px)', borderRadius: 14, marginBottom: 44 }}>
+          <h3 style={{ marginTop: 0, marginBottom: 16, fontSize: 20, fontWeight: 700 }}>Explore more Bay Islands</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14 }}>
+            <Link href="/islands/russell" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
+              <div>🏝️ Russell Island</div>
+              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Island hub</div>
+            </Link>
+            <Link href="/islands/macleay" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
+              <div>🏌️ Macleay Island</div>
+              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Golf course & beaches</div>
+            </Link>
+            <Link href="/islands/karragarra" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
+              <div>🦘 Karragarra Island</div>
+              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Nature & wildlife</div>
+            </Link>
+            <Link href="/islands" style={{ background: 'white', border: '1px solid #e2e8f0', padding: 14, borderRadius: 10, display: 'block', color: '#0f172a', fontWeight: 600, textAlign: 'center', textDecoration: 'none' }}>
+              <div>🏝️ All Islands</div>
+              <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>Compare all</div>
+            </Link>
+          </div>
+        </div>
+
         {/* Related Links */}
-        <section style={{ marginTop: '3rem', padding: '2rem', background: '#f7fafc', borderRadius: '0.5rem', borderLeft: '4px solid #0f766e' }}>
-          <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600, color: '#2d3748', marginBottom: '1rem' }}>
-            🔗 Related Resources
-          </h3>
-          <ul style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: 1.8, color: '#4a5568', marginLeft: '1.5rem' }}>
-            <li><a href="/islands" style={{ color: '#0f766e', textDecoration: 'underline' }}>Explore All Bay Islands</a></li>
-            <li><a href="/islands/russell" style={{ color: '#0f766e', textDecoration: 'underline' }}>Russell Island Guide</a></li>
-            <li><a href="/islands/macleay" style={{ color: '#0f766e', textDecoration: 'underline' }}>Macleay Island Guide</a></li>
-            <li><a href="/islands/karragarra" style={{ color: '#0f766e', textDecoration: 'underline' }}>Karragarra Island Guide</a></li>
-            <li><a href="/articles/transport-on-islands" style={{ color: '#0f766e', textDecoration: 'underline' }}>Ferry Timetables & Transport</a></li>
-            <li><a href="/articles/tourism-attractions" style={{ color: '#0f766e', textDecoration: 'underline' }}>Tourist Attractions Guide</a></li>
-            <li><a href="/articles/community-infrastructure" style={{ color: '#0f766e', textDecoration: 'underline' }}>Community Services & Infrastructure</a></li>
+        <div style={{ padding: 20, background: '#f8fafc', borderRadius: 12, borderLeft: '4px solid #0f766e' }}>
+          <h3 style={{ marginTop: 0, marginBottom: 12 }}>Related resources</h3>
+          <ul style={{ margin: 0, paddingLeft: 18, color: '#475569', lineHeight: 1.7 }}>
+            <li><Link href="/islands" style={{ color: '#0f766e' }}>Explore All Bay Islands</Link></li>
+            <li><Link href="/islands/russell" style={{ color: '#0f766e' }}>Russell Island Guide</Link></li>
+            <li><Link href="/islands/macleay" style={{ color: '#0f766e' }}>Macleay Island Guide</Link></li>
+            <li><Link href="/articles/transport-on-islands" style={{ color: '#0f766e' }}>Ferry Timetables & Transport</Link></li>
+            <li><Link href="/directory?location=lamb" style={{ color: '#0f766e' }}>Lamb Island Directory</Link></li>
           </ul>
-        </section>
+        </div>
       </div>
     </main>
   );

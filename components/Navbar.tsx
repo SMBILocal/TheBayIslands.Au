@@ -35,19 +35,19 @@ export default function Navbar(){
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: '14px',
+                  fontSize: 'clamp(13px, 2vw, 14px)',
                 fontWeight: '500',
                 fontFamily: 'inherit',
-                padding: '10px 14px',
+                padding: '8px 10px',
                 color: 'inherit',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                  gap: '6px',
                 borderRadius: '8px',
                 transition: 'background 0.2s',
               }}
             >
-              📍 Areas <span style={{ fontSize: '0.7em' }}>▼</span>
+                📍 <span style={{ whiteSpace: 'nowrap' }}>Areas <span style={{ fontSize: '0.7em', marginLeft: '2px' }}>▼</span></span>
             </button>
             <div 
               className={`nav-dropdown-menu ${areasOpen ? 'show' : ''}`}

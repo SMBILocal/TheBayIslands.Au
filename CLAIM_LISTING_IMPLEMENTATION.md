@@ -99,7 +99,9 @@ Full category list in `lib/businessCategories.ts`:
 3. **Payment Integration**
    - Stripe/PayPal for premium upgrades
    - 7-day free trial
-   - Auto-renewal every 90 days
+   - Billing frequencies aligned to user preference: monthly, 6-monthly, or annual
+   - Discounts applied by frequency (example: 5-10% for 6 months, 15-20% for annual; confirm exact rates per pricing page)
+   - Auto-renewal respects selected billing cadence with clear opt-out controls
    - Invoice generation
 
 4. **Verification Automation**

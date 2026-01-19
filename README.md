@@ -1,40 +1,53 @@
-# thebayislands.au — Local hub scaffold
+# TheBayIslands.Au — Local Hub
 
-This repository contains a Next.js (app-router) scaffold for the Bay Islands local hub: Articles, Jobs, Community Events, Business Directory and Buy & Sell classifieds.
+Next.js 14 (app router) platform for Bay Islands: articles, jobs, events, classifieds, and a business directory with claim + upgrade flows.
 
-
-Quick start
-
-1. Install dependencies:
-
+## Quick start
+1) Install dependencies
 ```bash
-cd thebayislands.au
 npm install
 ```
-
-2. Run dev server and preview in browser:
-
+2) Run dev server
 ```bash
 npm run dev
-# open http://localhost:3000 in your browser
+# open http://localhost:3000
 ```
-
-3. Seed sample data (after creating `.env.local` with your Supabase credentials):
-
+3) Optional: seed sample data (requires `.env.local` Supabase keys)
 ```bash
-# create .env.local from .env.example and fill values
 node scripts/seed.js
 ```
 
-Notes
-- This is a structural scaffold with sample pages and components. Replace dummy content with real listings and integrate Supabase or your chosen backend for data and auth.
-- Styling is in `styles/globals.css` and components live in `components/`.
-- The app will fetch from the local API routes (`/api/*`) so you can preview without extra env vars; however for seeding and server operations you must set Supabase keys in `.env.local`.
+## Branches & tags
+- Current working branch: `thebayislands.au-v0.0.3`
+- Last release tag: `v0.0.2`
+- Phase plan: [PHASE_PLAN_V0.0.3.md](PHASE_PLAN_V0.0.3.md)
 
-Supabase RLS (safe public reads)
-- A `supabase/policies.sql` file is included with SQL to enable Row Level Security (RLS) and add safe public `SELECT` policies for the scaffold tables. Run that SQL in the Supabase SQL editor (Project → SQL Editor) after creating your tables.
+## Documentation library
+- Index: [DOCUMENTATION-INDEX.md](DOCUMENTATION-INDEX.md)
+- Release summary: [V0.0.2-FINAL-SUMMARY.md](V0.0.2-FINAL-SUMMARY.md)
+- Claim flow: [CLAIM_LISTING_IMPLEMENTATION.md](CLAIM_LISTING_IMPLEMENTATION.md)
+- Folder guide: [FOLDER_GUIDE.md](FOLDER_GUIDE.md)
+- Legal templates: [docs/LEGAL-PAGES-CONTENT.md](docs/LEGAL-PAGES-CONTENT.md)
 
-Running in CI / GitHub Actions
-- Add secrets to GitHub as described in `SECRETS.md` and run the `Seed Supabase` workflow or trigger it from Actions → Workflows → Seed Supabase → Run workflow.
+## What’s built (v0.0.2)
+- Directory with search, filters, and claim buttons (cards + detail pages)
+- Claim modal on `/upgrade` with prefilled business data
+- Seeded 45+ businesses with statuses (featured/claimed/unclaimed)
+- Pricing tiers (UI) ready for Stripe wiring
 
-# TheBayIslands.Au
+## What’s next (v0.0.3)
+- SEO pages (suburb, category, suburb×category)
+- Comments & reviews system
+- Stripe tier enforcement (monthly / 6-month / annual billing)
+- UI polish (footer links, responsive fixes)
+
+## Supabase notes
+- Configure `.env.local` with Supabase service role and anon keys
+- Apply RLS policies from `supabase/policies.sql`
+- Use `supabase/schema-v0.0.2.sql` for baseline schema
+
+## Contributing
+- Run `npm run lint` before pushing
+- Keep docs updated when flows or billing rules change
+
+#

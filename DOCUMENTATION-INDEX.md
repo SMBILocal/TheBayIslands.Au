@@ -22,12 +22,22 @@
   - Troubleshooting guide
   - Common questions answered
 
+- **[FOLDER_GUIDE.md](FOLDER_GUIDE.md)**
+  - What each folder contains
+  - Who should edit it
+  - Links to key files
+
 ### For Understanding Your Platform
 - **[DASHBOARD.md](DASHBOARD.md)**
   - Visual progress tracking
   - What's built vs what's next
   - File structure reference
   - Success checklist
+
+- **[docs/DOCUMENT_LIBRARY.md](docs/DOCUMENT_LIBRARY.md)**
+  - User help vs admin handbook
+  - Billing cadence alignment (monthly / 6-month / annual)
+  - Publishing standards for help center
 
 - **[TIMELINE.md](TIMELINE.md)**
   - Detailed schedule

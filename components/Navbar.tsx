@@ -19,7 +19,7 @@ export default function Navbar(){
       <div className="container nav">
         <div className="brand">
           <Link href="/">
-            <Image src="/logo.svg" alt="The Bay Islands" width={140} height={40} />
+            <Image src="/logo.svg" alt="The Bay Islands" width={180} height={50} />
           </Link>
         </div>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
@@ -28,7 +28,7 @@ export default function Navbar(){
           <span></span>
         </button>
         <nav className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
-          <Link href="/" onClick={()=>setMenuOpen(false)}>Home</Link>
+          <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           
           {/* Areas Dropdown */}
           <div className="nav-dropdown" style={{ position: 'relative' }}>
@@ -106,11 +106,11 @@ export default function Navbar(){
             </div>
           </div>
           
-          <Link href="/articles" onClick={()=>setMenuOpen(false)}>Articles</Link>
-          <Link href="/jobs" onClick={()=>setMenuOpen(false)}>Jobs</Link>
-          <Link href="/events" onClick={()=>setMenuOpen(false)}>Community Events</Link>
-          <Link href="/directory" onClick={()=>setMenuOpen(false)}>Business Directory</Link>
-          <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>Buy & Sell</Link>
+          <Link href="/articles" onClick={()=>setMenuOpen(false)}>📰 Articles</Link>
+          <Link href="/jobs" onClick={()=>setMenuOpen(false)}>💼 Jobs</Link>
+          <Link href="/events" onClick={()=>setMenuOpen(false)}>🎉 Events</Link>
+          <Link href="/directory" onClick={()=>setMenuOpen(false)}>📍 Directory</Link>
+          <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>🛒 Buy & Sell</Link>
           <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
             ⭐ Go Premium
           </Link>

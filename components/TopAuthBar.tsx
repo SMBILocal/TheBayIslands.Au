@@ -13,11 +13,11 @@ export default function TopAuthBar() {
   return (
     <div
       style={{
-        background: 'linear-gradient(90deg, #0066b3 0%, #c85a17 100%)',
-        color: 'white',
+        background: 'white',
+        color: '#333',
         padding: '8px 0',
         fontSize: '13px',
-        borderBottom: '1px solid rgba(0,0,0,0.1)',
+        borderBottom: '1px solid #eee',
       }}
     >
       <div
@@ -34,15 +34,15 @@ export default function TopAuthBar() {
       >
         {user ? (
           <>
-            <span style={{ opacity: 0.9 }}>
+            <span style={{ opacity: 0.7, fontSize: '12px' }}>
               👤 Logged in: <strong>{user.email}</strong>
             </span>
             <button
               onClick={handleLogout}
               style={{
-                background: 'rgba(255,255,255,0.2)',
-                color: 'white',
-                border: '1px solid rgba(255,255,255,0.3)',
+                background: '#f3f4f6',
+                color: '#333',
+                border: '1px solid #d1d5db',
                 padding: '4px 12px',
                 borderRadius: '4px',
                 cursor: 'pointer',
@@ -51,10 +51,10 @@ export default function TopAuthBar() {
                 transition: 'all 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
+                e.currentTarget.style.background = '#e5e7eb';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.background = '#f3f4f6';
               }}
             >
               🚪 Logout
@@ -65,7 +65,7 @@ export default function TopAuthBar() {
             <Link
               href="/login"
               style={{
-                color: 'white',
+                color: '#0066b3',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
@@ -73,12 +73,12 @@ export default function TopAuthBar() {
                 fontWeight: '500',
                 transition: 'opacity 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               🔑 Login
             </Link>
-            <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.3)' }}></div>
+            <div style={{ width: '1px', height: '16px', background: '#d1d5db' }}></div>
             <Link
               href="/signup"
               style={{
@@ -88,16 +88,16 @@ export default function TopAuthBar() {
                 alignItems: 'center',
                 gap: '4px',
                 fontWeight: '600',
-                background: 'rgba(255,255,255,0.2)',
+                background: '#0066b3',
                 padding: '4px 12px',
                 borderRadius: '4px',
                 transition: 'all 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
+                e.currentTarget.style.background = '#005299';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.background = '#0066b3';
               }}
             >
               ✨ Sign Up

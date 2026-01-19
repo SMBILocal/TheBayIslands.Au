@@ -1,0 +1,153 @@
+"use client"
+import Link from "next/link"
+import Image from "next/image"
+import React, { useState } from "react"
+import { useAuth } from "@/lib/AuthContext"
+
+export default function Navbar(){
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [areasOpen, setAreasOpen] = useState(false)
+  const { user, signOut } = useAuth()
+
+  const handleLogout = async () => {
+    await signOut()
+    setMenuOpen(false)
+  }
+
+  return (
+    <header className="site-header">
+      <div className="container nav">
+        <div className="brand">
+          <Link href="/">
+            <Image src="/logo.svg" alt="The Bay Islands" width={140} height={40} />
+          </Link>
+        </div>
+        <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
+          <Link href="/" onClick={()=>setMenuOpen(false)}>Home</Link>
+          
+          {/* Areas Dropdown */}
+          <div className="nav-dropdown" style={{ position: 'relative' }}>
+            <button 
+              className="nav-dropdown-toggle"
+              onClick={() => setAreasOpen(!areasOpen)}
+              onMouseEnter={() => setAreasOpen(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: 'inherit',
+                fontFamily: 'inherit',
+                padding: '0',
+                color: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              📍 Areas <span style={{ fontSize: '0.7em' }}>▼</span>
+            </button>
+            <div 
+              className={`nav-dropdown-menu ${areasOpen ? 'show' : ''}`}
+              onMouseLeave={() => setAreasOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                background: 'white',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                borderRadius: '8px',
+                padding: '12px 0',
+                minWidth: '200px',
+                display: areasOpen ? 'block' : 'none',
+                zIndex: 1000
+              }}
+            >
+              <div style={{ padding: '8px 16px', fontWeight: 'bold', fontSize: '0.85em', color: '#666', textTransform: 'uppercase' }}>
+                Islands
+              </div>
+              <Link href="/islands/russell" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Russell Island
+              </Link>
+              <Link href="/islands/macleay" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Macleay Island
+              </Link>
+              <Link href="/islands/lamb" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Lamb Island
+              </Link>
+              <Link href="/islands/karragarra" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Karragarra Island
+              </Link>
+              <Link href="/islands" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#0066b3', textDecoration: 'none', fontWeight: '600' }}>
+                All Islands →
+              </Link>
+              
+              <div style={{ borderTop: '1px solid #eee', margin: '8px 0' }}></div>
+              
+              <div style={{ padding: '8px 16px', fontWeight: 'bold', fontSize: '0.85em', color: '#666', textTransform: 'uppercase' }}>
+                Mainland
+              </div>
+              <Link href="/areas/mainland/redland-bay" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Redland Bay
+              </Link>
+              <Link href="/areas/mainland/victoria-point" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Victoria Point
+              </Link>
+              <Link href="/areas/mainland/cleveland" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Cleveland
+              </Link>
+              <Link href="/areas/mainland/capalaba" onClick={()=>{setMenuOpen(false); setAreasOpen(false)}} style={{ display: 'block', padding: '8px 16px', color: '#333', textDecoration: 'none' }}>
+                Capalaba
+              </Link>
+            </div>
+          </div>
+          
+          <Link href="/articles" onClick={()=>setMenuOpen(false)}>Articles</Link>
+          <Link href="/jobs" onClick={()=>setMenuOpen(false)}>Jobs</Link>
+          <Link href="/events" onClick={()=>setMenuOpen(false)}>Community Events</Link>
+          <Link href="/directory" onClick={()=>setMenuOpen(false)}>Business Directory</Link>
+          <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>Buy & Sell</Link>
+          <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
+            ⭐ Go Premium
+          </Link>
+          <div style={{ borderTop: '1px solid #ddd', paddingTop: '12px', marginTop: '12px' }}>
+            {user ? (
+              <>
+                <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '0.9em' }}>Logged in as:</p>
+                <p style={{ margin: '0 0 12px 0', fontWeight: 'bold' }}>{user.email}</p>
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    width: '100%',
+                    backgroundColor: '#c85a17',
+                    color: 'white',
+                    padding: '8px 12px',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '0.9em'
+                  }}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" onClick={()=>setMenuOpen(false)} style={{ display: 'block', marginBottom: '8px', color: '#0066b3', textDecoration: 'underline' }}>
+                  Login
+                </Link>
+                <Link href="/signup" onClick={()=>setMenuOpen(false)} style={{ display: 'block', color: '#0066b3', textDecoration: 'underline' }}>
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </div>
+    </header>
+  )
+}

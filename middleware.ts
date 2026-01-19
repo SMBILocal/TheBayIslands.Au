@@ -9,7 +9,6 @@ const protectedPaths = [
   '/classifieds/new',
   '/account',
   '/dashboard',
-  '/upgrade',
 ]
 
 export async function middleware(req: NextRequest) {

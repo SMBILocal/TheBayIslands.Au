@@ -1,0 +1,10 @@
+# Node/Next build outputs
+.next
+node_modules
+# Logs
+*.log
+# OS files
+.DS_Store
+# Env files
+.env.local
+.env

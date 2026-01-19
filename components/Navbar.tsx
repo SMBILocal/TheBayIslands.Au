@@ -114,38 +114,6 @@ export default function Navbar(){
           <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
             ⭐ Go Premium
           </Link>
-          <div style={{ borderTop: '1px solid #ddd', paddingTop: '12px', marginTop: '12px' }}>
-            {user ? (
-              <>
-                <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '0.9em' }}>Logged in as:</p>
-                <p style={{ margin: '0 0 12px 0', fontWeight: 'bold' }}>{user.email}</p>
-                <button
-                  onClick={handleLogout}
-                  style={{
-                    width: '100%',
-                    backgroundColor: '#c85a17',
-                    color: 'white',
-                    padding: '8px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '0.9em'
-                  }}
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" onClick={()=>setMenuOpen(false)} style={{ display: 'block', marginBottom: '8px', color: '#0066b3', textDecoration: 'underline' }}>
-                  Login
-                </Link>
-                <Link href="/signup" onClick={()=>setMenuOpen(false)} style={{ display: 'block', color: '#0066b3', textDecoration: 'underline' }}>
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </div>
         </nav>
       </div>
     </header>

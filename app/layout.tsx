@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Navbar from '../components/Navbar'
+import TopAuthBar from '../components/TopAuthBar'
 import Footer from '../components/Footer'
 import { AuthProvider } from '../lib/AuthContext'
 
@@ -16,6 +17,7 @@ export default function RootLayout({children}:{children:React.ReactNode}){
     <html lang="en">
       <body>
         <AuthProvider>
+          <TopAuthBar />
           <Navbar />
           <main className="container" style={{paddingTop:20}}>
             {children}

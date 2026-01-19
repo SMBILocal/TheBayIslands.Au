@@ -21,9 +21,6 @@ export default function SignupPage() {
     try {
       await signUp(email, password, fullName);
       setSuccess(true);
-      setTimeout(() => {
-        window.location.href = '/directory';
-      }, 2000);
     } catch (err: any) {
       setError(err.message || 'Signup failed. Please try again.');
     } finally {
@@ -61,7 +58,7 @@ export default function SignupPage() {
               borderRadius: '4px',
               marginBottom: '20px'
             }}>
-              Account created! Redirecting...
+              Account created! Check your email to verify your account before logging in.
             </div>
           )}
 

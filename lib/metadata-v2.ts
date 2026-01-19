@@ -75,7 +75,6 @@ export function generateComprehensiveMetadata(props: MetadataGeneratorProps): Me
         'max-snippet': -1,
       },
     },
-    canonical,
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '',
     },

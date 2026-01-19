@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabaseClient'
+import supabase from '@/lib/supabaseClient'
 
 /**
  * Test database connection to Supabase
@@ -13,8 +13,6 @@ import { createClient } from '@/lib/supabaseClient'
 
 async function testConnection() {
   console.log('🧪 Testing Supabase Connection...\n')
-
-  const supabase = createClient()
 
   try {
     // Test 1: Check auth status

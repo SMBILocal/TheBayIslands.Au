@@ -1,15 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const { signIn } = useAuth();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [redirectTo, setRedirectTo] = useState('/directory');
+
+  useEffect(() => {
+    const target = searchParams.get('redirectTo');
+    if (target) setRedirectTo(target);
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +27,7 @@ export default function LoginPage() {
 
     try {
       await signIn(email, password);
-      window.location.href = '/directory';
+      router.push(redirectTo || '/directory');
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');
     } finally {
@@ -86,6 +95,11 @@ export default function LoginPage() {
                 boxSizing: 'border-box'
               }}
             />
+            <div style={{ marginTop: '8px', textAlign: 'right' }}>
+              <Link href="/forgot-password" style={{ color: '#0066b3', textDecoration: 'underline', fontSize: '0.9em' }}>
+                Forgot password?
+              </Link>
+            </div>
           </div>
 
           <button

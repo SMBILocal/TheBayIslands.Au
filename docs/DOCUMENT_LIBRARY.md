@@ -3,9 +3,10 @@
 Use this as the source of truth for in-product help center and internal admin docs.
 
 ## User Help (public / logged-in)
-- Getting started: `YOUR-NEXT-3-STEPS.md`, `QUICK-START.md`
+- Getting started: `docs/quickstart/YOUR-NEXT-3-STEPS.md`, `docs/quickstart/QUICK-START.md`
 - Managing listings: `CLAIM_LISTING_IMPLEMENTATION.md` (user-facing summary needed), upgrade tiers and billing cadence (monthly / 6-month / annual)
 - Directory usage: search, filters, categories, locations
+- Donations & community: `/donate` page; `docs/charity/SMBI_LOCAL.md` for background
 - Account & billing: upgrading, downgrading, cancellations, refunds window, receipts
 - Policies: Terms of Service, Privacy, Cookies, Refund & Cancellation, Environmental
 

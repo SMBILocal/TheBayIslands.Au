@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
-const linkStyle: React.CSSProperties = { color: '#0ea5e9', textDecoration: 'none', fontWeight: 600, fontSize: 14 }
+const linkStyle: React.CSSProperties = { color: '#38bdf8', textDecoration: 'none', fontWeight: 600, fontSize: 14 }
 
 export default function Footer(){
   return (
@@ -9,7 +9,7 @@ export default function Footer(){
       <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24}}>
         <div>
           <div style={{fontWeight: 700, fontSize: 18}}>thebayislands.au</div>
-          <div style={{opacity: 0.8, marginTop: 8}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades.</div>
+          <div style={{opacity: 0.8, marginTop: 8}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades. Created and operated by SMBI Local (smbilocal.au).</div>
         </div>
         <div>
           <div style={{fontWeight: 700, marginBottom: 12}}>Explore</div>
@@ -31,6 +31,13 @@ export default function Footer(){
           </ul>
         </div>
         <div>
+          <div style={{fontWeight: 700, marginBottom: 12}}>Community</div>
+          <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
+            <li><Link href="/donate" style={linkStyle}>Donate to SMBI Local</Link></li>
+            <li><Link href="/site-map" style={linkStyle}>Sitemap</Link></li>
+          </ul>
+        </div>
+        <div>
           <div style={{fontWeight: 700, marginBottom: 12}}>Policies</div>
           <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
             <li><Link href="/terms" style={linkStyle}>Terms of Service</Link></li>
@@ -41,8 +48,16 @@ export default function Footer(){
           </ul>
         </div>
       </div>
-      <div style={{borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', textAlign: 'center', color: 'rgba(255,255,255,0.7)'}}>
-        © {new Date().getFullYear()} thebayislands.au — All rights reserved.
+      <div style={{maxWidth: 1200, margin: '0 auto', padding: '0 20px 16px 20px', color: 'rgba(255,255,255,0.85)'}}>
+        <div style={{borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 12, fontSize: 14, lineHeight: 1.6}}>
+          We acknowledge the Quandamooka people as the Traditional Custodians of the lands and waters of the Southern Moreton Bay Islands — including Canaipa/Kanopa (Russell Island) — and pay respect to Elders past and present.
+        </div>
+        <div style={{paddingTop: 8, fontSize: 14, lineHeight: 1.6}}>
+          thebayislands.au is created and operated by SMBI Local (smbilocal.au). Commercial transactions, donations, and fundraising are managed by SMBI Local Ltd (charitable). Consider supporting the community via the Donate link.
+        </div>
+        <div style={{paddingTop: 8, textAlign: 'center', color: 'rgba(255,255,255,0.7)'}}>
+          © {new Date().getFullYear()} thebayislands.au — All rights reserved.
+        </div>
       </div>
     </footer>
   )

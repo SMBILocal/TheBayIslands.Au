@@ -14,6 +14,10 @@ const sections = [
     { href: "/signup", label: "Sign up" },
     { href: "/upgrade", label: "Upgrade & Pricing" },
   ]},
+  { title: "Community", links: [
+    { href: "/donate", label: "Donate to SMBI Local" },
+    { href: "/about-smbi-local", label: "About SMBI Local" },
+  ]},
   { title: "Legal", links: [
     { href: "/terms", label: "Terms of Service" },
     { href: "/privacy", label: "Privacy Policy" },

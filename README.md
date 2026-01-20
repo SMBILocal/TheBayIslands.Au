@@ -20,13 +20,13 @@ node scripts/seed.js
 ## Branches & tags
 - Current working branch: `thebayislands.au-v0.0.3`
 - Last release tag: `v0.0.2`
-- Phase plan: [PHASE_PLAN_V0.0.3.md](PHASE_PLAN_V0.0.3.md)
+- Phase plan: [docs/plans/PHASE_PLAN_V0.0.3.md](docs/plans/PHASE_PLAN_V0.0.3.md)
 
 ## Documentation library
-- Index: [DOCUMENTATION-INDEX.md](DOCUMENTATION-INDEX.md)
-- Release summary: [V0.0.2-FINAL-SUMMARY.md](V0.0.2-FINAL-SUMMARY.md)
+- Index: [docs/DOCUMENTATION-INDEX.md](docs/DOCUMENTATION-INDEX.md)
+- Release summaries: [docs/releases/V0.0.2-FINAL-SUMMARY.md](docs/releases/V0.0.2-FINAL-SUMMARY.md)
 - Claim flow: [CLAIM_LISTING_IMPLEMENTATION.md](CLAIM_LISTING_IMPLEMENTATION.md)
-- Folder guide: [FOLDER_GUIDE.md](FOLDER_GUIDE.md)
+- Folder guide: [docs/overview/FOLDER_GUIDE.md](docs/overview/FOLDER_GUIDE.md)
 - Legal templates: [docs/LEGAL-PAGES-CONTENT.md](docs/LEGAL-PAGES-CONTENT.md)
 
 ## What’s built (v0.0.2)

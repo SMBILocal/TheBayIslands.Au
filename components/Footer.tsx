@@ -6,11 +6,14 @@ const linkStyle: React.CSSProperties = { color: '#0066b3', textDecoration: 'none
 export default function Footer(){
   return (
     <footer style={{borderTop: '1px solid #e2e8f0', background: '#0b1727', color: 'white', marginTop: 64}}>
-      <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24}}>
-        {/* Column 1: Brand */}
-        <div>
-          <div style={{fontWeight: 700, fontSize: 18}}>thebayislands.au</div>
-          <div style={{opacity: 0.8, marginTop: 8}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades. Created and operated by SMBI Local (smbilocal.au).</div>
+      <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 40}}>
+        {/* Column 1: Brand with bird icon */}
+        <div style={{display: 'flex', gap: 12, alignItems: 'flex-start'}}>
+          <div style={{fontSize: 32, flexShrink: 0}}>🐦</div>
+          <div>
+            <div style={{fontWeight: 700, fontSize: 18}}>thebayislands.au</div>
+            <div style={{opacity: 0.8, marginTop: 8, fontSize: 14, lineHeight: 1.5}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades. Created and operated by SMBI Local (smbilocal.au).</div>
+          </div>
         </div>
         
         {/* Column 2: Explore */}
@@ -36,15 +39,25 @@ export default function Footer(){
           </ul>
         </div>
         
-        {/* Column 4: Policies */}
+        {/* Column 4: Community */}
         <div>
-          <div style={{fontWeight: 700, marginBottom: 12}}>Policies</div>
+          <div style={{fontWeight: 700, marginBottom: 12}}>Community</div>
+          <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
+            <li><Link href="/donate" style={linkStyle}>Donate to SMBI Local</Link></li>
+            <li><Link href="/about-smbi-local" style={linkStyle}>About SMBI Local</Link></li>
+            <li><Link href="/radio" style={linkStyle}>Bay Islands Radio</Link></li>
+            <li><Link href="/site-map" style={linkStyle}>Sitemap</Link></li>
+          </ul>
+        </div>
+        
+        {/* Column 5: Policies & Legal */}
+        <div>
+          <div style={{fontWeight: 700, marginBottom: 12}}>Legal</div>
           <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
             <li><Link href="/terms" style={linkStyle}>Terms of Service</Link></li>
             <li><Link href="/privacy" style={linkStyle}>Privacy Policy</Link></li>
-            <li><Link href="/refunds" style={linkStyle}>Refund & Cancellation</Link></li>
+            <li><Link href="/policies" style={linkStyle}>Policies</Link></li>
             <li><Link href="/cookies" style={linkStyle}>Cookies Policy</Link></li>
-            <li><Link href="/environment" style={linkStyle}>Environmental</Link></li>
           </ul>
         </div>
       </div>

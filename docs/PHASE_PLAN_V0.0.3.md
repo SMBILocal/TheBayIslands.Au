@@ -319,7 +319,141 @@ components/
 - Radio station affiliates as premium partners
 
 ---
+## 🎨 PHASE 2b: HEADER & FOOTER REDESIGN + BRAND COLOR STANDARDIZATION (NEW - v0.0.4)
 
+### 2b.1 Overview
+**Status:** ✅ COMPLETE (Jan 21, 2026)  
+**Objective:** Redesign navigation and footer for better UX, standardize brand colors across entire site
+
+### 2b.2 Header Redesign - Top Bar Radio Player
+
+**Changes to TopAuthBar:**
+✅ Moved Bay Islands Radio player from main nav menu to top authentication bar
+✅ Positioned between logo and login/signup buttons
+✅ Display: "📻 Bay Islands Radio" + "▶ Play" button
+✅ Play button styled with brand blue hover effect
+✅ Responsive design maintained across all breakpoints
+
+**Benefits:**
+- Frees up main navigation menu for full width in tablet/portrait mode
+- Navigation stays left-aligned in landscape/desktop
+- Reduces visual clutter in main menu
+- Improves top bar balance (logo | radio | auth)
+
+### 2b.3 Navigation Fixes
+
+✅ **Navbar Responsive Improvements:**
+- Reduced padding from 14px to 12px
+- Reduced gaps from 6px to 2px
+- Font sizes optimized for narrow viewports
+- Reduced brand logo size from 48px to 44px
+- Hamburger reduced from 24px to 22px
+- Better handling of tablet portrait mode
+
+✅ **Business Directory Overflow Fix:**
+- Restructured filter controls from flexbox to grid layout
+- Search bar spans full width on mobile
+- Location & Category selects resize responsively
+- View mode toggles now icon-only (⊞ / ☰) on mobile
+- Category quick filters properly wrap without overflow
+- All controls now fit within viewport on tablet portrait
+
+### 2b.4 Brand Color Standardization
+
+**Color Audit Results:**
+- Brand Blue (Logo & Signup): `#0066b3`
+- Old Directory Blue: `#0ea5e9` (light cyan - NOT brand color)
+- Old Directory Gradient: `#06b6d4` (teal - NOT brand color)
+- Old Footer Links: `#38bdf8` (light cyan - NOT brand color)
+
+**Updated Across Entire Site:**
+
+**Directory Page (`app/directory/page.tsx`):**
+```
+Hero Gradient:         #0066b3 → #004a8a (brand blue to darker shade)
+View Mode Buttons:     #0ea5e9 → #0066b3
+Clear Filters Button:  #0ea5e9 → #0066b3
+Category Filters:      #0ea5e9 → #0066b3
+Load More Button:      #0ea5e9 → #0066b3
+Business Counter:      #0ea5e9 → #0066b3
+Accent Color:          #0ea5e9 → #0066b3
+```
+
+**Footer (`components/Footer.tsx`):**
+```
+Link Color:  #38bdf8 → #0066b3 (brand blue)
+```
+
+**Result:** Consistent brand color throughout site (Blue: #0066b3)
+
+### 2b.5 Footer Redesign
+
+**Previous Issues:**
+- 5 columns causing stacking too early on tablet
+- Duplicate "Sitemap" links in Account & Community columns
+- Bottom copyright text centered (not symmetric)
+- Links in light cyan (#38bdf8) not matching brand
+
+**New Layout:**
+```
+Main Grid (4 Columns, minmax 250px):
+├── Column 1: Brand (Company info)
+├── Column 2: Explore (Directory, Articles, Events, Classifieds, Jobs)
+├── Column 3: Account (Login, Signup, Upgrade, Donate)
+└── Column 4: Policies (Terms, Privacy, Refunds, Cookies, Environmental)
+
+Acknowledgment Text: Traditional Custodians notice + SMBI Local info
+
+Bottom Row (Grid 2 Columns):
+├── Left:  Copyright (© 2026 thebayislands.au)
+└── Right: Sitemap • Terms • Policies (footer links with bullets)
+```
+
+**Benefits:**
+- Larger minimum column width (250px vs 200px) = better tablet stacking
+- 4 columns instead of 5 = symmetric layout
+- No duplicate Sitemap links
+- Clean bottom row with Copyright left, Links right
+- Donate moved to Account column (better organization)
+- All links use consistent brand blue
+
+### 2b.6 Responsive Behavior
+
+**Desktop (>1200px):**
+- 4-column footer displays side-by-side
+- Full horizontal layout
+- All links visible and clickable
+
+**Tablet (768px-1200px):**
+- Columns stack in 2-row grid
+- Row 1: Brand + Explore | Account + Policies
+- Bottom row centered (Copyright | Links)
+- Maintains full readability
+
+**Mobile (<768px):**
+- Single column layout
+- Brand → Explore → Account → Policies → Copyright/Links
+- Full-width responsive
+- Touch-friendly sizing
+
+### 2b.7 Files Modified
+
+```
+components/TopAuthBar.tsx   (Updated: Added radio player to top bar)
+components/Footer.tsx        (Updated: Redesigned layout & colors)
+app/directory/page.tsx       (Updated: All colors to brand blue #0066b3)
+styles/globals.css           (Updated: Navbar responsive tweaks)
+```
+
+### 2b.8 Build & Testing
+
+✅ **Build Status:** Successful (no errors)  
+✅ **Test Environment:** Dev server running on port 3002  
+✅ **Device Testing:** All breakpoints verified  
+✅ **Git Status:** Changes committed to `thebayislands.au-v0.0.4` branch  
+✅ **GitHub Status:** Pushed to remote repository
+
+---
 ## �🏗️ TIER A: SEO & CONTENT ENGINE
 
 ### A.1 Database Schema Extensions

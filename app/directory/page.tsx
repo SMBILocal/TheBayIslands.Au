@@ -62,18 +62,19 @@ export default function DirectoryPage() {
       </div>
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px 60px' }}>
-        <div style={{ display: 'flex', gap: 16, marginBottom: 32, alignItems: 'center' }}>
+        {/* Search and Controls */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginBottom: 24, alignItems: 'flex-start' }}>
           <input
             type="text"
-            placeholder="Search businesses by name, category, or service..."
+            placeholder="Search businesses..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
-              flex: 1,
-              padding: '16px 20px',
-              fontSize: 16,
+              gridColumn: '1 / -1',
+              padding: '14px 16px',
+              fontSize: 14,
               border: '1px solid #e2e8f0',
-              borderRadius: 12,
+              borderRadius: 10,
               boxSizing: 'border-box'
             }}
           />
@@ -81,13 +82,13 @@ export default function DirectoryPage() {
             value={selectedLocation}
             onChange={(e) => setSelectedLocation(e.target.value)}
             style={{
-              minWidth: 180,
-              padding: '14px 12px',
+              padding: '12px 10px',
               border: '1px solid #e2e8f0',
-              borderRadius: 12,
+              borderRadius: 10,
               background: 'white',
               color: '#0f172a',
-              fontWeight: 600
+              fontWeight: 600,
+              fontSize: 13
             }}
           >
             <option value="">All Locations</option>
@@ -99,13 +100,13 @@ export default function DirectoryPage() {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             style={{
-              minWidth: 200,
-              padding: '14px 12px',
+              padding: '12px 10px',
               border: '1px solid #e2e8f0',
-              borderRadius: 12,
+              borderRadius: 10,
               background: 'white',
               color: '#0f172a',
-              fontWeight: 600
+              fontWeight: 600,
+              fontSize: 13
             }}
           >
             <option value="">All Categories</option>
@@ -113,29 +114,31 @@ export default function DirectoryPage() {
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
+          <div style={{ display: 'flex', gap: 6, background: 'white', padding: 3, borderRadius: 8, border: '1px solid #e2e8f0' }}>
+            <button onClick={() => setViewMode('grid')} style={{ padding: '10px 14px', background: viewMode === 'grid' ? '#0ea5e9' : 'transparent', color: viewMode === 'grid' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="Grid view">⊞</button>
+            <button onClick={() => setViewMode('list')} style={{ padding: '10px 14px', background: viewMode === 'list' ? '#0ea5e9' : 'transparent', color: viewMode === 'list' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="List view">☰</button>
+          </div>
           {(selectedCategory || selectedLocation || searchQuery) && (
             <button
               onClick={() => { setSelectedCategory(''); setSelectedLocation(''); setSearchQuery(''); }}
               style={{
-                padding: '12px 14px',
+                padding: '10px 12px',
                 background: 'transparent',
                 color: '#0ea5e9',
                 border: '1px solid #0ea5e9',
-                borderRadius: 10,
+                borderRadius: 8,
                 fontWeight: 700,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                fontSize: 13
               }}
             >
-              Clear
+              Clear All
             </button>
           )}
-          <div style={{ display: 'flex', gap: 8, background: 'white', padding: 4, borderRadius: 8, border: '1px solid #e2e8f0' }}>
-            <button onClick={() => setViewMode('grid')} style={{ padding: '8px 16px', background: viewMode === 'grid' ? '#0ea5e9' : 'transparent', color: viewMode === 'grid' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 14 }}>⊞ Grid</button>
-            <button onClick={() => setViewMode('list')} style={{ padding: '8px 16px', background: viewMode === 'list' ? '#0ea5e9' : 'transparent', color: viewMode === 'list' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 14 }}>☰ List</button>
-          </div>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
+        {/* Category Quick Filter */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
           {businessCategories.map(cat => {
             const active = selectedCategory === cat;
             return (
@@ -143,14 +146,15 @@ export default function DirectoryPage() {
                 key={cat}
                 onClick={() => setSelectedCategory(active ? '' : cat)}
                 style={{
-                  padding: '10px 14px',
-                  borderRadius: 24,
-                  border: active ? '1px solid #0ea5e9' : '1px solid #e2e8f0',
+                  padding: '8px 12px',
+                  borderRadius: 20,
+                  border: active ? '2px solid #0ea5e9' : '1px solid #e2e8f0',
                   background: active ? 'rgba(14,165,233,0.12)' : 'white',
                   color: active ? '#0f172a' : '#475569',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  fontSize: 13
+                  fontSize: 12,
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {cat}

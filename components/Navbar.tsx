@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import React, { useState } from "react"
 import { useAuth } from "@/lib/AuthContext"
+import RadioPlayer from "./RadioPlayer"
 
 export default function Navbar(){
   const [menuOpen, setMenuOpen] = useState(false)
@@ -107,13 +108,13 @@ export default function Navbar(){
           <Link href="/articles" onClick={()=>setMenuOpen(false)}>📰 Articles</Link>
           <Link href="/jobs" onClick={()=>setMenuOpen(false)}>💼 Jobs</Link>
           <Link href="/events" onClick={()=>setMenuOpen(false)}>🎉 Events</Link>
-          <Link href="/radio" onClick={()=>setMenuOpen(false)}>📻 Radio</Link>
           <Link href="/directory" onClick={()=>setMenuOpen(false)}>📍 Directory</Link>
           <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>🛒 Buy & Sell</Link>
           <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
             ⭐ Go Premium
           </Link>
         </nav>
+        <RadioPlayer />
       </div>
     </header>
   )

@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import PricingCarousel from '@/components/PricingCarousel';
+import { PRICING_SECTIONS } from '@/lib/pricing.constants';
 
 export default function UpgradePage() {
-  const [selectedPlan, setSelectedPlan] = useState<'basic' | 'premium'>('premium');
+  const [selectedTier, setSelectedTier] = useState<string>('popular');
   const searchParams = useSearchParams();
   const businessSlug = searchParams?.get('business');
   const [claimingBusiness, setClaimingBusiness] = useState<any>(null);
@@ -25,19 +27,6 @@ export default function UpgradePage() {
         .catch(err => console.error('Failed to fetch business:', err));
     }
   }, [businessSlug]);
-
-  const features = [
-    { name: 'Post Listings', basic: true, premium: true },
-    { name: 'Photos & Images', basic: '1 photo', premium: 'Up to 10 photos' },
-    { name: 'Listing Duration', basic: '30 days', premium: '90 days (auto-renew)' },
-    { name: 'Featured Placement', basic: false, premium: true },
-    { name: 'Top Search Results', basic: false, premium: true },
-    { name: 'No Competitor Ads', basic: false, premium: true },
-    { name: 'Highlighted Badge', basic: false, premium: true },
-    { name: 'Priority Support', basic: false, premium: true },
-    { name: 'Analytics Dashboard', basic: false, premium: true },
-    { name: 'Boost Option', basic: false, premium: 'Included' },
-  ];
 
   return (
     <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
@@ -295,117 +284,21 @@ export default function UpgradePage() {
         </p>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 20px) clamp(40px, 8vw, 60px)' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(16px, 5vw, 20px) clamp(40px, 8vw, 60px)' }}>
         
-        {/* Pricing Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(20px, 4vw, 40px)', marginBottom: 80 }}>
+        {/* Pricing Carousel Section */}
+        <div style={{ marginBottom: 80 }}>
+          <h2 style={{ fontSize: 'clamp(1.8em, 4vw, 36px)', fontWeight: 700, textAlign: 'center', margin: '0 0 16px 0' }}>
+            {PRICING_SECTIONS.hero.title}
+          </h2>
+          <p style={{ textAlign: 'center', color: '#64748b', fontSize: 'clamp(1em, 1.8vw, 16px)', margin: '0 0 40px 0', maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
+            {PRICING_SECTIONS.hero.description}
+          </p>
           
-          {/* Basic Plan */}
-          <div style={{
-            background: 'white',
-            border: '2px solid #e2e8f0',
-            borderRadius: 16,
-            padding: 'clamp(24px, 5vw, 40px)',
-            display: 'flex',
-            flexDirection: 'column',
-            transition: 'all 0.3s ease'
-          }}>
-            <h3 style={{ fontSize: 'clamp(1.3em, 2.5vw, 24px)', fontWeight: 700, margin: '0 0 8px 0' }}>Standard</h3>
-            <p style={{ color: '#64748b', fontSize: 'clamp(0.9em, 1.5vw, 14px)', margin: '0 0 20px 0' }}>Perfect for testing</p>
-            <div style={{ fontSize: 'clamp(2em, 5vw, 36px)', fontWeight: 800, color: '#0066b3', margin: '0 0 4px 0' }}>
-              Free
-            </div>
-            <p style={{ color: '#64748b', fontSize: '0.9em', margin: '0 0 24px 0' }}>Forever free, no credit card required</p>
-            <button style={{
-              width: '100%',
-              padding: '12px 24px',
-              background: '#e2e8f0',
-              color: '#0f172a',
-              border: 'none',
-              borderRadius: 8,
-              fontWeight: 600,
-              cursor: 'pointer',
-              fontSize: 'clamp(0.9em, 1.5vw, 14px)',
-              minHeight: '44px',
-              marginBottom: 24
-            }}>
-              Currently Active
-            </button>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {features.map((f) => (
-                <div key={f.name} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', fontSize: 'clamp(0.85em, 1.5vw, 13px)' }}>
-                  <span style={{ fontSize: '1.2em', marginTop: -2 }}>
-                    {f.basic ? '✓' : '✗'}
-                  </span>
-                  <div>
-                    <div style={{ fontWeight: 600, color: '#0f172a' }}>{f.name}</div>
-                    {typeof f.basic === 'string' && <div style={{ color: '#64748b', fontSize: '0.9em' }}>{f.basic}</div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Premium Plan */}
-          <div style={{
-            background: 'linear-gradient(135deg, #0066b3 0%, #c85a17 100%)',
-            color: 'white',
-            border: '3px solid #0066b3',
-            borderRadius: 16,
-            padding: 'clamp(24px, 5vw, 40px)',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            transform: 'scale(1.05)',
-            boxShadow: '0 20px 50px rgba(0,102,179,0.3)'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: -12,
-              right: 20,
-              background: '#fff',
-              color: '#c85a17',
-              padding: '4px 12px',
-              borderRadius: 20,
-              fontSize: '0.75em',
-              fontWeight: 700,
-              textTransform: 'uppercase'
-            }}>
-              Most Popular
-            </div>
-            <h3 style={{ fontSize: 'clamp(1.3em, 2.5vw, 24px)', fontWeight: 700, margin: '0 0 8px 0' }}>Premium Featured</h3>
-            <p style={{ opacity: 0.9, fontSize: 'clamp(0.9em, 1.5vw, 14px)', margin: '0 0 20px 0' }}>Maximum visibility & impact</p>
-            <div style={{ fontSize: 'clamp(2em, 5vw, 36px)', fontWeight: 800, margin: '0 0 4px 0' }}>
-              $14.90
-            </div>
-            <p style={{ opacity: 0.9, fontSize: '0.9em', margin: '0 0 24px 0' }}>per month (7-day free trial)</p>
-            <button style={{
-              width: '100%',
-              padding: '12px 24px',
-              background: 'white',
-              color: '#0066b3',
-              border: 'none',
-              borderRadius: 8,
-              fontWeight: 700,
-              cursor: 'pointer',
-              fontSize: 'clamp(0.9em, 1.5vw, 14px)',
-              minHeight: '44px',
-              marginBottom: 24
-            }}>
-              Upgrade Now
-            </button>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {features.map((f) => (
-                <div key={f.name} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', fontSize: 'clamp(0.85em, 1.5vw, 13px)' }}>
-                  <span style={{ fontSize: '1.2em', marginTop: -2 }}>✓</span>
-                  <div>
-                    <div style={{ fontWeight: 600 }}>{f.name}</div>
-                    {typeof f.premium === 'string' && <div style={{ opacity: 0.8, fontSize: '0.9em' }}>{f.premium}</div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <PricingCarousel 
+            onTierSelect={(tierId) => setSelectedTier(tierId)}
+            defaultTier="popular"
+          />
         </div>
 
         {/* Why Premium Section */}
@@ -531,6 +424,10 @@ export default function UpgradePage() {
           </h2>
           <div style={{ maxWidth: 700, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
             {[
+              {
+                q: 'Is the free tier always free?',
+                a: 'Absolutely! The Free tier will always be free. You can upgrade to a paid tier anytime to unlock more features, and you can also downgrade back to Free at any time. No surprises, no hidden fees.'
+              },
               {
                 q: 'Can I cancel anytime?',
                 a: 'Yes! No long-term contracts. Cancel anytime from your account settings. If you cancel mid-month, you won\'t be charged again.'

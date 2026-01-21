@@ -83,7 +83,110 @@ v0.1.0 (STABLE RELEASE)
 
 ---
 
-## 🏗️ TIER A: SEO & CONTENT ENGINE
+## � PHASE 1 (Jan 21, 2026): PRICING REFINEMENT & FEATURE CLARIFICATION
+
+### Overview
+Refine the pricing model, improve messaging clarity, and add critical features for content management and community engagement.
+
+### 1.1 Pricing Updates
+
+**Changes to PRICING_TIERS:**
+- ✅ Removed "Browse directory" from Free & Standard (it's free for all)
+- ✅ Added feature tooltips/help text for all features
+- ✅ Clarified job & classifieds post limits per tier
+- ✅ Added article publishing with admin review
+- ✅ Pro tier now includes 2 directory listings (shared dashboard)
+- ✅ Enterprise pricing changed from "$250/mo" to "Custom Pricing"
+
+**Feature Limits (Paid Posts per Tier):**
+```
+Free:         0 paid posts (free posts only)
+Standard:     2 job posts + 2 classifieds per month
+Professional: 5 job posts + 5 classifieds per month
+Pro:          10 job posts + 10 classifieds per month
+Enterprise:   Unlimited paid posts
+```
+
+**New Pro Tier Feature:**
+```
+"2 directory listings (shared dashboard)"
+- Manage 2 businesses from one dashboard
+- Both get full Pro features (10 categories each, unlimited photos, etc.)
+- Separate dashboards available only at higher tiers or with separate subscriptions
+- Effectively doubles value for same monthly cost
+```
+
+### 1.2 Messaging & Transparency
+
+**Added FAQ Section Question:**
+```
+Q: Is the free tier always free?
+A: Absolutely! The Free tier will always be free. You can upgrade to a paid 
+tier anytime to unlock more features, and you can also downgrade back to 
+Free at any time. No surprises, no hidden fees.
+```
+
+**Added Platform-Wide Messaging:**
+- Emphasize: "Pricing covers entire platform—jobs, classifieds, articles, events, AND directory"
+- Not just directory fees like competitors
+- Competitive advantage: one-stop platform for local business
+
+### 1.3 Content Approval System (Design Phase)
+
+**New Content Types Needing Approval:**
+1. Business listings (new claims)
+2. Job postings (paid)
+3. Classifieds (paid)
+4. Articles (paid)
+5. Events (all)
+
+**Workflow:**
+```
+User submits content → System validates against guidelines 
+  → If passes: Auto-approve (instant) 
+  → If fails: Hold for manual review 
+  → Admin/Moderator reviews → Approve/reject/request changes 
+  → User notified
+```
+
+**Auto-Approval Guidelines (To Define):**
+- Content quality (no spam, no profanity, no inappropriate material)
+- Business legitimacy (name, contact, location verification)
+- Image requirements (min resolution, no copyrighted images without permission)
+- Compliance (local laws, service regulations, terms of service)
+
+### 1.4 Bay Islands Radio Widget (Planning Phase)
+
+**Feature:** Live-streaming local radio in header
+- **Station:** Bay Islands Radio 98.8 FM (confirm frequency)
+- **Location:** Top header bar (centered)
+- **Elements:** Play/pause button, current song, time/date, station link
+- **Implementation:** Phase 4 (after pricing stabilizes)
+- **Estimated Time:** 13 hours
+- **See:** [BAY-ISLANDS-RADIO-WIDGET-PLAN.md](BAY-ISLANDS-RADIO-WIDGET-PLAN.md)
+
+### 1.5 Files & Documentation
+
+**Files Created:**
+- `docs/PHASE-PLAN-2026-EXPANSION.md` - All user feedback & requirements
+- `docs/BAY-ISLANDS-RADIO-WIDGET-PLAN.md` - Radio widget implementation
+- `docs/PRICING-MESSAGING-UPDATE-JAN-2026.md` - Complete changelog
+
+**Files Modified:**
+- `lib/pricing.constants.ts` - Updated features, tooltips, limits
+- `components/PricingCarousel.tsx` - Added tooltip rendering
+- `app/upgrade/page.tsx` - Added FAQ question
+
+### 1.6 Timeline: Phase 1
+- ✅ **Jan 21:** Pricing constants updated, FAQ added, messaging updated
+- ✅ **Jan 21:** Radio widget plan created & added to roadmap
+- ⏳ **Jan 22-23:** Testing on all devices (desktop, tablet, mobile)
+- ⏳ **Jan 24:** Deploy to production
+- ⏳ **Jan 25+:** Monitor conversion metrics & user feedback
+
+---
+
+## �🏗️ TIER A: SEO & CONTENT ENGINE
 
 ### A.1 Database Schema Extensions
 

@@ -6,47 +6,49 @@ const linkStyle: React.CSSProperties = { color: '#0066b3', textDecoration: 'none
 export default function Footer(){
   return (
     <footer style={{borderTop: '1px solid #e2e8f0', background: '#0b1727', color: 'white', marginTop: 64}}>
-      <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 40}}>
-        {/* Column 1: Brand with wrapped bird icon */}
-        <div>
-          <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12}}>
-            <span style={{fontSize: 28}}>🐦</span>
-            <div style={{fontWeight: 700, fontSize: 18}}>thebayislands.au</div>
+      <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px 0 20px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40, marginBottom: 32}}>
+          {/* Column 1: Brand with wrapped bird icon */}
+          <div>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12}}>
+              <span style={{fontSize: 28}}>🐦</span>
+              <div style={{fontWeight: 700, fontSize: 18}}>thebayislands.au</div>
+            </div>
+            <div style={{opacity: 0.8, fontSize: 14, lineHeight: 1.5}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades. Created and operated by SMBI Local (smbilocal.au).</div>
           </div>
-          <div style={{opacity: 0.8, fontSize: 14, lineHeight: 1.5}}>Local hub for SMBI — directory, jobs, classifieds, events, and business upgrades. Created and operated by SMBI Local (smbilocal.au).</div>
-        </div>
-        
-        {/* Column 2: Explore */}
-        <div>
-          <div style={{fontWeight: 700, marginBottom: 12}}>Explore</div>
-          <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
-            <li><Link href="/directory" style={linkStyle}>Directory</Link></li>
-            <li><Link href="/articles" style={linkStyle}>Articles</Link></li>
-            <li><Link href="/events" style={linkStyle}>Events</Link></li>
-            <li><Link href="/classifieds" style={linkStyle}>Classifieds</Link></li>
-            <li><Link href="/jobs" style={linkStyle}>Jobs</Link></li>
-          </ul>
-        </div>
-        
-        {/* Column 3: Account */}
-        <div>
-          <div style={{fontWeight: 700, marginBottom: 12}}>Account</div>
-          <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
-            <li><Link href="/login" style={linkStyle}>Login</Link></li>
-            <li><Link href="/signup" style={linkStyle}>Sign up</Link></li>
-            <li><Link href="/upgrade" style={linkStyle}>Upgrade & Pricing</Link></li>
-            <li><Link href="/donate" style={linkStyle}>Donate</Link></li>
-          </ul>
-        </div>
-        
-        {/* Column 4: Community */}
-        <div>
-          <div style={{fontWeight: 700, marginBottom: 12}}>Community</div>
-          <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
-            <li><Link href="/donate" style={linkStyle}>Donate to SMBI Local</Link></li>
-            <li><Link href="/about-smbi-local" style={linkStyle}>About SMBI Local</Link></li>
-            <li><Link href="/radio" style={linkStyle}>Local Radio Stations</Link></li>
-          </ul>
+          
+          {/* Column 2: Explore */}
+          <div>
+            <div style={{fontWeight: 700, marginBottom: 12}}>Explore</div>
+            <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
+              <li><Link href="/directory" style={linkStyle}>Directory</Link></li>
+              <li><Link href="/articles" style={linkStyle}>Articles</Link></li>
+              <li><Link href="/events" style={linkStyle}>Events</Link></li>
+              <li><Link href="/classifieds" style={linkStyle}>Classifieds</Link></li>
+              <li><Link href="/jobs" style={linkStyle}>Jobs</Link></li>
+            </ul>
+          </div>
+          
+          {/* Column 3: Account */}
+          <div>
+            <div style={{fontWeight: 700, marginBottom: 12}}>Account</div>
+            <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
+              <li><Link href="/login" style={linkStyle}>Login</Link></li>
+              <li><Link href="/signup" style={linkStyle}>Sign up</Link></li>
+              <li><Link href="/upgrade" style={linkStyle}>Upgrade & Pricing</Link></li>
+              <li><Link href="/donate" style={linkStyle}>Donate</Link></li>
+            </ul>
+          </div>
+          
+          {/* Column 4: Community */}
+          <div>
+            <div style={{fontWeight: 700, marginBottom: 12}}>Community</div>
+            <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
+              <li><Link href="/donate" style={linkStyle}>Donate to SMBI Local</Link></li>
+              <li><Link href="/about-smbi-local" style={linkStyle}>About SMBI Local</Link></li>
+              <li><Link href="/radio" style={linkStyle}>Local Radio Stations</Link></li>
+            </ul>
+          </div>
         </div>
       </div>
       

@@ -72,11 +72,14 @@ input,button,textarea,select{font:inherit}
   margin-left:auto;
 }
 
-/* Tablet Portrait: Center align navigation */
+/* Tablet Portrait: Center align navigation without stacking */
 @media (max-width:1024px) and (min-width:769px){
   .nav-links{
     margin-left:0;
     justify-content:center;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    gap: 2px;
   }
 }
 

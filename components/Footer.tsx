@@ -6,20 +6,8 @@ const linkStyle: React.CSSProperties = { color: '#0066b3', textDecoration: 'none
 export default function Footer(){
   return (
     <footer style={{borderTop: '1px solid #e2e8f0', background: '#0b1727', color: 'white', marginTop: 64}}>
-      <style>{`
-        @media (max-width: 1024px) {
-          .footer-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 768px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
       <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px 0 20px'}}>
-        <div className="footer-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40, marginBottom: 32}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40, marginBottom: 32}}>
           {/* Column 1: Brand with wrapped bird icon */}
           <div>
             <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12}}>

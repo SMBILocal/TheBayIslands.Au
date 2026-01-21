@@ -53,8 +53,14 @@ export default function TopAuthBar() {
           </svg>
         </Link>
 
+        {/* Radio Player in middle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '500', color: '#0066b3', marginLeft: 'auto', marginRight: 'auto' }}>
+          <span>📻 Bay Islands Radio</span>
+          <button style={{ padding: '4px 10px', background: '#f0f4f8', color: '#0066b3', border: '1px solid #d1e0f0', borderRadius: '4px', cursor: 'pointer', fontWeight: '600', fontSize: '12px', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.currentTarget.style.background = '#0066b3'; e.currentTarget.style.color = 'white'; }} onMouseLeave={(e) => { e.currentTarget.style.background = '#f0f4f8'; e.currentTarget.style.color = '#0066b3'; }} >▶ Play</button>
+        </div>
+
         {/* Auth links on right */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginLeft: 'auto' }}>
           {user ? (
             <>
               <span style={{ opacity: 0.7, fontSize: '12px' }}>

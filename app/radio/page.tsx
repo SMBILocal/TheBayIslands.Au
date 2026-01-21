@@ -277,6 +277,9 @@ export default function RadioStationsPage() {
               <p className="text-blue-100 text-lg mt-2">
                 Tune in to the heartbeat of the Bay Islands and surrounding region
               </p>
+              <p className="text-blue-50 text-sm mt-3 italic">
+                💡 Tip: Click "📻 Bay Islands Radio" in the top bar to listen to Bay Islands Radio 88.0 FM anytime!
+              </p>
             </div>
           </div>
         </div>

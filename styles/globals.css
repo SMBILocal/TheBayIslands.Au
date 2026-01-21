@@ -72,6 +72,14 @@ input,button,textarea,select{font:inherit}
   margin-left:auto;
 }
 
+/* Tablet Portrait: Center align navigation */
+@media (max-width:1024px) and (min-width:769px){
+  .nav-links{
+    margin-left:0;
+    justify-content:center;
+  }
+}
+
 @media (max-width:1200px){
   .nav-links{gap:2px;}
   .nav a{

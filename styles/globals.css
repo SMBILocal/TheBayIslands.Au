@@ -69,6 +69,7 @@ input,button,textarea,select{font:inherit}
   gap:2px;
   align-items:center;
   flex-wrap:wrap;
+  margin-left:auto;
 }
 
 @media (max-width:1200px){

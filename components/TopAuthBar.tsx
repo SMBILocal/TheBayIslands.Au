@@ -43,22 +43,12 @@ export default function TopAuthBar() {
           padding: '0 20px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           gap: '24px',
           minHeight: '32px',
         }}
       >
-        {/* Logo on left */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <svg width="160" height="32" viewBox="0 0 160 32" style={{ display: 'block' }}>
-            <text x="0" y="24" fontSize="20" fontWeight="800" fill="#0066b3">the</text>
-            <text x="35" y="24" fontSize="20" fontWeight="800" fill="#c85a17">bay</text>
-            <text x="70" y="24" fontSize="20" fontWeight="800" fill="#0066b3">islands</text>
-            <text x="140" y="24" fontSize="14" fill="#64748b" fontWeight="600">.au</text>
-          </svg>
-        </Link>
-
-        {/* Radio Player in middle - simple black play/pause icons */}
+        {/* Radio Player centered - simple black play/pause icons */}
         <button
           onClick={handleRadioToggle}
           style={{

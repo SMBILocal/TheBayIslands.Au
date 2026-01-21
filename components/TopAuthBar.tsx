@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 export default function TopAuthBar() {
   const { user, signOut } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -19,6 +20,10 @@ export default function TopAuthBar() {
 
   const handleLogout = async () => {
     await signOut();
+  };
+
+  const handleRadioToggle = () => {
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -53,11 +58,29 @@ export default function TopAuthBar() {
           </svg>
         </Link>
 
-        {/* Radio Player in middle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '500', color: '#0066b3', marginLeft: 'auto', marginRight: 'auto' }}>
+        {/* Radio Player in middle - fully clickable, no button box */}
+        <button
+          onClick={handleRadioToggle}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '13px',
+            fontWeight: '500',
+            color: '#0066b3',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '4px 0',
+            transition: 'opacity 0.2s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+          title="Click to listen to Bay Islands Radio 88.0 FM"
+        >
           <span>📻 Bay Islands Radio</span>
-          <button style={{ padding: '4px 10px', background: '#f0f4f8', color: '#0066b3', border: '1px solid #d1e0f0', borderRadius: '4px', cursor: 'pointer', fontWeight: '600', fontSize: '12px', transition: 'all 0.2s' }} onMouseEnter={(e) => { e.currentTarget.style.background = '#0066b3'; e.currentTarget.style.color = 'white'; }} onMouseLeave={(e) => { e.currentTarget.style.background = '#f0f4f8'; e.currentTarget.style.color = '#0066b3'; }} >▶ Play</button>
-        </div>
+          <span style={{ fontSize: '14px' }}>{isPlaying ? '⏸️' : '⏯️'}</span>
+        </button>
 
         {/* Auth links on right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginLeft: 'auto' }}>

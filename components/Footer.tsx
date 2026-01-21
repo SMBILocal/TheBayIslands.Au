@@ -46,6 +46,7 @@ export default function Footer(){
             <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8}}>
               <li><Link href="/donate" style={linkStyle}>Donate to SMBI Local</Link></li>
               <li><Link href="/about-smbi-local" style={linkStyle}>About SMBI Local</Link></li>
+              <li><a href="https://smbilocal.au" target="_blank" rel="noopener noreferrer" style={linkStyle}>SMBI Local (smbilocal.au)</a></li>
               <li><Link href="/radio" style={linkStyle}>Local Radio Stations</Link></li>
             </ul>
           </div>

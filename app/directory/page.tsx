@@ -54,7 +54,7 @@ export default function DirectoryPage() {
 
   return (
     <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
-      <div style={{ background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)', color: 'white', padding: '60px 20px', marginBottom: 40 }}>
+      <div style={{ background: 'linear-gradient(135deg, #0066b3 0%, #004a8a 100%)', color: 'white', padding: '60px 20px', marginBottom: 40 }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h1 style={{ fontSize: 42, fontWeight: 700, margin: '0 0 12px 0' }}>Business Directory</h1>
           <p style={{ fontSize: 18, opacity: 0.9, margin: 0 }}>Connect with local businesses across the Bay Islands</p>
@@ -115,8 +115,8 @@ export default function DirectoryPage() {
             ))}
           </select>
           <div style={{ display: 'flex', gap: 6, background: 'white', padding: 3, borderRadius: 8, border: '1px solid #e2e8f0' }}>
-            <button onClick={() => setViewMode('grid')} style={{ padding: '10px 14px', background: viewMode === 'grid' ? '#0ea5e9' : 'transparent', color: viewMode === 'grid' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="Grid view">⊞</button>
-            <button onClick={() => setViewMode('list')} style={{ padding: '10px 14px', background: viewMode === 'list' ? '#0ea5e9' : 'transparent', color: viewMode === 'list' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="List view">☰</button>
+            <button onClick={() => setViewMode('grid')} style={{ padding: '10px 14px', background: viewMode === 'grid' ? '#0066b3' : 'transparent', color: viewMode === 'grid' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="Grid view">⊞</button>
+            <button onClick={() => setViewMode('list')} style={{ padding: '10px 14px', background: viewMode === 'list' ? '#0066b3' : 'transparent', color: viewMode === 'list' ? 'white' : '#64748b', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 12 }} title="List view">☰</button>
           </div>
           {(selectedCategory || selectedLocation || searchQuery) && (
             <button
@@ -124,8 +124,8 @@ export default function DirectoryPage() {
               style={{
                 padding: '10px 12px',
                 background: 'transparent',
-                color: '#0ea5e9',
-                border: '1px solid #0ea5e9',
+                color: '#0066b3',
+                border: '1px solid #0066b3',
                 borderRadius: 8,
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -148,7 +148,7 @@ export default function DirectoryPage() {
                 style={{
                   padding: '8px 12px',
                   borderRadius: 20,
-                  border: active ? '2px solid #0ea5e9' : '1px solid #e2e8f0',
+                  border: active ? '2px solid #0066b3' : '1px solid #e2e8f0',
                   background: active ? 'rgba(14,165,233,0.12)' : 'white',
                   color: active ? '#0f172a' : '#475569',
                   fontWeight: 700,
@@ -201,7 +201,7 @@ export default function DirectoryPage() {
             <button onClick={() => setShowAddBusinessForm(true)} style={{
                 width: '100%',
                 padding: 12,
-                background: '#0ea5e9',
+                background: '#0066b3',
                 color: 'white',
                 border: 'none',
                 borderRadius: 8,
@@ -226,7 +226,7 @@ export default function DirectoryPage() {
 
             <div style={{ background: 'white', borderRadius: 12, padding: 'clamp(20px, 5vw, 24px)', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h4 style={{ fontSize: 'clamp(1em, 1.5vw, 16px)', fontWeight: 600, margin: '0 0 12px 0' }}>Total Businesses</h4>
-              <div style={{ fontSize: 'clamp(1.8em, 5vw, 32px)', fontWeight: 700, color: '#0ea5e9' }}>{businesses.length}</div>
+              <div style={{ fontSize: 'clamp(1.8em, 5vw, 32px)', fontWeight: 700, color: '#0066b3' }}>{businesses.length}</div>
             </div>
         </div>
       </div>
@@ -235,7 +235,7 @@ export default function DirectoryPage() {
         isOpen={showAddBusinessForm}
         title="Add Your Business"
         description="List your business in the Bay Islands directory and reach local customers."
-        accentColor="#0ea5e9"
+        accentColor="#0066b3"
         fields={[
           { name: 'name', label: 'Business Name', type: 'text', placeholder: 'e.g. Island Cafe & Bakery', required: true },
           { name: 'category', label: 'Category', type: 'text', placeholder: 'e.g. Cafe & Food', required: true },

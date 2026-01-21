@@ -58,28 +58,30 @@ export default function TopAuthBar() {
           </svg>
         </Link>
 
-        {/* Radio Player in middle - fully clickable, no button box */}
+        {/* Radio Player in middle - simple black play/pause icons */}
         <button
           onClick={handleRadioToggle}
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '4px',
+            gap: '8px',
             fontSize: '13px',
             fontWeight: '500',
-            color: '#0066b3',
+            color: '#333',
             background: 'transparent',
             border: 'none',
             cursor: 'pointer',
-            padding: '4px 0',
+            padding: '4px 8px',
             transition: 'opacity 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.6')}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
           title="Click to listen to Bay Islands Radio 88.0 FM"
         >
-          <span>📻 Bay Islands Radio</span>
-          <span style={{ fontSize: '14px' }}>{isPlaying ? '⏸️' : '⏯️'}</span>
+          <span>Bay Islands Radio 88.0</span>
+          <span style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '1px' }}>
+            {isPlaying ? '⏸' : '▶'}
+          </span>
         </button>
 
         {/* Auth links on right */}

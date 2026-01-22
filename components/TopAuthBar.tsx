@@ -79,7 +79,9 @@ export default function TopAuthBar() {
             onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             title="Click to listen to Bay Islands Radio 88.0 FM"
           >
-            <span>Bay Islands Radio 88.0</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', transform: 'translateY(2px)' }}>
+              📻 Bay Islands Radio 88.0
+            </span>
             <span style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '1px' }}>
               {isPlaying ? '⏸' : '▶'}
             </span>

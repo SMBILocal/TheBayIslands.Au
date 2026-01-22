@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       url: `https://thebayislands.au/directory/${params.slug}`,
       siteName: 'The Bay Islands',
       locale: 'en_AU',
-      type: 'business.business',
+      type: 'website',
     },
     alternates: {
       canonical: `https://thebayislands.au/directory/${params.slug}`,

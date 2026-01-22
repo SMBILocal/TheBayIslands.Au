@@ -107,9 +107,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
 
     if (data.user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role, subscription_tier')
+        .eq('id', data.user.id)
+        .single();
+
       setUser({
         id: data.user.id,
         email: data.user.email || '',
+        role: userData?.role || 'user',
+        subscription_tier: userData?.subscription_tier || 'free',
         user_metadata: data.user.user_metadata
       });
     }
@@ -124,9 +132,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
 
     if (data.user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role, subscription_tier')
+        .eq('id', data.user.id)
+        .single();
+
       setUser({
         id: data.user.id,
         email: data.user.email || '',
+        role: userData?.role || 'user',
+        subscription_tier: userData?.subscription_tier || 'free',
         user_metadata: data.user.user_metadata
       });
     }

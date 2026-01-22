@@ -83,7 +83,8 @@ export async function POST(request: NextRequest) {
         {
           ...validatedData,
           user_id: user.id,
-          status: 'upcoming'
+          status: 'upcoming',
+          moderation_status: 'approved'
         }
       ])
       .select();

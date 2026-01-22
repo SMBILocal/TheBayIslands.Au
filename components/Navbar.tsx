@@ -26,7 +26,7 @@ export default function Navbar(){
           <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           
           {/* Areas Dropdown */}
-          <div className="nav-dropdown" style={{ position: 'relative' }}>
+          <div className="nav-dropdown" style={{ position: 'relative', zIndex: 1001 }}>
             <button 
               className="nav-dropdown-toggle"
               onClick={() => setAreasOpen(!areasOpen)}
@@ -62,7 +62,7 @@ export default function Navbar(){
                 padding: '12px 0',
                 minWidth: '200px',
                 display: areasOpen ? 'block' : 'none',
-                zIndex: 1000
+                zIndex: 9999
               }}
             >
               <div style={{ padding: '8px 16px', fontWeight: 'bold', fontSize: '0.85em', color: '#666', textTransform: 'uppercase' }}>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import supabase from '@/lib/supabaseClient';
+import { canCreateListing, getListingLimit, SubscriptionTier } from '@/lib/permissions';
 
 interface DirectoryListing {
   id: string;
@@ -54,12 +55,15 @@ export default function DirectoryListingsPage() {
     if (!confirm('Are you sure you want to delete this listing?')) return;
 
     try {
-      const { error: deleteError } = await supabase
-        .from('directory_listings')
-        .delete()
-        .eq('id', id);
+      const response = await fetch(`/api/directory/listings/${id}`, {
+        method: 'DELETE',
+      });
 
-      if (deleteError) throw deleteError;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to delete listing');
+      }
+
       setListings(listings.filter(l => l.id !== id));
     } catch (err: any) {
       alert(err.message || 'Failed to delete listing');
@@ -68,23 +72,58 @@ export default function DirectoryListingsPage() {
 
   if (loading) return <div>Loading...</div>;
 
+  const subscriptionTier = (user?.subscription_tier || 'free') as SubscriptionTier;
+  const listingLimit = getListingLimit(subscriptionTier);
+  const canCreate = canCreateListing(subscriptionTier, listings.length);
+
   return (
     <div style={{ minHeight: '100vh', paddingTop: '40px', paddingBottom: '40px' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-          <h1>My Directory Listings</h1>
-          <Link href="/directory">
-            <button style={{
-              backgroundColor: '#0070f3',
-              color: 'white',
-              padding: '10px 20px',
-              borderRadius: '4px',
-              border: 'none',
-              cursor: 'pointer'
-            }}>
-              New Listing
-            </button>
-          </Link>
+        <Link href="/dashboard" style={{ color: '#0070f3', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>
+          ← Back to Dashboard
+        </Link>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <div>
+            <h1 style={{ marginBottom: '10px' }}>My Directory Listings</h1>
+            <p style={{ color: '#666', margin: 0 }}>
+              {listings.length} / {listingLimit === null ? '∞' : listingLimit} listings used
+            </p>
+          </div>
+          {canCreate ? (
+            <Link href="/directory">
+              <button style={{
+                backgroundColor: '#0070f3',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '4px',
+                border: 'none',
+                cursor: 'pointer'
+              }}>
+                New Listing
+              </button>
+            </Link>
+          ) : (
+            <div style={{ textAlign: 'right' }}>
+              <button
+                disabled
+                style={{
+                  backgroundColor: '#ccc',
+                  color: '#666',
+                  padding: '10px 20px',
+                  borderRadius: '4px',
+                  border: 'none',
+                  cursor: 'not-allowed',
+                  marginBottom: '5px'
+                }}
+              >
+                Limit Reached
+              </button>
+              <p style={{ fontSize: '12px', color: '#666', margin: 0 }}>
+                <Link href="/dashboard/billing" style={{ color: '#0070f3' }}>Upgrade</Link> to create more
+              </p>
+            </div>
+          )}
         </div>
 
         {error && (
@@ -109,18 +148,20 @@ export default function DirectoryListingsPage() {
             <p style={{ color: '#666', marginBottom: '20px' }}>
               You haven't created any directory listings yet.
             </p>
-            <Link href="/directory">
-              <button style={{
-                backgroundColor: '#0070f3',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: '4px',
-                border: 'none',
-                cursor: 'pointer'
-              }}>
-                Create Your First Listing
-              </button>
-            </Link>
+            {canCreate && (
+              <Link href="/directory">
+                <button style={{
+                  backgroundColor: '#0070f3',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '4px',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}>
+                  Create Your First Listing
+                </button>
+              </Link>
+            )}
           </div>
         ) : (
           <div style={{ display: 'grid', gap: '15px' }}>

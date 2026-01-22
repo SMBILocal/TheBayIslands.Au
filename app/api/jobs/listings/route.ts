@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { z } from 'zod';
 
 async function getSupabaseServer() {
   const cookieStore = cookies();
@@ -24,6 +25,18 @@ async function getSupabaseServer() {
 
   return supabase;
 }
+
+const jobCreateSchema = z.object({
+  title: z.string().min(1).max(200),
+  description: z.string().min(1),
+  company_name: z.string().min(1).max(200),
+  location: z.string().min(1).max(100),
+  job_type: z.string().optional(),
+  salary_range: z.string().optional(),
+  contact_email: z.string().email().optional(),
+  contact_phone: z.string().optional(),
+  application_url: z.string().url().optional(),
+});
 
 export async function GET(request: NextRequest) {
   try {
@@ -57,12 +70,14 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    
+    const validatedData = jobCreateSchema.parse(body);
 
     const { data, error } = await supabase
       .from('jobs')
       .insert([
         {
-          ...body,
+          ...validatedData,
           user_id: user.id,
           status: 'pending'
         }
@@ -72,6 +87,9 @@ export async function POST(request: NextRequest) {
     if (error) throw error;
     return NextResponse.json(data[0], { status: 201 });
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Validation failed', details: error.issues }, { status: 400 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

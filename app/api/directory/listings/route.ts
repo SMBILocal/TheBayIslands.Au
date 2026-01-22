@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { z } from 'zod';
 
 async function getSupabaseServer() {
   const cookieStore = cookies();
@@ -24,6 +25,20 @@ async function getSupabaseServer() {
 
   return supabase;
 }
+
+const directoryListingCreateSchema = z.object({
+  business_name: z.string().min(1).max(200),
+  description: z.string().min(1),
+  category: z.string().min(1),
+  location: z.string().min(1).max(100),
+  address: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().email().optional(),
+  website: z.string().url().optional(),
+  hours: z.string().optional(),
+  logo_url: z.string().optional(),
+  images: z.array(z.string()).optional(),
+});
 
 export async function GET(request: NextRequest) {
   try {
@@ -59,12 +74,14 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    
+    const validatedData = directoryListingCreateSchema.parse(body);
 
     const { data, error } = await supabase
       .from('directory_listings')
       .insert([
         {
-          ...body,
+          ...validatedData,
           user_id: user.id,
           status: 'pending'
         }
@@ -75,6 +92,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(data[0], { status: 201 });
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Validation failed', details: error.issues }, { status: 400 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

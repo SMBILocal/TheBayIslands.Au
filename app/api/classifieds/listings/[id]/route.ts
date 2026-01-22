@@ -26,19 +26,18 @@ async function getSupabaseServer() {
   return supabase;
 }
 
-const directoryListingUpdateSchema = z.object({
-  business_name: z.string().min(1).max(200).optional(),
+const classifiedUpdateSchema = z.object({
+  title: z.string().min(1).max(200).optional(),
   description: z.string().min(1).optional(),
   category: z.string().min(1).optional(),
+  price: z.number().min(0).optional(),
   location: z.string().min(1).max(100).optional(),
-  address: z.string().optional(),
-  phone: z.string().optional(),
-  email: z.string().email().optional(),
-  website: z.string().url().optional(),
-  hours: z.string().optional(),
-  logo_url: z.string().optional(),
+  condition: z.string().optional(),
   images: z.array(z.string()).optional(),
-  status: z.enum(['pending', 'active', 'inactive', 'suspended']).optional(),
+  contact_name: z.string().optional(),
+  contact_email: z.string().email().optional(),
+  contact_phone: z.string().optional(),
+  status: z.enum(['pending', 'active', 'sold', 'expired']).optional(),
 });
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -46,7 +45,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     const supabase = await getSupabaseServer();
     
     const { data, error } = await supabase
-      .from('directory_listings')
+      .from('classifieds')
       .select('*')
       .eq('id', params.id)
       .single();
@@ -69,24 +68,24 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const body = await request.json();
     
-    const validatedData = directoryListingUpdateSchema.parse(body);
+    const validatedData = classifiedUpdateSchema.parse(body);
 
-    const { data: listing } = await supabase
-      .from('directory_listings')
+    const { data: classified } = await supabase
+      .from('classifieds')
       .select('user_id')
       .eq('id', params.id)
       .single();
 
-    if (!listing) {
-      return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    if (!classified) {
+      return NextResponse.json({ error: 'Classified not found' }, { status: 404 });
     }
 
-    if (listing.user_id !== user.id) {
+    if (classified.user_id !== user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const { data, error } = await supabase
-      .from('directory_listings')
+      .from('classifieds')
       .update({
         ...validatedData,
         updated_at: new Date().toISOString()
@@ -113,22 +112,22 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data: listing } = await supabase
-      .from('directory_listings')
+    const { data: classified } = await supabase
+      .from('classifieds')
       .select('user_id')
       .eq('id', params.id)
       .single();
 
-    if (!listing) {
-      return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    if (!classified) {
+      return NextResponse.json({ error: 'Classified not found' }, { status: 404 });
     }
 
-    if (listing.user_id !== user.id) {
+    if (classified.user_id !== user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const { error } = await supabase
-      .from('directory_listings')
+      .from('classifieds')
       .delete()
       .eq('id', params.id);
 

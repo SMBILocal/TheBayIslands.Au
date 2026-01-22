@@ -26,7 +26,7 @@ export default function Navbar(){
           <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           
           {/* Areas Dropdown */}
-          <div className="nav-dropdown" style={{ position: 'relative' }} onMouseLeave={() => setAreasOpen(false)}>
+          <div className="nav-dropdown" style={{ position: 'relative' }}>
             <button 
               className="nav-dropdown-toggle"
               onClick={() => setAreasOpen(!areasOpen)}
@@ -35,23 +35,23 @@ export default function Navbar(){
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: 'clamp(13px, 2vw, 14px)',
+                  fontSize: 'clamp(13px, 2vw, 14px)',
                 fontWeight: '500',
                 fontFamily: 'inherit',
                 padding: '8px 10px',
                 color: 'inherit',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                  gap: '6px',
                 borderRadius: '8px',
                 transition: 'background 0.2s',
               }}
             >
-              📍 <span style={{ whiteSpace: 'nowrap' }}>Areas <span style={{ fontSize: '0.7em', marginLeft: '2px' }}>▼</span></span>
+                📍 <span style={{ whiteSpace: 'nowrap' }}>Areas <span style={{ fontSize: '0.7em', marginLeft: '2px' }}>▼</span></span>
             </button>
             <div 
               className={`nav-dropdown-menu ${areasOpen ? 'show' : ''}`}
-              onMouseEnter={() => setAreasOpen(true)}
+              onMouseLeave={() => setAreasOpen(false)}
               style={{
                 position: 'absolute',
                 top: '100%',
@@ -108,6 +108,7 @@ export default function Navbar(){
           <Link href="/jobs" onClick={()=>setMenuOpen(false)}>💼 Jobs</Link>
           <Link href="/events" onClick={()=>setMenuOpen(false)}>🎉 Events</Link>
           <Link href="/directory" onClick={()=>setMenuOpen(false)}>📍 Directory</Link>
+          <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>🛒 Buy & Sell</Link>
           <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
             ⭐ Go Premium
           </Link>

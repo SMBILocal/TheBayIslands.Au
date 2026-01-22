@@ -49,6 +49,7 @@ input,button,textarea,select{font:inherit}
   padding:12px 0;
   position:relative;
   gap:8px;
+  width:100%;
 }
 
 .brand{
@@ -70,6 +71,8 @@ input,button,textarea,select{font:inherit}
   align-items:center;
   flex-wrap:wrap;
   margin-left:auto;
+  max-width:calc(100% - 100px);
+  overflow:hidden;
 }
 
 /* Tablet Portrait: Right align navigation */
@@ -79,7 +82,38 @@ input,button,textarea,select{font:inherit}
     justify-content:flex-end;
     flex-wrap:wrap;
     gap: 2px;
+    max-width:calc(100% - 100px);
   }
+}
+
+.nav-dropdown{
+  position:relative;
+  z-index:100;
+}
+
+.nav-dropdown-menu{
+  position:absolute;
+  top:calc(100% + 4px);
+  left:0;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  border-radius:8px;
+  padding:12px 0;
+  min-width:200px;
+  z-index:9999;
+  border:1px solid #e2e8f0;
+}
+
+.nav-dropdown-menu a{
+  display:block;
+  padding:8px 16px;
+  color:#333;
+  text-decoration:none;
+  transition:background 0.2s;
+}
+
+.nav-dropdown-menu a:hover{
+  background:#f0f4f8;
 }
 
 @media (max-width:1200px){

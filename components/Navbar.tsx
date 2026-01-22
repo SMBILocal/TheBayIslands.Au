@@ -26,43 +26,36 @@ export default function Navbar(){
           <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           
           {/* Areas Dropdown */}
-          <div className="nav-dropdown" style={{ position: 'relative', zIndex: 1001 }}>
+          <div className="nav-dropdown">
             <button 
               className="nav-dropdown-toggle"
               onClick={() => setAreasOpen(!areasOpen)}
               onMouseEnter={() => setAreasOpen(true)}
+              onMouseLeave={() => setAreasOpen(false)}
               style={{
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                  fontSize: 'clamp(13px, 2vw, 14px)',
+                fontSize: 'clamp(13px, 2vw, 14px)',
                 fontWeight: '500',
                 fontFamily: 'inherit',
                 padding: '8px 10px',
                 color: 'inherit',
                 display: 'flex',
                 alignItems: 'center',
-                  gap: '6px',
+                gap: '6px',
                 borderRadius: '8px',
                 transition: 'background 0.2s',
               }}
             >
-                📍 <span style={{ whiteSpace: 'nowrap' }}>Areas <span style={{ fontSize: '0.7em', marginLeft: '2px' }}>▼</span></span>
+              📍 <span style={{ whiteSpace: 'nowrap' }}>Areas <span style={{ fontSize: '0.7em', marginLeft: '2px' }}>▼</span></span>
             </button>
             <div 
               className={`nav-dropdown-menu ${areasOpen ? 'show' : ''}`}
+              onMouseEnter={() => setAreasOpen(true)}
               onMouseLeave={() => setAreasOpen(false)}
               style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                background: 'white',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                borderRadius: '8px',
-                padding: '12px 0',
-                minWidth: '200px',
                 display: areasOpen ? 'block' : 'none',
-                zIndex: 9999
               }}
             >
               <div style={{ padding: '8px 16px', fontWeight: 'bold', fontSize: '0.85em', color: '#666', textTransform: 'uppercase' }}>

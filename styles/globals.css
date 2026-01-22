@@ -70,7 +70,11 @@ input,button,textarea,select{font:inherit}
 }
 
 @media (max-width:1024px){
-  .nav-links{gap:4px;}
+  .nav-links{
+    gap:4px;
+    max-width: 75%;
+    overflow-x: auto;
+  }
   .nav a{
     padding:8px 10px;
     font-size:13px;

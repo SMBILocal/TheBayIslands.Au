@@ -1,8 +1,58 @@
 import { MetadataRoute } from 'next';
+import { ALL_LOCATIONS } from '@/lib/locations';
+import { BUSINESS_CATEGORIES } from '@/lib/business-categories';
+import { categoryToSlug } from '@/lib/seo-helpers';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://thebayislands.au';
   const currentDate = new Date().toISOString();
+
+  // Generate suburb pages
+  const suburbPages = ALL_LOCATIONS.map((location) => ({
+    url: `${baseUrl}/suburbs/${location.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // Generate category pages
+  const categoryPages = BUSINESS_CATEGORIES.map((category) => ({
+    url: `${baseUrl}/categories/${categoryToSlug(category)}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // Generate popular suburb+category combination pages (money pages)
+  const popularCategories = [
+    'Cafes & Coffee Shops',
+    'Restaurants',
+    'Takeaway Food',
+    'Doctors & Medical Centers',
+    'Pharmacies',
+    'Supermarkets & Groceries',
+    'Convenience Stores',
+    'Plumbers',
+    'Electricians',
+    'Builders & Construction',
+    'Transport & Ferry Services',
+    'Marina Services',
+    'Real Estate Agents',
+    'Hairdressers & Barbers',
+    'Community Halls',
+  ];
+
+  const moneyPages: MetadataRoute.Sitemap = [];
+  ALL_LOCATIONS.forEach((location) => {
+    popularCategories.forEach((category) => {
+      moneyPages.push({
+        url: `${baseUrl}/${location.slug}/${categoryToSlug(category)}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      });
+    });
+  });
 
   return [
     // Home
@@ -148,5 +198,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    // Suburb pages
+    ...suburbPages,
+    // Category pages
+    ...categoryPages,
+    // Money pages (suburb + category)
+    ...moneyPages,
   ];
 }

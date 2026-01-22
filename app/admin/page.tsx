@@ -1,162 +1,72 @@
 'use client';
 
-import { useAuth } from '@/lib/AuthContext';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import AdminDashboardStats from '@/components/admin/AdminDashboardStats';
+import ApprovalQueueReview from '@/components/admin/ApprovalQueueReview';
+import ReportsManagement from '@/components/admin/ReportsManagement';
+import { useState } from 'react';
 
-export default function AdminDashboard() {
-  const { user } = useAuth();
-  const router = useRouter();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
+export default function ModerationDashboard() {
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'queue' | 'reports'>('dashboard');
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirectTo=/admin');
-      return;
-    }
-
-    // Check admin status from metadata or custom claim
-    // For now, check if email is in admin list
-    const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(',') || [];
-    const userIsAdmin = adminEmails.includes(user.email || '');
-    
-    if (!userIsAdmin) {
-      router.push('/');
-      return;
-    }
-
-    setIsAdmin(true);
-    setLoading(false);
-  }, [user, router]);
-
-  if (loading) return <div>Loading...</div>;
-  if (!isAdmin) return null;
+  const tabs = [
+    { id: 'dashboard', label: '📊 Dashboard' },
+    { id: 'queue', label: '⏳ Approval Queue' },
+    { id: 'reports', label: '🚩 Reports' },
+  ] as const;
 
   return (
-    <div style={{ minHeight: '100vh', paddingTop: '40px', paddingBottom: '40px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-        <h1>Admin Dashboard</h1>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '20px',
-          marginTop: '30px'
-        }}>
-          {/* Directory Listings */}
-          <Link href="/admin/directory" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Directory Listings</h3>
-              <p>Manage business directory listings</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
-
-          {/* Jobs */}
-          <Link href="/admin/jobs" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Jobs</h3>
-              <p>Manage job listings</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
-
-          {/* Events */}
-          <Link href="/admin/events" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Events</h3>
-              <p>Manage events</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
-
-          {/* Classifieds */}
-          <Link href="/admin/classifieds" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Classifieds</h3>
-              <p>Manage buy & sell listings</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
-
-          {/* Users */}
-          <Link href="/admin/users" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Users</h3>
-              <p>Manage user accounts</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
-
-          {/* Reports & Analytics */}
-          <Link href="/admin/analytics" style={{ textDecoration: 'none' }}>
-            <div style={{
-              padding: '20px',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-            >
-              <h3>Analytics</h3>
-              <p>View reports and analytics</p>
-              <span style={{ color: '#0070f3' }}>View →</span>
-            </div>
-          </Link>
+    <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '24px' }}>
+        <div style={{ marginBottom: 32 }}>
+          <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8, color: '#111827' }}>Moderation Dashboard</h1>
+          <p style={{ color: '#6b7280' }}>Content approval, queue management, and abuse reports</p>
         </div>
 
-        <div style={{ marginTop: '50px', paddingTop: '20px', borderTop: '1px solid #ddd' }}>
-          <h3>Quick Stats</h3>
-          <p>Coming soon: Real-time metrics and statistics</p>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24, borderBottom: '2px solid #e5e7eb', paddingBottom: 12, flexWrap: 'wrap' }}>
+          {tabs.map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                padding: '10px 16px',
+                background: activeTab === tab.id ? '#0066b3' : 'transparent',
+                color: activeTab === tab.id ? 'white' : '#6b7280',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: activeTab === tab.id ? 600 : 500,
+                fontSize: 14,
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={e => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.background = '#f0f4f8';
+                }
+              }}
+              onMouseLeave={e => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.background = 'transparent';
+                }
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ background: 'white', borderRadius: 8, border: '1px solid #e5e7eb', overflow: 'hidden' }}>
+          {activeTab === 'dashboard' && <AdminDashboardStats />}
+          {activeTab === 'queue' && <ApprovalQueueReview />}
+          {activeTab === 'reports' && <ReportsManagement />}
+        </div>
+
+        <div style={{ marginTop: 32, padding: 20, background: '#e0e7ff', borderRadius: 8, color: '#4338ca' }}>
+          <p style={{ fontSize: 13, margin: 0 }}>
+            <strong>Phase 2c: Content Approval System v1.0</strong>
+          </p>
+          <p style={{ fontSize: 12, marginTop: 8, opacity: 0.8, margin: 0 }}>
+            Approve pending submissions, manage reported content, and monitor platform moderation metrics.
+          </p>
         </div>
       </div>
     </div>

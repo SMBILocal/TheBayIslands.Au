@@ -64,32 +64,33 @@ input,button,textarea,select{font:inherit}
 
 .nav-links{
   display:flex;
-  gap:6px;
+  gap:2px;
   margin-left:auto;
   align-items:center;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
   flex-shrink:1;
   min-width:0;
+  overflow-x:hidden;
 }
 
 @media (max-width:1024px){
-  .nav-links{gap:4px;}
+  .nav-links{gap:2px;}
   .nav a{
-    padding:8px 10px;
-    font-size:13px;
+    padding:6px 8px;
+    font-size:12px;
   }
   .nav-dropdown-toggle{
-    padding:8px 10px;
-    font-size:13px;
+    padding:6px 8px;
+    font-size:12px;
   }
 }
 
 .nav a{
   color:var(--color-ink);
   text-decoration:none;
-  padding:10px 14px;
+  padding:8px 10px;
   border-radius:8px;
-  font-size:14px;
+  font-size:13px;
   font-weight:500;
   transition:background 0.2s, color 0.2s;
   white-space:nowrap;

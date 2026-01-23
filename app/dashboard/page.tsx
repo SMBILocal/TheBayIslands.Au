@@ -21,12 +21,23 @@ export default function UserDashboard() {
   if (loading) return <div>Loading...</div>;
   if (!user) return null;
 
+  const subscriptionTier = user.subscription_tier || 'free';
+  const tierDisplayName = subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1);
+
   return (
     <div style={{ minHeight: '100vh', paddingTop: '40px', paddingBottom: '40px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <h1>Dashboard</h1>
-        <p style={{ color: '#666', marginBottom: '30px' }}>
+        <p style={{ color: '#666', marginBottom: '10px' }}>
           Welcome, {user.email}
+        </p>
+        <p style={{ 
+          color: '#0070f3', 
+          fontWeight: 'bold', 
+          marginBottom: '30px',
+          fontSize: '14px'
+        }}>
+          Current Plan: {tierDisplayName}
         </p>
 
         <div style={{
@@ -49,6 +60,24 @@ export default function UserDashboard() {
             >
               <h3>My Profile</h3>
               <p>Update your profile information</p>
+              <span style={{ color: '#0070f3' }}>Manage →</span>
+            </div>
+          </Link>
+
+          {/* Billing */}
+          <Link href="/dashboard/billing" style={{ textDecoration: 'none' }}>
+            <div style={{
+              padding: '20px',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+            >
+              <h3>Billing</h3>
+              <p>Manage subscription and billing</p>
               <span style={{ color: '#0070f3' }}>Manage →</span>
             </div>
           </Link>

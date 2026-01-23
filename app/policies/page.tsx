@@ -1,49 +1,53 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
+
+type TabId = 'privacy' | 'refunds' | 'cookies' | 'environment' | 'terms';
+
+const tabs: { id: TabId; label: string }[] = [
+  { id: 'privacy', label: 'Privacy Policy' },
+  { id: 'refunds', label: 'Refunds & Cancellation' },
+  { id: 'cookies', label: 'Cookies Policy' },
+  { id: 'environment', label: 'Environmental & Sustainability' },
+  { id: 'terms', label: 'Terms of Service (Summary)' },
+];
+
+const sectionStyle = { display: 'grid', gap: 24 } as const;
+const heading = { fontSize: 20, fontWeight: 600, marginBottom: 12, color: '#0066b3' } as const;
+const subheading = { fontSize: 18, fontWeight: 600, marginBottom: 12 } as const;
+const body = { color: '#475569' } as const;
+const list = { paddingLeft: 20, color: '#475569', display: 'grid', gap: 8 } as const;
 
 export default function PoliciesPage() {
-  const [activeTab, setActiveTab] = useState('privacy');
-
-  const tabs = [
-    { id: 'privacy', label: 'Privacy Policy' },
-    { id: 'refunds', label: 'Refunds & Cancellation' },
-    { id: 'cookies', label: 'Cookies Policy' },
-    { id: 'environment', label: 'Sustainability' },
-  ];
+  const [activeTab, setActiveTab] = useState<TabId>('privacy');
 
   return (
-    <main style={{ maxWidth: 1000, margin: '0 auto', padding: '48px 20px', lineHeight: 1.6 }}>
+    <main style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 20px', lineHeight: 1.6 }}>
       <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12, color: '#0066b3' }}>Policies & Legal</h1>
       <p style={{ color: '#64748b', marginBottom: 40, fontSize: 16 }}>Last updated: January 2026 — Australian Consumer Law applies</p>
 
-      {/* Tab Navigation */}
-      <div style={{ display: 'flex', gap: 12, marginBottom: 40, flexWrap: 'wrap', borderBottom: '2px solid #e2e8f0', paddingBottom: 12 }}>
-        {tabs.map(tab => (
+      <div style={{ display: 'flex', gap: 12, marginBottom: 32, flexWrap: 'wrap', borderBottom: '2px solid #e2e8f0', paddingBottom: 12 }}>
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              padding: '10px 20px',
+              padding: '10px 18px',
               background: activeTab === tab.id ? '#0066b3' : 'transparent',
               color: activeTab === tab.id ? 'white' : '#333',
-              border: 'none',
+              border: '1px solid #e2e8f0',
               borderRadius: '6px',
               cursor: 'pointer',
-              fontWeight: activeTab === tab.id ? 600 : 500,
+              fontWeight: activeTab === tab.id ? 700 : 500,
               fontSize: 14,
               transition: 'all 0.2s',
             }}
             onMouseEnter={(e) => {
-              if (activeTab !== tab.id) {
-                e.currentTarget.style.background = '#f0f4f8';
-              }
+              if (activeTab !== tab.id) e.currentTarget.style.background = '#f0f4f8';
             }}
             onMouseLeave={(e) => {
-              if (activeTab !== tab.id) {
-                e.currentTarget.style.background = 'transparent';
-              }
+              if (activeTab !== tab.id) e.currentTarget.style.background = 'transparent';
             }}
           >
             {tab.label}
@@ -51,58 +55,57 @@ export default function PoliciesPage() {
         ))}
       </div>
 
-      {/* Privacy Policy Tab */}
       {activeTab === 'privacy' && (
-        <div style={{ display: 'grid', gap: 24 }}>
+        <div style={sectionStyle}>
           <section>
-            <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12, color: '#0066b3' }}>Privacy Policy</h2>
-            <p style={{ color: '#475569' }}>thebayislands.au ("we," "us," "our") is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information.</p>
+            <h2 style={heading}>Privacy Policy</h2>
+            <p style={body}>thebayislands.au ("we," "us," "our") is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information.</p>
           </section>
 
           <section>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Data We Collect</h3>
-            <ul style={{ paddingLeft: 20, color: '#475569', display: 'grid', gap: 8 }}>
-              <li><strong>Account Details:</strong> name, email, phone (optional), location data (optional for directory filtering)</li>
-              <li><strong>Business Listings:</strong> content you create, images, contact information</li>
-              <li><strong>Payment Data:</strong> processed securely via Stripe; we do not store card numbers</li>
-              <li><strong>Usage Data:</strong> IP address, device/browser, pages visited, time spent, referrers</li>
-              <li><strong>Communications:</strong> support messages, feedback, correspondence</li>
+            <h3 style={subheading}>Data We Collect</h3>
+            <ul style={list}>
+              <li><strong>Account:</strong> name, email, phone (optional), location (optional for directory filtering)</li>
+              <li><strong>Listings:</strong> business content, images, contact info</li>
+              <li><strong>Payments:</strong> via Stripe; card details never stored on our servers</li>
+              <li><strong>Usage:</strong> IP/device, pages viewed, time on page, referrers</li>
+              <li><strong>Comms:</strong> support messages, feedback</li>
             </ul>
           </section>
 
           <section>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>How We Use Your Data</h3>
-            <ul style={{ paddingLeft: 20, color: '#475569', display: 'grid', gap: 8 }}>
+            <h3 style={subheading}>How We Use Your Data</h3>
+            <ul style={list}>
               <li>Provide and improve directory, classifieds, jobs, and events services</li>
               <li>Process billing, subscriptions, and renewals</li>
               <li>Send transactional emails and support communications</li>
-              <li>Send promotional emails (only with your consent; you can opt out)</li>
+              <li>Send promotional emails (only with consent; you can opt out)</li>
               <li>Prevent fraud and maintain security</li>
               <li>Comply with legal obligations</li>
-              <li>Analyse usage patterns to optimise the user experience</li>
+              <li>Analyse usage to improve experience</li>
             </ul>
           </section>
 
           <section>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Data Security & Retention</h3>
-            <p style={{ color: '#475569', marginBottom: 8 }}>We use encryption in transit, least-privilege access controls, and audit logs. Payment data is handled exclusively by Stripe.</p>
-            <ul style={{ paddingLeft: 20, color: '#475569', display: 'grid', gap: 8 }}>
+            <h3 style={subheading}>Data Security & Retention</h3>
+            <p style={{ ...body, marginBottom: 8 }}>We use encryption in transit, least-privilege access controls, and audit logs. Payment data is handled exclusively by Stripe.</p>
+            <ul style={list}>
               <li><strong>Account Data:</strong> Retained while your account is active; delete anytime</li>
-              <li><strong>Transaction Records:</strong> Retained 7 years (tax/legal compliance)</li>
+              <li><strong>Transactions:</strong> Retained 7 years (tax/legal compliance)</li>
               <li><strong>Cookies:</strong> Typically expire after 12 months</li>
             </ul>
           </section>
 
           <section>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Your Rights (Australian Privacy Act)</h3>
-            <ul style={{ paddingLeft: 20, color: '#475569', display: 'grid', gap: 8 }}>
+            <h3 style={subheading}>Your Rights (Australian Privacy Act)</h3>
+            <ul style={list}>
               <li><strong>Access:</strong> Request a copy of your personal data</li>
               <li><strong>Correction:</strong> Update or correct your information anytime</li>
-              <li><strong>Deletion:</strong> Request deletion ("right to be forgotten") where applicable</li>
+              <li><strong>Deletion:</strong> Request deletion where applicable</li>
               <li><strong>Portability:</strong> Export your data in standard format</li>
               <li><strong>Opt-Out:</strong> Unsubscribe from marketing communications</li>
             </ul>
-            <p style={{ color: '#475569', marginTop: 12 }}>Submit requests to: <strong>privacy@thebayislands.au</strong></p>
+            <p style={{ ...body, marginTop: 12 }}>Submit requests to: <strong>privacy@thebayislands.au</strong></p>
           </section>
 
           <section>

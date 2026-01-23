@@ -29,6 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: '/admin', label: '📊 Moderation Dashboard', icon: '📊' },
+    { href: '/admin/seo', label: '🔍 SEO Control', icon: '🔍' },
     { href: '/admin/legacy', label: '🔧 Legacy Admin', icon: '🔧' },
   ];
 

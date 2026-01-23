@@ -1,0 +1,53 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+
+async function getSupabaseServer() {
+  const cookieStore = cookies()
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+    {
+      cookies: {
+        getAll() { return cookieStore.getAll() },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options)
+          })
+        },
+      },
+    }
+  )
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = await getSupabaseServer()
+
+    const { data, error } = await supabase
+      .from('classifieds')
+      .select('*')
+      .eq('id', params.id)
+      .single()
+
+    if (error || !data) {
+      return NextResponse.json({ error: 'Classified not found' }, { status: 404 })
+    }
+
+    // Increment view count (non-blocking)
+    supabase
+      .from('classifieds')
+      .update({ views: (data.views || 0) + 1 })
+      .eq('id', params.id)
+      .then()
+      .catch((err) => console.error('View count update failed:', err))
+
+    return NextResponse.json(data)
+  } catch (error: any) {
+    console.error('Classified fetch error:', error)
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}

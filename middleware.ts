@@ -11,6 +11,8 @@ const protectedPaths = [
   '/dashboard',
 ]
 
+const adminPaths = ['/admin']
+
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
   const supabase = createServerClient(
@@ -35,12 +37,34 @@ export async function middleware(req: NextRequest) {
 
   const { pathname } = req.nextUrl
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path))
+  const isAdmin = adminPaths.some((path) => pathname.startsWith(path))
 
   if (isProtected && !session) {
     const redirectUrl = req.nextUrl.clone()
     redirectUrl.pathname = '/login'
     redirectUrl.searchParams.set('redirectTo', pathname)
     return NextResponse.redirect(redirectUrl)
+  }
+
+  if (isAdmin) {
+    if (!session) {
+      const redirectUrl = req.nextUrl.clone()
+      redirectUrl.pathname = '/login'
+      redirectUrl.searchParams.set('redirectTo', pathname)
+      return NextResponse.redirect(redirectUrl)
+    }
+
+    const { data: userData } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', session.user.id)
+      .single()
+
+    if (!userData || userData.role !== 'admin') {
+      const redirectUrl = req.nextUrl.clone()
+      redirectUrl.pathname = '/'
+      return NextResponse.redirect(redirectUrl)
+    }
   }
 
   return res
@@ -55,5 +79,6 @@ export const config = {
     '/account',
     '/dashboard',
     '/upgrade',
+    '/admin/:path*',
   ],
 }

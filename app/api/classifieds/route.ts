@@ -11,7 +11,12 @@ const mockClassifieds = [
 
 export async function GET(){
   try {
-    const { data, error } = await supabase.from('classifieds').select('*').order('created_at', {ascending:false}).limit(50)
+    const { data, error } = await supabase
+      .from('classifieds')
+      .select('*')
+      .eq('moderation_status', 'approved')
+      .order('created_at', {ascending:false})
+      .limit(50)
     if(error) return NextResponse.json(data && data.length > 0 ? data : mockClassifieds)
     return NextResponse.json(data && data.length > 0 ? data : mockClassifieds)
   } catch {

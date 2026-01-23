@@ -186,6 +186,274 @@ User submits content → System validates against guidelines
 
 ---
 
+## 🎙️ PHASE 2a: LOCAL RADIO STATIONS PAGE (NEW - v0.0.4)
+
+### 2a.1 Overview
+**Status:** ✅ COMPLETE (Jan 21, 2026)  
+**Route:** `/radio`  
+**Objective:** Create comprehensive local radio stations directory with streaming capabilities, community broadcasting history, and SEO optimization
+
+### 2a.2 Features Implemented
+
+✅ **Featured Bay Islands Radio Player**
+- 88.0 MHz FM primary featured station
+- Play/pause controls (UI ready, awaiting streaming URL)
+- Volume slider (functional)
+- Station selector dropdown (all 11 stations)
+- Real-time station details display
+
+✅ **11-Station Directory**
+- Sortable by frequency (88.0 → 107.7)
+- Click-to-expand station profiles
+- Detailed history paragraphs for each station
+- Coverage information and distance calculations
+- Establishment years and broadcast formats
+- Badge system for station types (Local, Community, Commercial, National)
+
+✅ **Station Data Structure**
+| Frequency | Station | Format | Location | Status |
+|-----------|---------|--------|----------|--------|
+| 88.0 | Bay Islands Radio | Community Variety | Bay Islands | Featured ⭐ |
+| 96.5 | 96five | Christian Community | Brisbane ~30km | Stream Available |
+| 98.1 | 4EB | Multilingual | Brisbane ~35km | Stream Available |
+| 98.9 | 4AAA (Murri Country) | Indigenous | Brisbane ~35km | Stream Available |
+| 99.4 | Rebel FM | Rock Format | Gold Coast ~50km | Stream Available |
+| 100.3 | Bay FM | Community Radio | Redland City ~15km | Stream Available |
+| 102.1 | 4ZZZ | Independent | Brisbane ~35km | Stream Available |
+| 103.7 | 4MBS Classic FM | Classical | Brisbane ~40km | Stream Available |
+| 106.9 | Nova | Commercial Pop | Brisbane ~40km | Stream Available |
+| 97.3 | KIIS | Mainstream Pop | Brisbane ~40km | Stream Available |
+| 107.7 | Triple J | Youth Music | National Network | Stream Available |
+
+✅ **SEO Optimization**
+- Meta title: "Local Radio Stations | Bay Islands Radio 88.0 FM | The Bay Islands"
+- Meta description: Detailed local keyword targeting (Bay Islands Radio, Russell Island, Macleay Island, Lamb Island, Redland City)
+- 50+ SEO keywords for local radio search visibility
+- Open Graph image support
+
+✅ **Schema.org Structured Data**
+- BroadcastService schema (primary station)
+- BroadcastFrequency schema (for each station)
+- LocalBusiness schema (Bay Islands Radio as broadcaster)
+- ItemList schema (all 11 stations as searchable list)
+
+✅ **Content Sections**
+- **Local Radio History:** Paragraph about Moreton Bay broadcasting heritage
+- **How to Tune In:** 3-column guide (FM Radio, Online Streaming, Mobile Apps)
+- **FAQ Section:** 7 expandable questions covering common topics
+- **Station Directory:** Full frequency-sorted table with expandable profiles
+
+✅ **Responsive Design**
+- Desktop: 2-column layout (player + directory)
+- Tablet: Adjusted grid
+- Mobile: Full-width stacked layout
+- Accessible controls and navigation
+
+### 2a.3 File Structure Created
+
+```
+app/radio/
+├── page.tsx          # Main page (React, 500+ lines)
+└── layout.tsx        # SEO metadata & structured data
+
+docs/
+├── LOCAL-RADIO-STATIONS-IMPLEMENTATION.md    (26 KB comprehensive spec)
+└── RADIO-STATIONS-PAGE-QUICK-START.md         (Quick reference)
+
+components/
+└── Navbar.tsx        # Updated with 📻 Radio link
+```
+
+### 2a.4 Navigation Integration
+- Added `📻 Radio` link to main navigation menu
+- Positioned between Events and Directory
+- Mobile-responsive dropdown support
+
+### 2a.5 Build Status
+✅ **Build:** Successful (no TypeScript errors)  
+✅ **Page Size:** 6.17 kB (lightweight)  
+✅ **First Load JS:** 101 kB (optimized)  
+✅ **Route:** Pre-rendered as static HTML
+
+### 2a.6 What's Next: Phase 2b - Streaming Integration
+
+**Timeline:** 1 week (Jan 22-29)
+
+**Tasks:**
+1. **Obtain Streaming URLs**
+   - Contact Bay Islands Radio station
+   - Request MP3/AAC streaming URL
+   - Confirm frequency (88.0 FM confirmed)
+   - Get format and bitrate details
+
+2. **Implement Audio Streaming**
+   - Replace play/pause mockup with working HTML5 audio player
+   - Connect dropdown to alternate station URLs
+   - Add error handling for stream failures
+   - Implement loading states
+
+3. **Browser & Device Testing**
+   - Chrome, Safari, Firefox, Edge
+   - iOS Safari (mobile)
+   - Android Chrome
+   - Audio quality verification
+
+4. **Performance Optimization**
+   - Measure page load time
+   - Optimize audio stream for bandwidth
+   - Cache control headers
+   - CDN configuration for streams
+
+### 2a.7 Streaming Considerations
+- **Audio Format:** MP3 128kbps recommended (good quality, low bandwidth)
+- **URL Type:** HLS, HTTP progressive, or Shoutcast compatible
+- **Fallback:** Link to station website if direct stream unavailable
+- **Testing:** Verify on 3G/4G mobile connections
+
+### 2a.8 Future Enhancements
+- Schedule widget showing current programming
+- Station contact/request forms
+- Local event promotions from stations
+- Listener polls/voting
+- Community radio show submissions
+- Radio station affiliates as premium partners
+
+---
+## 🎨 PHASE 2b: HEADER & FOOTER REDESIGN + BRAND COLOR STANDARDIZATION (NEW - v0.0.4)
+
+### 2b.1 Overview
+**Status:** ✅ COMPLETE (Jan 21, 2026)  
+**Objective:** Redesign navigation and footer for better UX, standardize brand colors across entire site
+
+### 2b.2 Header Redesign - Top Bar Radio Player
+
+**Changes to TopAuthBar:**
+✅ Moved Bay Islands Radio player from main nav menu to top authentication bar
+✅ Positioned between logo and login/signup buttons
+✅ Display: "📻 Bay Islands Radio" + "▶ Play" button
+✅ Play button styled with brand blue hover effect
+✅ Responsive design maintained across all breakpoints
+
+**Benefits:**
+- Frees up main navigation menu for full width in tablet/portrait mode
+- Navigation stays left-aligned in landscape/desktop
+- Reduces visual clutter in main menu
+- Improves top bar balance (logo | radio | auth)
+
+### 2b.3 Navigation Fixes
+
+✅ **Navbar Responsive Improvements:**
+- Reduced padding from 14px to 12px
+- Reduced gaps from 6px to 2px
+- Font sizes optimized for narrow viewports
+- Reduced brand logo size from 48px to 44px
+- Hamburger reduced from 24px to 22px
+- Better handling of tablet portrait mode
+
+✅ **Business Directory Overflow Fix:**
+- Restructured filter controls from flexbox to grid layout
+- Search bar spans full width on mobile
+- Location & Category selects resize responsively
+- View mode toggles now icon-only (⊞ / ☰) on mobile
+- Category quick filters properly wrap without overflow
+- All controls now fit within viewport on tablet portrait
+
+### 2b.4 Brand Color Standardization
+
+**Color Audit Results:**
+- Brand Blue (Logo & Signup): `#0066b3`
+- Old Directory Blue: `#0ea5e9` (light cyan - NOT brand color)
+- Old Directory Gradient: `#06b6d4` (teal - NOT brand color)
+- Old Footer Links: `#38bdf8` (light cyan - NOT brand color)
+
+**Updated Across Entire Site:**
+
+**Directory Page (`app/directory/page.tsx`):**
+```
+Hero Gradient:         #0066b3 → #004a8a (brand blue to darker shade)
+View Mode Buttons:     #0ea5e9 → #0066b3
+Clear Filters Button:  #0ea5e9 → #0066b3
+Category Filters:      #0ea5e9 → #0066b3
+Load More Button:      #0ea5e9 → #0066b3
+Business Counter:      #0ea5e9 → #0066b3
+Accent Color:          #0ea5e9 → #0066b3
+```
+
+**Footer (`components/Footer.tsx`):**
+```
+Link Color:  #38bdf8 → #0066b3 (brand blue)
+```
+
+**Result:** Consistent brand color throughout site (Blue: #0066b3)
+
+### 2b.5 Footer Redesign
+
+**Previous Issues:**
+- 5 columns causing stacking too early on tablet
+- Duplicate "Sitemap" links in Account & Community columns
+- Bottom copyright text centered (not symmetric)
+- Links in light cyan (#38bdf8) not matching brand
+
+**New Layout:**
+```
+Main Grid (4 Columns, minmax 250px):
+├── Column 1: Brand (Company info)
+├── Column 2: Explore (Directory, Articles, Events, Classifieds, Jobs)
+├── Column 3: Account (Login, Signup, Upgrade, Donate)
+└── Column 4: Policies (Terms, Privacy, Refunds, Cookies, Environmental)
+
+Acknowledgment Text: Traditional Custodians notice + SMBI Local info
+
+Bottom Row (Grid 2 Columns):
+├── Left:  Copyright (© 2026 thebayislands.au)
+└── Right: Sitemap • Terms • Policies (footer links with bullets)
+```
+
+**Benefits:**
+- Larger minimum column width (250px vs 200px) = better tablet stacking
+- 4 columns instead of 5 = symmetric layout
+- No duplicate Sitemap links
+- Clean bottom row with Copyright left, Links right
+- Donate moved to Account column (better organization)
+- All links use consistent brand blue
+
+### 2b.6 Responsive Behavior
+
+**Desktop (>1200px):**
+- 4-column footer displays side-by-side
+- Full horizontal layout
+- All links visible and clickable
+
+**Tablet (768px-1200px):**
+- Columns stack in 2-row grid
+- Row 1: Brand + Explore | Account + Policies
+- Bottom row centered (Copyright | Links)
+- Maintains full readability
+
+**Mobile (<768px):**
+- Single column layout
+- Brand → Explore → Account → Policies → Copyright/Links
+- Full-width responsive
+- Touch-friendly sizing
+
+### 2b.7 Files Modified
+
+```
+components/TopAuthBar.tsx   (Updated: Added radio player to top bar)
+components/Footer.tsx        (Updated: Redesigned layout & colors)
+app/directory/page.tsx       (Updated: All colors to brand blue #0066b3)
+styles/globals.css           (Updated: Navbar responsive tweaks)
+```
+
+### 2b.8 Build & Testing
+
+✅ **Build Status:** Successful (no errors)  
+✅ **Test Environment:** Dev server running on port 3002  
+✅ **Device Testing:** All breakpoints verified  
+✅ **Git Status:** Changes committed to `thebayislands.au-v0.0.4` branch  
+✅ **GitHub Status:** Pushed to remote repository
+
+---
 ## �🏗️ TIER A: SEO & CONTENT ENGINE
 
 ### A.1 Database Schema Extensions

@@ -14,8 +14,8 @@ jobs:
           node-version: '20'
       - name: Install
         run: npm ci
-      - name: Run seed script
+      - name: Run seed script (v0.0.2 schema)
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/seed.js
+        run: node scripts/seed-v0.0.2.js

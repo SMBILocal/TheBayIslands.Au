@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { z } from 'zod';
 
 async function getSupabaseServer() {
   const cookieStore = cookies();
@@ -24,6 +25,21 @@ async function getSupabaseServer() {
 
   return supabase;
 }
+
+const directoryListingUpdateSchema = z.object({
+  business_name: z.string().min(1).max(200).optional(),
+  description: z.string().min(1).optional(),
+  category: z.string().min(1).optional(),
+  location: z.string().min(1).max(100).optional(),
+  address: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().email().optional(),
+  website: z.string().url().optional(),
+  hours: z.string().optional(),
+  logo_url: z.string().optional(),
+  images: z.array(z.string()).optional(),
+  status: z.enum(['pending', 'active', 'inactive', 'suspended']).optional(),
+});
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -52,23 +68,28 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const body = await request.json();
+    
+    const validatedData = directoryListingUpdateSchema.parse(body);
 
-    // Verify ownership
     const { data: listing } = await supabase
       .from('directory_listings')
       .select('user_id')
       .eq('id', params.id)
       .single();
 
-    if (listing?.user_id !== user.id) {
+    if (!listing) {
+      return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    }
+
+    if (listing.user_id !== user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const { data, error } = await supabase
       .from('directory_listings')
       .update({
-        ...body,
-        updated_at: new Date()
+        ...validatedData,
+        updated_at: new Date().toISOString()
       })
       .eq('id', params.id)
       .select();
@@ -76,6 +97,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     if (error) throw error;
     return NextResponse.json(data[0]);
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Validation failed', details: error.issues }, { status: 400 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -89,14 +113,17 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Verify ownership
     const { data: listing } = await supabase
       .from('directory_listings')
       .select('user_id')
       .eq('id', params.id)
       .single();
 
-    if (listing?.user_id !== user.id) {
+    if (!listing) {
+      return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    }
+
+    if (listing.user_id !== user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

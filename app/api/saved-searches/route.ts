@@ -23,7 +23,7 @@ async function getSupabaseServer() {
 
 const searchSaveSchema = z.object({
   query: z.string().min(1),
-  filters: z.record(z.any()).optional(),
+  filters: z.record(z.string(), z.any()).optional(),
   search_type: z.enum(['directory', 'jobs', 'events', 'classifieds']),
 })
 

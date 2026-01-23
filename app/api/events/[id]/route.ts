@@ -42,8 +42,6 @@ export async function GET(
       .from('events')
       .update({ views: (data.views || 0) + 1 })
       .eq('id', params.id)
-      .then()
-      .catch((err) => console.error('View count update failed:', err))
 
     return NextResponse.json(data)
   } catch (error: any) {

@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       .eq('user_role', 'admin')
 
     if (admins && admins.length > 0) {
-      await supabase
+      supabase
         .from('mod_notifications')
         .insert(
           admins.map(admin => ({
@@ -98,7 +98,6 @@ export async function POST(request: NextRequest) {
             priority: validatedData.report_reason === 'illegal' ? 'urgent' : 'high',
           }))
         )
-        .catch((err) => console.error('Notification creation failed:', err))
     }
 
     return NextResponse.json(data[0], { status: 201 })

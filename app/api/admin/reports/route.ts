@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     const { error: updateError } = await supabase
       .from('content_reports')
       .update({
-        status: action === 'dismissed' ? 'dismissed' : 'resolved',
+        status: action === 'dismiss' ? 'dismissed' : 'resolved',
         resolved_by: user.id,
         resolved_at: new Date().toISOString(),
         moderator_notes,

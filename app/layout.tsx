@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import { ReactNode } from 'react'
 import Navbar from '../components/Navbar'
 import TopAuthBar from '../components/TopAuthBar'
 import Footer from '../components/Footer'
@@ -12,7 +13,7 @@ export const metadata = {
   description: 'Articles, jobs, events, business directory and classifieds for the Bay Islands region.'
 }
 
-export default function RootLayout({children}:{children:React.ReactNode}){
+export default function RootLayout({children}: {children: ReactNode}){
   return (
     <html lang="en">
       <body>

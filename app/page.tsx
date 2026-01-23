@@ -1,11 +1,44 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 export default function Home(){
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    
+    const params = new URLSearchParams();
+    params.set('q', searchQuery);
+    if (selectedCategory !== 'all') {
+      params.set('category', selectedCategory);
+    }
+    
+    // Route to directory/search
+    router.push(`/directory?${params.toString()}`);
+  };
+
   return (
     <section>
-      {/* Hero Banner */}
+      {/* Hero Banner with Search */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(0,102,179,0.75) 0%, rgba(200,90,23,0.75) 100%), url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&h=500&fit=crop&q=80) center/cover',
+        background: 'linear-gradient(135deg, rgba(0,102,179,0.75) 0%, rgba(200,90,23,0.75) 100%), url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&h=500&fit=crop?q=80) center/cover',
         backgroundBlendMode: 'overlay',
-        height: '400px',
+        minHeight: '500px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -14,21 +47,139 @@ export default function Home(){
         padding: '40px 20px',
         marginBottom: '40px'
       }}>
-        <div style={{ maxWidth: '800px' }}>
+        <div style={{ maxWidth: '900px', width: '100%' }}>
           <h1 style={{ fontSize: 'clamp(2em, 5vw, 3.5em)', margin: '0 0 20px 0', fontWeight: 800 }}>Welcome to the Bay Islands Hub</h1>
-          <p style={{ fontSize: 'clamp(1em, 2vw, 1.3em)', margin: 0, opacity: 0.95 }}>Discover local businesses, jobs, events and community across South Morton Bay</p>
+          <p style={{ fontSize: 'clamp(1em, 2vw, 1.3em)', margin: '0 0 32px 0', opacity: 0.95 }}>Discover local businesses, jobs, events and community across South Morton Bay</p>
+          
+          {/* Responsive Search Bar */}
+          <form onSubmit={handleSearch} style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : '1fr auto',
+              gap: '12px',
+              alignItems: 'stretch'
+            }}>
+              {/* Search Input */}
+              <div style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                <input
+                  type="text"
+                  placeholder="Search local events, jobs, businesses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    fontSize: 'clamp(13px, 2.5vw, 15px)',
+                    border: 'none',
+                    borderRadius: isMobile ? '8px' : '8px 0 0 8px',
+                    outline: 'none',
+                    color: '#0b1727',
+                    fontWeight: 500,
+                    backgroundColor: 'white',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    minHeight: '48px'
+                  }}
+                />
+              </div>
+              
+              {/* Search Button */}
+              <button
+                type="submit"
+                style={{
+                  padding: '14px 24px',
+                  background: '#10b981',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: isMobile ? '8px' : '0 8px 8px 0',
+                  cursor: 'pointer',
+                  fontWeight: 700,
+                  fontSize: 'clamp(13px, 2.5vw, 15px)',
+                  minHeight: '48px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  transition: 'all 0.2s',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = '#059669';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = '#10b981';
+                }}
+              >
+                🔍 Search
+              </button>
+            </div>
+            
+            {/* Category Filters - Hidden on Mobile, Visible on Tablet+ */}
+            {!isMobile && (
+              <div style={{
+                display: 'flex',
+                gap: '12px',
+                marginTop: '12px',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                fontSize: '13px'
+              }}>
+                {[
+                  { value: 'all', label: 'All Categories' },
+                  { value: 'businesses', label: '🏢 Businesses' },
+                  { value: 'jobs', label: '💼 Jobs' },
+                  { value: 'events', label: '🎉 Events' },
+                  { value: 'classifieds', label: '🛒 Classifieds' }
+                ].map(category => (
+                  <label key={category.value} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    cursor: 'pointer',
+                    background: selectedCategory === category.value ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)',
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    transition: 'all 0.2s'
+                  }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = selectedCategory === category.value ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)';
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="category"
+                      value={category.value}
+                      checked={selectedCategory === category.value}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      style={{ cursor: 'pointer', accentColor: '#10b981' }}
+                    />
+                    <span style={{ color: 'white', fontWeight: 500 }}>{category.label}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </form>
         </div>
       </div>
 
       <div className="hero container">
         <div style={{flex:1}}>
           <h2>Your Local Community Hub</h2>
-          <p className="muted">Articles • Jobs • Community Events • Business Directory • Buy & Sell classifieds</p>
+          <p className="muted" style={{maxWidth: '720px'}}>Trusted guide for the South Moreton Bay Islands — Russell, Macleay, Lamb, Karragarra and Redland Bay. Discover verified local businesses, events, jobs, services, and classifieds with fresh listings posted weekly.</p>
+          <p className="muted" style={{marginTop: '8px', fontWeight: 600}}>Articles • Jobs • Community Events • Business Directory • Buy & Sell • Island Guides • Council & Transport Updates</p>
         </div>
         <div style={{minWidth:'280px'}}>
           <div className="card">
             <h3>Get started</h3>
-            <p className="muted">Create listings, post jobs and connect with the local community.</p>
+            <p className="muted" style={{marginBottom: '12px'}}>Create free listings, post jobs, add events, and connect with locals across SMBI in minutes.</p>
+            <p className="muted" style={{marginBottom: '16px'}}>Built for residents, tradies, small businesses, clubs, and visitors looking for trusted local information.</p>
+            <div style={{display:'flex', gap:'10px', flexWrap:'wrap'}}>
+              <a href="/signup" style={{background:'#0066b3', color:'white', padding:'10px 18px', borderRadius:'8px', textDecoration:'none', fontWeight:700, boxShadow:'0 4px 10px rgba(0,102,179,0.25)'}}>Sign up free</a>
+              <a href="/login" style={{background:'transparent', color:'#0066b3', padding:'10px 18px', borderRadius:'8px', textDecoration:'none', fontWeight:700, border:'2px solid #0066b3'}}>Sign in</a>
+            </div>
           </div>
         </div>
       </div>

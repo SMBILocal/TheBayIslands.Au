@@ -1,7 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+// Prefer the new publishable key; fall back to legacy anon for compatibility
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
+  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  || ''
 
 const isBrowser = typeof window !== 'undefined'
 

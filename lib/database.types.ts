@@ -416,12 +416,231 @@ export type Database = {
           created_at?: string
         }
       }
+      approval_queue: {
+        Row: {
+          id: string
+          content_id: string
+          content_type: 'directory' | 'job' | 'event' | 'classified'
+          submitted_by: string
+          submission_content: Record<string, any>
+          status: 'pending' | 'approved' | 'rejected' | 'needs_revision'
+          reviewed_by: string | null
+          reviewed_at: string | null
+          rejection_reason: string | null
+          revision_notes: string | null
+          priority: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          content_id: string
+          content_type: 'directory' | 'job' | 'event' | 'classified'
+          submitted_by: string
+          submission_content: Record<string, any>
+          status?: 'pending' | 'approved' | 'rejected' | 'needs_revision'
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          rejection_reason?: string | null
+          revision_notes?: string | null
+          priority?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          content_id?: string
+          content_type?: 'directory' | 'job' | 'event' | 'classified'
+          submitted_by?: string
+          submission_content?: Record<string, any>
+          status?: 'pending' | 'approved' | 'rejected' | 'needs_revision'
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          rejection_reason?: string | null
+          revision_notes?: string | null
+          priority?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      moderation_logs: {
+        Row: {
+          id: string
+          action_type: 'approved' | 'rejected' | 'suspended' | 'deleted' | 'flag_resolved' | 'user_warned'
+          content_id: string | null
+          content_type: 'directory' | 'job' | 'event' | 'classified' | 'user' | 'comment' | null
+          moderator_id: string
+          reason: string
+          previous_status: string | null
+          new_status: string | null
+          metadata: Record<string, any> | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          action_type: 'approved' | 'rejected' | 'suspended' | 'deleted' | 'flag_resolved' | 'user_warned'
+          content_id?: string | null
+          content_type?: 'directory' | 'job' | 'event' | 'classified' | 'user' | 'comment' | null
+          moderator_id: string
+          reason: string
+          previous_status?: string | null
+          new_status?: string | null
+          metadata?: Record<string, any> | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          action_type?: 'approved' | 'rejected' | 'suspended' | 'deleted' | 'flag_resolved' | 'user_warned'
+          content_id?: string | null
+          content_type?: 'directory' | 'job' | 'event' | 'classified' | 'user' | 'comment' | null
+          moderator_id?: string
+          reason?: string
+          previous_status?: string | null
+          new_status?: string | null
+          metadata?: Record<string, any> | null
+          created_at?: string
+        }
+      }
+      content_reports: {
+        Row: {
+          id: string
+          content_id: string
+          content_type: 'directory' | 'job' | 'event' | 'classified' | 'user'
+          reported_by: string
+          report_reason: 'spam' | 'scam' | 'illegal' | 'inappropriate' | 'misinformation' | 'harassment' | 'other'
+          description: string | null
+          status: 'open' | 'investigating' | 'resolved' | 'dismissed'
+          moderator_notes: string | null
+          resolved_by: string | null
+          resolved_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          content_id: string
+          content_type: 'directory' | 'job' | 'event' | 'classified' | 'user'
+          reported_by: string
+          report_reason: 'spam' | 'scam' | 'illegal' | 'inappropriate' | 'misinformation' | 'harassment' | 'other'
+          description?: string | null
+          status?: 'open' | 'investigating' | 'resolved' | 'dismissed'
+          moderator_notes?: string | null
+          resolved_by?: string | null
+          resolved_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          content_id?: string
+          content_type?: 'directory' | 'job' | 'event' | 'classified' | 'user'
+          reported_by?: string
+          report_reason?: 'spam' | 'scam' | 'illegal' | 'inappropriate' | 'misinformation' | 'harassment' | 'other'
+          description?: string | null
+          status?: 'open' | 'investigating' | 'resolved' | 'dismissed'
+          moderator_notes?: string | null
+          resolved_by?: string | null
+          resolved_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      mod_notifications: {
+        Row: {
+          id: string
+          moderator_id: string
+          notification_type: 'new_submission' | 'flagged_content' | 'user_warning' | 'bulk_action'
+          content_id: string | null
+          title: string
+          message: string | null
+          priority: 'low' | 'normal' | 'high' | 'urgent'
+          read: boolean
+          read_at: string | null
+          action_url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          moderator_id: string
+          notification_type: 'new_submission' | 'flagged_content' | 'user_warning' | 'bulk_action'
+          content_id?: string | null
+          title: string
+          message?: string | null
+          priority?: 'low' | 'normal' | 'high' | 'urgent'
+          read?: boolean
+          read_at?: string | null
+          action_url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          moderator_id?: string
+          notification_type?: 'new_submission' | 'flagged_content' | 'user_warning' | 'bulk_action'
+          content_id?: string | null
+          title?: string
+          message?: string | null
+          priority?: 'low' | 'normal' | 'high' | 'urgent'
+          read?: boolean
+          read_at?: string | null
+          action_url?: string | null
+          created_at?: string
+        }
+      }
+      moderation_rules: {
+        Row: {
+          id: string
+          rule_name: string
+          rule_category: 'spam' | 'scam' | 'harmful' | 'policy_violation'
+          description: string | null
+          action: 'auto_reject' | 'flag_for_review' | 'auto_approve' | 'require_revision'
+          keywords: string[] | null
+          enabled: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          rule_name: string
+          rule_category: 'spam' | 'scam' | 'harmful' | 'policy_violation'
+          description?: string | null
+          action: 'auto_reject' | 'flag_for_review' | 'auto_approve' | 'require_revision'
+          keywords?: string[] | null
+          enabled?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          rule_name?: string
+          rule_category?: 'spam' | 'scam' | 'harmful' | 'policy_violation'
+          description?: string | null
+          action?: 'auto_reject' | 'flag_for_review' | 'auto_approve' | 'require_revision'
+          keywords?: string[] | null
+          enabled?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
-    Views: {}
+    Views: {
+      moderation_dashboard_stats: {
+        Row: {
+          date: string | null
+          content_type: string | null
+          total_submissions: number | null
+          pending_count: number | null
+          approved_count: number | null
+          rejected_count: number | null
+          revision_count: number | null
+          avg_review_time_seconds: number | null
+        }
+      }
+    }
     Functions: {}
     Enums: {
       user_role: 'user' | 'admin' | 'moderator'
       listing_status: 'active' | 'pending' | 'suspended' | 'deleted'
+      approval_status: 'pending' | 'approved' | 'rejected' | 'needs_revision'
     }
   }
 }

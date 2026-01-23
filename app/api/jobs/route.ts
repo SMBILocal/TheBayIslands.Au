@@ -12,7 +12,12 @@ const mockJobs = [
 
 export async function GET(){
   try {
-    const { data, error } = await supabase.from('jobs').select('*').order('posted_at', {ascending:false}).limit(50)
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .eq('moderation_status', 'approved')
+      .order('posted_at', {ascending:false})
+      .limit(50)
     if(error) return NextResponse.json(mockJobs)
     return NextResponse.json(data && data.length > 0 ? data : mockJobs)
   } catch {

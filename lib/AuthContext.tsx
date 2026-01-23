@@ -6,6 +6,8 @@ import { supabase } from '@/lib/supabaseClient';
 interface AuthUser {
   id: string;
   email: string;
+  role?: string;
+  subscription_tier?: string;
   user_metadata?: {
     full_name?: string;
     avatar_url?: string;
@@ -40,9 +42,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
+          const { data: userData } = await supabase
+            .from('users')
+            .select('role, subscription_tier')
+            .eq('id', session.user.id)
+            .single();
+
           setUser({
             id: session.user.id,
             email: session.user.email || '',
+            role: userData?.role || 'user',
+            subscription_tier: userData?.subscription_tier || 'free',
             user_metadata: session.user.user_metadata
           });
         }
@@ -56,11 +66,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initializeAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      async (_event, session) => {
         if (session?.user) {
+          const { data: userData } = await supabase
+            .from('users')
+            .select('role, subscription_tier')
+            .eq('id', session.user.id)
+            .single();
+
           setUser({
             id: session.user.id,
             email: session.user.email || '',
+            role: userData?.role || 'user',
+            subscription_tier: userData?.subscription_tier || 'free',
             user_metadata: session.user.user_metadata
           });
         } else {
@@ -89,9 +107,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
 
     if (data.user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role, subscription_tier')
+        .eq('id', data.user.id)
+        .single();
+
       setUser({
         id: data.user.id,
         email: data.user.email || '',
+        role: userData?.role || 'user',
+        subscription_tier: userData?.subscription_tier || 'free',
         user_metadata: data.user.user_metadata
       });
     }
@@ -106,9 +132,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
 
     if (data.user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role, subscription_tier')
+        .eq('id', data.user.id)
+        .single();
+
       setUser({
         id: data.user.id,
         email: data.user.email || '',
+        role: userData?.role || 'user',
+        subscription_tier: userData?.subscription_tier || 'free',
         user_metadata: data.user.user_metadata
       });
     }

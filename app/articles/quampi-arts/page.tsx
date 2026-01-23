@@ -11,8 +11,8 @@ export default function QuampiPage() {
   return (
     <main className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <Link href="/culture" className="text-blue-600 hover:underline mb-4 inline-block">
-          ← Back to Culture
+        <Link href="/articles" className="text-blue-600 hover:underline mb-4 inline-block">
+          ← Back to Articles
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           🎨 QUAMPI Arts & Culture Centre

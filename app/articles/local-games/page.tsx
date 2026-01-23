@@ -137,7 +137,7 @@ export default function GamesPage() {
       <section className="border-t pt-8">
         <h2 className="text-2xl font-bold mb-4">Related Activities</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          <Link href="/sports" className="p-4 border rounded hover:border-blue-500 hover:shadow-md transition-all">
+          <Link href="/articles/sports-clubs" className="p-4 border rounded hover:border-blue-500 hover:shadow-md transition-all">
             <h3 className="font-semibold mb-1">Sports & Recreation</h3>
             <p className="text-sm text-gray-600">Local sports clubs and activities</p>
           </Link>
@@ -145,7 +145,7 @@ export default function GamesPage() {
             <h3 className="font-semibold mb-1">Events Calendar</h3>
             <p className="text-sm text-gray-600">Upcoming community events</p>
           </Link>
-          <Link href="/community/notices" className="p-4 border rounded hover:border-blue-500 hover:shadow-md transition-all">
+          <Link href="/articles/community-noticeboard" className="p-4 border rounded hover:border-blue-500 hover:shadow-md transition-all">
             <h3 className="font-semibold mb-1">Community Board</h3>
             <p className="text-sm text-gray-600">Local notices and announcements</p>
           </Link>

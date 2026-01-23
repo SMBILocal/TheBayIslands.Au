@@ -11,8 +11,8 @@ export default function QuandamookaPage() {
   return (
     <main className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <Link href="/culture" className="text-blue-600 hover:underline mb-4 inline-block">
-          ← Back to Culture
+        <Link href="/articles" className="text-blue-600 hover:underline mb-4 inline-block">
+          ← Back to Articles
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           🌏 Quandamooka Country
@@ -178,7 +178,7 @@ export default function QuandamookaPage() {
             <h3 className="font-semibold mb-1">Queensland Parks</h3>
             <p className="text-sm text-gray-600">Indigenous heritage</p>
           </a>
-          <Link href="/culture/quampi"
+          <Link href="/articles/quampi-arts"
             className="p-4 border rounded hover:border-blue-500 hover:shadow-md transition-all">
             <h3 className="font-semibold mb-1">QUAMPI Arts Centre</h3>
             <p className="text-sm text-gray-600">Cultural gallery on Minjerribah</p>

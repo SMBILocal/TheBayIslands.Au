@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import Breadcrumb from '@/components/Breadcrumb';
+import RadioStreamPlayer from '@/components/RadioStreamPlayer';
 
 // Radio Station Data
 const radioStations = [
@@ -257,6 +258,14 @@ export default function RadioStationsPage() {
   const [selectedStation, setSelectedStation] = useState(radioStations[0]);
   const [expandedStation, setExpandedStation] = useState<string | null>(null);
 
+  const streamingStations = radioStations
+    .filter(s => s.streaming?.available)
+    .map(s => ({
+      id: s.id,
+      name: `${s.name} - ${s.frequency} ${s.frequencyUnit}`,
+      streamUrl: s.streaming?.url || 'https://stream.example.com/bayislands'
+    }));
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Breadcrumb */}
@@ -288,84 +297,13 @@ export default function RadioStationsPage() {
       {/* Featured Player Section */}
       <section className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             {/* Player */}
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                  {selectedStation.name}
-                </h2>
-                {selectedStation.callsign && (
-                  <p className="text-slate-600 text-lg">{selectedStation.callsign}</p>
-                )}
-              </div>
-
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-slate-600 text-sm">Now Streaming</p>
-                    <p className="text-2xl font-bold text-blue-600">
-                      {selectedStation.frequency} {selectedStation.frequencyUnit}
-                    </p>
-                  </div>
-                  <div className="text-4xl">🎵</div>
-                </div>
-
-                {/* Player Controls */}
-                <div className="bg-white rounded-lg p-4 space-y-4">
-                  <div className="flex items-center justify-center gap-4">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 transition">
-                      <span className="text-2xl">▶</span>
-                    </button>
-                    <button className="bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-full p-4 transition">
-                      <span className="text-2xl">⏸</span>
-                    </button>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
-                      Volume
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      defaultValue="70"
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Station Selector */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Select a Station
-                </label>
-                <select
-                  value={selectedStation.id}
-                  onChange={(e) => {
-                    const station = radioStations.find((s) => s.id === e.target.value);
-                    if (station) setSelectedStation(station);
-                  }}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {radioStations.map((station) => (
-                    <option key={station.id} value={station.id}>
-                      {station.frequency} - {station.name}{' '}
-                      {station.featured ? '(Featured)' : ''}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex gap-3">
-                <a
-                  href={selectedStation.website}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-center transition"
-                >
-                  Visit Website
-                </a>
-              </div>
+            <div>
+              <RadioStreamPlayer 
+                stations={streamingStations}
+                defaultStation={selectedStation.id}
+              />
             </div>
 
             {/* Station Info */}

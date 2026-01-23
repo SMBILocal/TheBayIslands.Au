@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
+import ReviewList from '@/components/ReviewList';
+import ReviewForm from '@/components/ReviewForm';
 
 interface Business {
   id: string;
@@ -20,7 +23,10 @@ interface Business {
 export default function BusinessDetail({ params }: { params: { slug: string } }) {
   const [business, setBusiness] = useState<Business | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewRefresh, setReviewRefresh] = useState(0);
   const router = useRouter();
+  const { user } = useAuth();
 
   useEffect(() => {
     async function fetchBusiness() {
@@ -150,6 +156,52 @@ export default function BusinessDetail({ params }: { params: { slug: string } })
 
           <button style={{ width: '100%', padding: 12, background: 'white', color: '#0ea5e9', border: '2px solid #0ea5e9', borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>Share Business</button>
         </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div style={{ maxWidth: 1200, margin: '60px auto 0', padding: '0 clamp(16px, 5vw, 40px) clamp(40px, 10vw, 60px)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+          <h2 style={{ fontSize: 32, fontWeight: 700, color: '#0f172a', margin: 0 }}>Reviews</h2>
+          {user && !showReviewForm && (
+            <button
+              onClick={() => setShowReviewForm(true)}
+              style={{
+                padding: '12px 24px',
+                background: '#0ea5e9',
+                color: 'white',
+                border: 'none',
+                borderRadius: 8,
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              Write a Review
+            </button>
+          )}
+          {!user && (
+            <p style={{ fontSize: 14, color: '#64748b', margin: 0 }}>
+              <a href="/login" style={{ color: '#0ea5e9', textDecoration: 'underline' }}>Log in</a> to write a review
+            </p>
+          )}
+        </div>
+
+        {showReviewForm && (
+          <div style={{ marginBottom: 32 }}>
+            <ReviewForm
+              listingId={business.id}
+              listingName={business.name}
+              onSuccess={() => {
+                setShowReviewForm(false);
+                setReviewRefresh(prev => prev + 1);
+                alert('Thank you! Your review has been submitted and is pending moderation.');
+              }}
+              onCancel={() => setShowReviewForm(false)}
+            />
+          </div>
+        )}
+
+        <ReviewList listingId={business.id} refreshTrigger={reviewRefresh} />
       </div>
     </main>
   );

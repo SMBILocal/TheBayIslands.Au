@@ -2,18 +2,26 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function TopAuthBar() {
   const { user, signOut } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !audioRef.current) {
+      audioRef.current = new Audio('https://stream.example.com/bayislands');
+      audioRef.current.volume = 0.7;
+    }
   }, []);
 
   if (isMobile) return null;
@@ -23,7 +31,17 @@ export default function TopAuthBar() {
   };
 
   const handleRadioToggle = () => {
-    setIsPlaying(!isPlaying);
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().catch(() => {
+        setIsPlaying(false);
+      });
+      setIsPlaying(true);
+    }
   };
 
   return (

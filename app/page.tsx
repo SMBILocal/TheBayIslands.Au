@@ -75,7 +75,7 @@ export default function Home(){
 
   return (
     <section>
-      {/* Hero Banner with Search */}
+      {/* Hero Banner with Search - Full Width */}
       <div style={{
         background: 'linear-gradient(135deg, rgba(0,102,179,0.75) 0%, rgba(200,90,23,0.75) 100%), url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&h=400&fit=crop?q=80) center/cover',
         backgroundBlendMode: 'overlay',
@@ -85,8 +85,7 @@ export default function Home(){
         justifyContent: 'center',
         color: 'white',
         textAlign: 'center',
-        padding: '40px 20px',
-        marginBottom: '40px'
+        padding: '40px 20px'
       }}>
         <div style={{ maxWidth: '900px', width: '100%' }}>
           <h1 style={{ fontSize: 'clamp(2em, 5vw, 3.5em)', margin: '0 0 20px 0', fontWeight: 800 }}>Welcome to the Bay Islands Hub</h1>
@@ -626,20 +625,22 @@ export default function Home(){
         </section>
       )}
 
-      {/* Sign Up Free CTA - Moved Higher */}
+      {/* Ready to Join Our Community - Merged CTA with Quick Links */}
       <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'white'}}>
         <div className="container">
+          {/* Main CTA */}
           <div style={{
             background:'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
             borderRadius:'16px',
             padding:'clamp(2.5rem, 6vw, 4rem)',
             color:'white',
-            textAlign:'center'
+            textAlign:'center',
+            marginBottom:'clamp(32px, 6vw, 48px)'
           }}>
-            <h2 style={{fontSize:'clamp(1.75rem, 4vw, 2.25rem)', fontWeight:700, marginBottom:'1rem'}}>
+            <h2 style={{fontSize:'clamp(1.75rem, 4vw, 2.25rem)', fontWeight:700, marginBottom:'1rem', color:'white'}}>
               Ready to Join Our Community?
             </h2>
-            <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem'}}>
+            <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
             <div style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap'}}>
@@ -652,8 +653,18 @@ export default function Home(){
                   textDecoration:'none',
                   borderRadius:'8px',
                   fontWeight:600,
-                  fontSize:'1.125rem',
-                  display:'inline-block'
+                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  display:'inline-block',
+                  transition:'all 0.3s',
+                  boxShadow:'0 4px 12px rgba(0,0,0,0.15)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
                 }}
               >
                 Sign Up Free
@@ -668,13 +679,251 @@ export default function Home(){
                   border:'2px solid white',
                   borderRadius:'8px',
                   fontWeight:600,
-                  fontSize:'1.125rem',
-                  display:'inline-block'
+                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  display:'inline-block',
+                  transition:'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.color = '#6366f1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'white';
                 }}
               >
                 List Your Business
               </a>
+              <a
+                href="/classifieds/new"
+                style={{
+                  padding:'1rem 2rem',
+                  backgroundColor:'transparent',
+                  color:'white',
+                  textDecoration:'none',
+                  border:'2px solid white',
+                  borderRadius:'8px',
+                  fontWeight:600,
+                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  display:'inline-block',
+                  transition:'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.color = '#6366f1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'white';
+                }}
+              >
+                Post a Classified
+              </a>
             </div>
+          </div>
+
+          {/* Quick Links - Your Local Community Hub */}
+          <div style={{textAlign:'center', marginBottom:'clamp(24px, 4vw, 32px)'}}>
+            <h3 style={{fontSize:'clamp(1.3em, 3vw, 1.6em)', fontWeight:700, marginBottom:8, color:'#333'}}>
+              Your Local Community Hub
+            </h3>
+            <p style={{color:'#666', fontSize:'clamp(0.95em, 2vw, 1.05em)'}}>
+              Quick access to everything you need on the islands
+            </p>
+          </div>
+
+          <div style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))',
+            gap:'clamp(12px, 2vw, 16px)',
+            maxWidth:'1000px',
+            margin:'0 auto'
+          }}>
+            <a href="/directory" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>🏢</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>Directory</div>
+            </a>
+
+            <a href="/classifieds" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>🛒</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>Classifieds</div>
+            </a>
+
+            <a href="/events" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>🎉</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>Events</div>
+            </a>
+
+            <a href="/jobs" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>💼</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>Jobs</div>
+            </a>
+
+            <a href="/news" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>📰</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>News</div>
+            </a>
+
+            <a href="/islands" style={{
+              background:'#f8f9fa',
+              padding:'clamp(20px, 3vw, 24px)',
+              borderRadius:12,
+              textDecoration:'none',
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.borderColor = '#0066b3';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1.1)';
+              if (text) text.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f8f9fa';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+              const icon = e.currentTarget.querySelector('div:first-child') as HTMLElement;
+              const text = e.currentTarget.querySelector('div:last-child') as HTMLElement;
+              if (icon) icon.style.transform = 'scale(1)';
+              if (text) text.style.color = '#333';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8, transition:'all 0.3s'}}>🏝️</div>
+              <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.9em, 2vw, 0.95em)', transition:'all 0.3s'}}>Islands</div>
+            </a>
           </div>
         </div>
       </section>
@@ -911,7 +1160,7 @@ export default function Home(){
               Discover the Southern Moreton Bay Islands
             </h2>
             <p style={{color:'#666', fontSize:'clamp(1em, 2vw, 1.2em)', maxWidth:800, margin:'0 auto', lineHeight:1.6}}>
-              Just 30 minutes from Brisbane CBD, the Southern Moreton Bay Islands (Russell, Macleay, Lamb & Karragarra) offer peaceful island living with excellent mainland access. Located in the sheltered waters of Moreton Bay, Southeast Queensland, each island has its own unique character, local amenities, and close-knit community.
+              <strong style={{color:'#333', fontSize:'1.1em'}}>Explore Our Islands.</strong> Just 30 minutes from Brisbane CBD, the Southern Moreton Bay Islands (Russell, Macleay, Lamb & Karragarra) offer peaceful island living with excellent mainland access. Located in the sheltered waters of Moreton Bay, Southeast Queensland, each island has its own unique character, local amenities, and close-knit community.
             </p>
           </div>
 
@@ -949,7 +1198,7 @@ export default function Home(){
                 zIndex:1
               }} />
               <img 
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" 
+                src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=800&q=80" 
                 alt="Russell Island - Southern Moreton Bay, Queensland"
                 style={{width:'100%', height:320, objectFit:'cover'}}
               />
@@ -1002,7 +1251,7 @@ export default function Home(){
                 zIndex:1
               }} />
               <img 
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80" 
+                src="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=800&q=80" 
                 alt="Macleay Island - Moreton Bay Islands, Queensland"
                 style={{width:'100%', height:320, objectFit:'cover'}}
               />
@@ -1055,7 +1304,7 @@ export default function Home(){
                 zIndex:1
               }} />
               <img 
-                src="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=800&q=80" 
+                src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=800&q=80" 
                 alt="Karragarra Island - Peaceful Bay Island, Queensland"
                 style={{width:'100%', height:320, objectFit:'cover'}}
               />

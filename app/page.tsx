@@ -903,61 +903,297 @@ export default function Home(){
         </section>
       )}
 
-      {/* Discover the Islands Section */}
-      <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'white'}}>
+      {/* Discover the Islands Section - Enhanced with SEO & Local Images */}
+      <section style={{padding:'clamp(50px, 10vw, 80px) 0', background:'white'}}>
         <div className="container">
-          <h2>Explore the Islands 🏝️</h2>
-          <p className="muted" style={{maxWidth:600, marginBottom:32}}>The South Moreton Bay Islands (Russell, Macleay, Lamb & Karragarra) offer island living with mainland convenience. Discover each island's unique character, amenities, and lifestyle.</p>
-          
-          <div className="grid" style={{marginTop:12, marginBottom:40}}>
-            <a href="/islands/russell" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-                 e.currentTarget.style.borderColor = '#0066b3';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-                 e.currentTarget.style.borderColor = 'transparent';
-               }}
-            >
-              <h3>🏝️ Russell Island</h3>
-              <p className="muted">The hub with shops, schools, and community. Population 2,000+</p>
+          <div style={{textAlign:'center', marginBottom:'clamp(40px, 8vw, 60px)'}}>
+            <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:16}}>
+              Discover the Southern Moreton Bay Islands
+            </h2>
+            <p style={{color:'#666', fontSize:'clamp(1em, 2vw, 1.2em)', maxWidth:800, margin:'0 auto', lineHeight:1.6}}>
+              Just 30 minutes from Brisbane CBD, the Southern Moreton Bay Islands (Russell, Macleay, Lamb & Karragarra) offer peaceful island living with excellent mainland access. Located in the sheltered waters of Moreton Bay, Southeast Queensland, each island has its own unique character, local amenities, and close-knit community.
+            </p>
+          </div>
+
+          <div style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',
+            gap:'clamp(24px, 4vw, 32px)',
+            marginBottom:'clamp(32px, 6vw, 48px)'
+          }}>
+            <a href="/islands/russell" style={{
+              textDecoration:'none',
+              color:'inherit',
+              display:'block',
+              position:'relative',
+              borderRadius:16,
+              overflow:'hidden',
+              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
+              transition:'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-6px)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,102,179,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+            }}>
+              <div style={{
+                background:'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75))',
+                position:'absolute',
+                top:0,
+                left:0,
+                right:0,
+                bottom:0,
+                zIndex:1
+              }} />
+              <img 
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" 
+                alt="Russell Island - Southern Moreton Bay, Queensland"
+                style={{width:'100%', height:320, objectFit:'cover'}}
+              />
+              <div style={{
+                position:'absolute',
+                bottom:0,
+                left:0,
+                right:0,
+                padding:24,
+                zIndex:2,
+                color:'white'
+              }}>
+                <h3 style={{fontSize:'clamp(1.3em, 3vw, 1.6em)', fontWeight:700, marginBottom:12, color:'white'}}>
+                  Russell Island
+                </h3>
+                <p style={{opacity:0.95, fontSize:'clamp(0.9em, 2vw, 1em)', lineHeight:1.5, marginBottom:8}}>
+                  Largest SMBI island • 3,000+ residents
+                </p>
+                <p style={{opacity:0.9, fontSize:'0.9em', lineHeight:1.4}}>
+                  Main shopping hub with IGA supermarket, medical centre, schools, police station, and ferry terminal. Community markets every Sunday.
+                </p>
+              </div>
             </a>
-            <a href="/islands/macleay" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-                 e.currentTarget.style.borderColor = '#0066b3';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-                 e.currentTarget.style.borderColor = 'transparent';
-               }}
-            >
-              <h3>⛳ Macleay Island</h3>
-              <p className="muted">Upscale & serene with golf, fine dining & art. Population 1,200+</p>
+
+            <a href="/islands/macleay" style={{
+              textDecoration:'none',
+              color:'inherit',
+              display:'block',
+              position:'relative',
+              borderRadius:16,
+              overflow:'hidden',
+              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
+              transition:'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-6px)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,102,179,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+            }}>
+              <div style={{
+                background:'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75))',
+                position:'absolute',
+                top:0,
+                left:0,
+                right:0,
+                bottom:0,
+                zIndex:1
+              }} />
+              <img 
+                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80" 
+                alt="Macleay Island - Moreton Bay Islands, Queensland"
+                style={{width:'100%', height:320, objectFit:'cover'}}
+              />
+              <div style={{
+                position:'absolute',
+                bottom:0,
+                left:0,
+                right:0,
+                padding:24,
+                zIndex:2,
+                color:'white'
+              }}>
+                <h3 style={{fontSize:'clamp(1.3em, 3vw, 1.6em)', fontWeight:700, marginBottom:12, color:'white'}}>
+                  Macleay Island
+                </h3>
+                <p style={{opacity:0.95, fontSize:'clamp(0.9em, 2vw, 1em)', lineHeight:1.5, marginBottom:8}}>
+                  Family-friendly island • 1,200+ residents
+                </p>
+                <p style={{opacity:0.9, fontSize:'0.9em', lineHeight:1.4}}>
+                  Home to Macleay Island Golf Club, bowls club, sandy beaches, and peaceful bushwalking trails. Strong arts and community groups.
+                </p>
+              </div>
             </a>
-            <a href="/islands" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-                 e.currentTarget.style.borderColor = '#0066b3';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-                 e.currentTarget.style.borderColor = 'transparent';
-               }}
-            >
-              <h3>🌴 All Islands Guide</h3>
-              <p className="muted">Complete guides to Lamb & Karragarra plus island comparisons.</p>
+
+            <a href="/islands/karragarra" style={{
+              textDecoration:'none',
+              color:'inherit',
+              display:'block',
+              position:'relative',
+              borderRadius:16,
+              overflow:'hidden',
+              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
+              transition:'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-6px)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,102,179,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+            }}>
+              <div style={{
+                background:'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75))',
+                position:'absolute',
+                top:0,
+                left:0,
+                right:0,
+                bottom:0,
+                zIndex:1
+              }} />
+              <img 
+                src="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=800&q=80" 
+                alt="Karragarra Island - Peaceful Bay Island, Queensland"
+                style={{width:'100%', height:320, objectFit:'cover'}}
+              />
+              <div style={{
+                position:'absolute',
+                bottom:0,
+                left:0,
+                right:0,
+                padding:24,
+                zIndex:2,
+                color:'white'
+              }}>
+                <h3 style={{fontSize:'clamp(1.3em, 3vw, 1.6em)', fontWeight:700, marginBottom:12, color:'white'}}>
+                  Karragarra Island
+                </h3>
+                <p style={{opacity:0.95, fontSize:'clamp(0.9em, 2vw, 1em)', lineHeight:1.5, marginBottom:8}}>
+                  Peaceful sanctuary • 200+ residents
+                </p>
+                <p style={{opacity:0.9, fontSize:'0.9em', lineHeight:1.4}}>
+                  Smallest inhabited SMBI island offering tranquil coastal living, mangrove wetlands, and abundant birdlife. Perfect for nature lovers.
+                </p>
+              </div>
+            </a>
+
+            <a href="/islands/lamb" style={{
+              textDecoration:'none',
+              color:'inherit',
+              display:'block',
+              position:'relative',
+              borderRadius:16,
+              overflow:'hidden',
+              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
+              transition:'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-6px)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,102,179,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+            }}>
+              <div style={{
+                background:'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75))',
+                position:'absolute',
+                top:0,
+                left:0,
+                right:0,
+                bottom:0,
+                zIndex:1
+              }} />
+              <img 
+                src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80" 
+                alt="Lamb Island - Historic Moreton Bay Island, Queensland"
+                style={{width:'100%', height:320, objectFit:'cover'}}
+              />
+              <div style={{
+                position:'absolute',
+                bottom:0,
+                left:0,
+                right:0,
+                padding:24,
+                zIndex:2,
+                color:'white'
+              }}>
+                <h3 style={{fontSize:'clamp(1.3em, 3vw, 1.6em)', fontWeight:700, marginBottom:12, color:'white'}}>
+                  Lamb Island
+                </h3>
+                <p style={{opacity:0.95, fontSize:'clamp(0.9em, 2vw, 1em)', lineHeight:1.5, marginBottom:8}}>
+                  Historic charm • 400+ residents
+                </p>
+                <p style={{opacity:0.9, fontSize:'0.9em', lineHeight:1.4}}>
+                  Rich Indigenous and European heritage, quiet coastal streets, bay views, and close community. Ideal for peaceful retirement or remote work.
+                </p>
+              </div>
             </a>
           </div>
+
+          {/* Quick Island Facts */}
+          <div style={{
+            background:'#f8f9fa',
+            padding:'clamp(32px, 5vw, 48px)',
+            borderRadius:16,
+            marginBottom:'clamp(24px, 4vw, 32px)'
+          }}>
+            <div style={{
+              display:'grid',
+              gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))',
+              gap:'clamp(20px, 4vw, 32px)',
+              textAlign:'center'
+            }}>
+              <div>
+                <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>⛴️</div>
+                <div style={{fontWeight:700, fontSize:'clamp(1em, 2vw, 1.1em)', marginBottom:4}}>Regular Ferry Service</div>
+                <div style={{fontSize:'0.9em', color:'#666'}}>30 min to Redland Bay</div>
+              </div>
+              <div>
+                <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🏪</div>
+                <div style={{fontWeight:700, fontSize:'clamp(1em, 2vw, 1.1em)', marginBottom:4}}>Local Amenities</div>
+                <div style={{fontSize:'0.9em', color:'#666'}}>Shops, cafes, services</div>
+              </div>
+              <div>
+                <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🏫</div>
+                <div style={{fontWeight:700, fontSize:'clamp(1em, 2vw, 1.1em)', marginBottom:4}}>Schools & Medical</div>
+                <div style={{fontSize:'0.9em', color:'#666'}}>P-10 schools, medical centres</div>
+              </div>
+              <div>
+                <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>📍</div>
+                <div style={{fontWeight:700, fontSize:'clamp(1em, 2vw, 1.1em)', marginBottom:4}}>30km from Brisbane</div>
+                <div style={{fontSize:'0.9em', color:'#666'}}>Moreton Bay, Redland City</div>
+              </div>
+            </div>
+          </div>
+
           <div style={{textAlign:'center'}}>
-            <a href="/islands" style={{color:'#0066b3', fontWeight:600, fontSize:'1.05em', textDecoration:'none'}}>View complete islands guide →</a>
+            <a href="/islands" style={{
+              display:'inline-flex',
+              alignItems:'center',
+              gap:8,
+              color:'#0066b3',
+              fontWeight:700,
+              fontSize:'clamp(1em, 2vw, 1.1em)',
+              textDecoration:'none',
+              padding:'16px 32px',
+              background:'#f0f7ff',
+              borderRadius:12,
+              transition:'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0066b3';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f0f7ff';
+              e.currentTarget.style.color = '#0066b3';
+            }}>
+              Complete Islands Guide & Comparison →
+            </a>
           </div>
         </div>
       </section>
@@ -1489,178 +1725,6 @@ export default function Home(){
             <p style={{fontSize:'0.9em', opacity:0.8, marginTop:16}}>
               Join 2,500+ island residents. Unsubscribe anytime.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Island Highlights Grid */}
-      <section style={{padding:'clamp(50px, 10vw, 80px) 0', background:'white'}}>
-        <div className="container">
-          <div style={{textAlign:'center', marginBottom:'clamp(40px, 8vw, 60px)'}}>
-            <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:16}}>
-              Explore Our Islands
-            </h2>
-            <p style={{color:'#666', fontSize:'clamp(1em, 2vw, 1.2em)', maxWidth:700, margin:'0 auto'}}>
-              Each island has its own unique character and community
-            </p>
-          </div>
-
-          <div style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',
-            gap:'clamp(24px, 4vw, 32px)'
-          }}>
-            <a href="/islands/russell-island" style={{
-              textDecoration:'none',
-              color:'inherit',
-              display:'block',
-              position:'relative',
-              borderRadius:16,
-              overflow:'hidden',
-              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
-              transition:'all 0.3s'
-            }}>
-              <div style={{
-                background:'linear-gradient(to bottom, transparent, rgba(0,0,0,0.7))',
-                position:'absolute',
-                top:0,
-                left:0,
-                right:0,
-                bottom:0,
-                zIndex:1
-              }} />
-              <img 
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" 
-                alt="Russell Island"
-                style={{width:'100%', height:280, objectFit:'cover'}}
-              />
-              <div style={{
-                position:'absolute',
-                bottom:0,
-                left:0,
-                right:0,
-                padding:24,
-                zIndex:2,
-                color:'white'
-              }}>
-                <h3 style={{fontSize:'1.5em', fontWeight:700, marginBottom:8, color:'white'}}>Russell Island</h3>
-                <p style={{opacity:0.95, fontSize:'0.95em'}}>Largest island • 3,000+ residents • Shopping hub</p>
-              </div>
-            </a>
-
-            <a href="/islands/macleay-island" style={{
-              textDecoration:'none',
-              color:'inherit',
-              display:'block',
-              position:'relative',
-              borderRadius:16,
-              overflow:'hidden',
-              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
-              transition:'all 0.3s'
-            }}>
-              <div style={{
-                background:'linear-gradient(to bottom, transparent, rgba(0,0,0,0.7))',
-                position:'absolute',
-                top:0,
-                left:0,
-                right:0,
-                bottom:0,
-                zIndex:1
-              }} />
-              <img 
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" 
-                alt="Macleay Island"
-                style={{width:'100%', height:280, objectFit:'cover'}}
-              />
-              <div style={{
-                position:'absolute',
-                bottom:0,
-                left:0,
-                right:0,
-                padding:24,
-                zIndex:2,
-                color:'white'
-              }}>
-                <h3 style={{fontSize:'1.5em', fontWeight:700, marginBottom:8, color:'white'}}>Macleay Island</h3>
-                <p style={{opacity:0.95, fontSize:'0.95em'}}>Family friendly • Golf course • Beautiful beaches</p>
-              </div>
-            </a>
-
-            <a href="/islands/karragarra-island" style={{
-              textDecoration:'none',
-              color:'inherit',
-              display:'block',
-              position:'relative',
-              borderRadius:16,
-              overflow:'hidden',
-              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
-              transition:'all 0.3s'
-            }}>
-              <div style={{
-                background:'linear-gradient(to bottom, transparent, rgba(0,0,0,0.7))',
-                position:'absolute',
-                top:0,
-                left:0,
-                right:0,
-                bottom:0,
-                zIndex:1
-              }} />
-              <img 
-                src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800" 
-                alt="Karragarra Island"
-                style={{width:'100%', height:280, objectFit:'cover'}}
-              />
-              <div style={{
-                position:'absolute',
-                bottom:0,
-                left:0,
-                right:0,
-                padding:24,
-                zIndex:2,
-                color:'white'
-              }}>
-                <h3 style={{fontSize:'1.5em', fontWeight:700, marginBottom:8, color:'white'}}>Karragarra Island</h3>
-                <p style={{opacity:0.95, fontSize:'0.95em'}}>Peaceful retreat • Nature lovers • Small community</p>
-              </div>
-            </a>
-
-            <a href="/islands/lamb-island" style={{
-              textDecoration:'none',
-              color:'inherit',
-              display:'block',
-              position:'relative',
-              borderRadius:16,
-              overflow:'hidden',
-              boxShadow:'0 4px 16px rgba(0,0,0,0.1)',
-              transition:'all 0.3s'
-            }}>
-              <div style={{
-                background:'linear-gradient(to bottom, transparent, rgba(0,0,0,0.7))',
-                position:'absolute',
-                top:0,
-                left:0,
-                right:0,
-                bottom:0,
-                zIndex:1
-              }} />
-              <img 
-                src="https://images.unsplash.com/photo-1540202404-a2f2a2100811?w=800" 
-                alt="Lamb Island"
-                style={{width:'100%', height:280, objectFit:'cover'}}
-              />
-              <div style={{
-                position:'absolute',
-                bottom:0,
-                left:0,
-                right:0,
-                padding:24,
-                zIndex:2,
-                color:'white'
-              }}>
-                <h3 style={{fontSize:'1.5em', fontWeight:700, marginBottom:8, color:'white'}}>Lamb Island</h3>
-                <p style={{opacity:0.95, fontSize:'0.95em'}}>Quiet lifestyle • Historic charm • Coastal views</p>
-              </div>
-            </a>
           </div>
         </div>
       </section>

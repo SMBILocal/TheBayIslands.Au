@@ -15,10 +15,12 @@ const adminPaths = ['/admin']
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://jazreuartewyrmbfhtdz.supabase.co'
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    supabaseUrl,
     // Prefer publishable key (anon key deprecated)
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+    supabaseKey,
     {
       cookies: {
         get: (name: string) => req.cookies.get(name)?.value,

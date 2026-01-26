@@ -1191,7 +1191,12 @@ export default function Home(){
             marginBottom:'clamp(32px, 6vw, 48px)'
           }}>
           <style jsx>{`
-            @media (min-width: 768px) {
+            @media (min-width: 768px) and (max-width: 1023px) {
+              .islands-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+            @media (min-width: 1024px) {
               .islands-grid {
                 grid-template-columns: repeat(4, 1fr) !important;
               }
@@ -2008,12 +2013,19 @@ export default function Home(){
       {/* Quick Stats Bar */}
       <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'#f8f9fa'}}>
         <div className="container">
-          <div style={{
+          <div className="stats-grid" style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns:'repeat(4, 1fr)',
             gap:'clamp(24px, 4vw, 32px)',
             textAlign:'center'
           }}>
+          <style jsx>{`
+            @media (max-width: 480px) {
+              .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+          `}</style>
             <div>
               <div style={{fontSize:'clamp(2.5em, 5vw, 3.5em)', fontWeight:800, color:'#0066b3', marginBottom:8}}>
                 {homepageData?.stats?.businesses || '250+'}

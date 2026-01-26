@@ -6,21 +6,30 @@
  */
 
 import { createClient } from '@supabase/supabase-js'
+import { config } from 'dotenv'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+// Load .env.local
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+config({ path: join(__dirname, '..', '.env.local') })
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://jazreuartewyrmbfhtdz.supabase.co'
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+// Support both new SECRET_KEY and legacy SERVICE_ROLE_KEY naming
+const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 
-if (!serviceRoleKey || serviceRoleKey.includes('replace-with')) {
-  console.error('❌ ERROR: SUPABASE_SERVICE_ROLE_KEY is not set in .env.local')
+if (!secretKey || secretKey.includes('replace-with')) {
+  console.error('❌ ERROR: SUPABASE_SECRET_KEY is not set in .env.local')
   console.log('\n📋 To fix this:')
   console.log('1. Go to: https://supabase.com/dashboard/project/jazreuartewyrmbfhtdz/settings/api')
-  console.log('2. Copy the "service_role" secret key')
-  console.log('3. Update SUPABASE_SERVICE_ROLE_KEY in .env.local')
-  console.log('4. Also update NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY (anon public key)\n')
+  console.log('2. Copy the "Secret key" (starts with sb_secret_)')
+  console.log('3. Update SUPABASE_SECRET_KEY in .env.local')
+  console.log('4. Also update NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY (publishable key)\n')
   process.exit(1)
 }
 
-const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
+const supabaseAdmin = createClient(supabaseUrl, secretKey, {
   auth: { autoRefreshToken: false, persistSession: false }
 })
 

@@ -9,7 +9,27 @@ export default function Footer(){
   return (
     <footer style={{borderTop: '1px solid #e2e8f0', background: '#0b1727', color: 'white', marginTop: 64}}>
       <div style={{maxWidth: 1200, margin: '0 auto', padding: '32px 20px 0 20px'}}>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, marginBottom: 32}}>
+        <div className="footer-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, marginBottom: 32}}>
+          <style jsx>{`
+            @media (max-width: 768px) {
+              .footer-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+            @media (max-width: 480px) {
+              .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+              }
+              .footer-bottom-links {
+                grid-template-columns: 1fr !important;
+                text-align: center !important;
+              }
+              .footer-bottom-links > div:last-child {
+                justify-content: center !important;
+              }
+            }
+          `}</style>
           {/* Column 1: Brand with wrapped bird icon */}
           <div>
             <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12}}>
@@ -66,7 +86,7 @@ export default function Footer(){
         </div>
         
         {/* Copyright and bottom links row */}
-        <div style={{paddingTop: 12, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center', fontSize: 13, borderTop: '1px solid rgba(255,255,255,0.08)'}}>
+        <div className="footer-bottom-links" style={{paddingTop: 12, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center', fontSize: 13, borderTop: '1px solid rgba(255,255,255,0.08)'}}>
           <div style={{color: 'rgba(255,255,255,0.7)'}}>
             © {new Date().getFullYear()} thebayislands.au — All rights reserved.
           </div>

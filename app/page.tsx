@@ -251,12 +251,19 @@ export default function Home(){
             </p>
           </div>
 
-          <div style={{
+          <div className="category-grid" style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))',
+            gridTemplateColumns:'repeat(4, 1fr)',
             gap:'clamp(16px, 3vw, 24px)',
             marginBottom:32
           }}>
+          <style jsx>{`
+            @media (max-width: 480px) {
+              .category-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+          `}</style>
             <a href="/directory?category=restaurants" style={{
               textDecoration:'none',
               background:'white',
@@ -1177,12 +1184,19 @@ export default function Home(){
             </p>
           </div>
 
-          <div style={{
+          <div className="islands-grid" style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns:'1fr',
             gap:'clamp(24px, 4vw, 32px)',
             marginBottom:'clamp(32px, 6vw, 48px)'
           }}>
+          <style jsx>{`
+            @media (min-width: 768px) {
+              .islands-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+              }
+            }
+          `}</style>
             <a href="/islands/russell" style={{
               textDecoration:'none',
               color:'inherit',

@@ -19,10 +19,6 @@ export default function Navbar(){
   return (
     <header className="site-header">
       <div className="container nav">
-        <Link href="/" className="brand" onClick={()=>setMenuOpen(false)}>
-          <span style={{fontSize: 28}}>🐦</span>
-          <span>thebayislands.au</span>
-        </Link>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>

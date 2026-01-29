@@ -4,8 +4,16 @@ import Image from "next/image"
 import React, { useState } from "react"
 import { useAuth } from "@/lib/AuthContext"
 
-export default function Navbar(){
-  const [menuOpen, setMenuOpen] = useState(false)
+interface NavbarProps {
+  menuOpen?: boolean;
+  setMenuOpen?: (open: boolean) => void;
+}
+
+export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: externalSetMenuOpen }: NavbarProps = {}){
+  const [internalMenuOpen, setInternalMenuOpen] = useState(false)
+  const menuOpen = externalMenuOpen ?? internalMenuOpen;
+  const setMenuOpen = externalSetMenuOpen ?? setInternalMenuOpen;
+  
   const [areasOpen, setAreasOpen] = useState(false)
   const [articlesOpen, setArticlesOpen] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)

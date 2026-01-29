@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function UserMenu() {
+interface UserMenuProps {
+  showIconOnly?: boolean;
+}
+
+export default function UserMenu({ showIconOnly = false }: UserMenuProps = {}) {
   const { user, signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -29,6 +33,109 @@ export default function UserMenu() {
   }, [isOpen]);
 
   if (!user) {
+    // Mobile Portrait: Icon only
+    if (showIconOnly) {
+      return (
+        <div ref={menuRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '36px',
+              height: '36px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              fontSize: '18px',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#f3f4f6';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+            aria-label="Account menu"
+          >
+            👤
+          </button>
+
+          {isOpen && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 8px)',
+                right: 0,
+                background: 'white',
+                border: '1px solid #e5e7eb',
+                borderRadius: '8px',
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+                minWidth: '160px',
+                zIndex: 1000,
+                overflow: 'hidden',
+                padding: '8px',
+              }}
+            >
+              <Link
+                href="/login"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  display: 'block',
+                  padding: '8px 12px',
+                  fontSize: '13px',
+                  fontWeight: '500',
+                  color: '#0066b3',
+                  textDecoration: 'none',
+                  border: '1px solid #0066b3',
+                  borderRadius: '6px',
+                  textAlign: 'center',
+                  transition: 'all 0.2s',
+                  marginBottom: '6px',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f0f7ff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                🔐 Login
+              </Link>
+              <Link
+                href="/signup"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  display: 'block',
+                  padding: '8px 12px',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  color: 'white',
+                  background: '#0066b3',
+                  textDecoration: 'none',
+                  border: '1px solid #0066b3',
+                  borderRadius: '6px',
+                  textAlign: 'center',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#005299';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#0066b3';
+                }}
+              >
+                ✨ Sign Up
+              </Link>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // All other views: Buttons
     return (
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <Link 

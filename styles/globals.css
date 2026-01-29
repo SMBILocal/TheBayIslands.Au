@@ -154,8 +154,9 @@ input,button,textarea,select{font:inherit}
 
 /* Mobile Menu */
 @media (max-width:768px){
-  .hamburger{
-    display:flex;
+  /* Hide Navbar hamburger since TopAuthBar handles it */
+  .site-header .hamburger{
+    display:none !important;
   }
   
   .nav-links{

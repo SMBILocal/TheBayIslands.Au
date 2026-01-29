@@ -747,11 +747,7 @@ export default function Home(){
             </p>
           </div>
 
-          <div style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))',
-            gap:'clamp(16px, 3vw, 24px)'
-          }}>
+          <div className="location-grid">
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}
@@ -791,6 +787,23 @@ export default function Home(){
               </a>
             ))}
           </div>
+          <style jsx>{`
+            .location-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: clamp(16px, 3vw, 24px);
+            }
+            @media (max-width: 1024px) {
+              .location-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+            @media (max-width: 640px) {
+              .location-grid {
+                grid-template-columns: 1fr;
+              }
+            }
+          `}</style>
         </div>
       </section>
 
@@ -851,13 +864,7 @@ export default function Home(){
           </div>
 
           {/* Quick Links Grid - One Row on Tablet Portrait */}
-          <div style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(6, 1fr)',
-            gap:'clamp(12px, 2vw, 16px)',
-            maxWidth:'1000px',
-            margin:'0 auto'
-          }}>
+          <div className="quick-links-grid">
             <a href="/news" style={{
               background:'#f8f9fa',
               padding:'clamp(16px, 3vw, 20px)',
@@ -1044,6 +1051,25 @@ export default function Home(){
               <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.8em, 2vw, 0.9em)', transition:'all 0.3s'}}>Island Guides</div>
             </a>
           </div>
+          <style jsx>{`
+            .quick-links-grid {
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+              gap: clamp(12px, 2vw, 16px);
+              max-width: 1000px;
+              margin: 0 auto;
+            }
+            @media (max-width: 768px) {
+              .quick-links-grid {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+            @media (max-width: 480px) {
+              .quick-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+          `}</style>
         </div>
       </section>
 

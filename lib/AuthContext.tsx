@@ -41,7 +41,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          // Silently handle AbortError - common during hot reload
+          if (error.name === 'AbortError') {
+            console.log('Session fetch aborted - retrying...');
+            return;
+          }
+          console.error('Auth session error:', error);
+          return;
+        }
+        
         if (session?.user) {
           // Get role from app_metadata (set during user creation)
           const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
@@ -58,8 +69,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
           });
         }
-      } catch (err) {
-        console.error('Auth initialization error:', err);
+      } catch (err: any) {
+        // Silently handle AbortError - common during hot reload in development
+        if (err?.name !== 'AbortError') {
+          console.error('Auth initialization error:', err);
+        }
       } finally {
         setLoading(false);
       }

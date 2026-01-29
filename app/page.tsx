@@ -749,14 +749,8 @@ export default function Home(){
 
           <div style={{
             display:'grid',
-            gridTemplateColumns:'repeat(4, 1fr)',
-            gap:'clamp(16px, 3vw, 24px)',
-            '@media (max-width: 1024px)': {
-              gridTemplateColumns:'repeat(2, 1fr)'
-            },
-            '@media (max-width: 768px)': {
-              gridTemplateColumns:'1fr'
-            }
+            gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))',
+            gap:'clamp(16px, 3vw, 24px)'
           }}>
             {ALL_LOCATIONS.map(location => (
               <a 

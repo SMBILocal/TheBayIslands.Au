@@ -16,7 +16,7 @@ interface UserProfile {
 }
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -30,13 +30,15 @@ export default function ProfilePage() {
   const [success, setSuccess] = useState('');
 
   useEffect(() => {
+    if (authLoading) return;
+    
     if (!user) {
       router.push('/login?redirectTo=/dashboard/profile');
       return;
     }
 
     fetchProfile();
-  }, [user, router]);
+  }, [user, authLoading, router]);
 
   const fetchProfile = async () => {
     try {

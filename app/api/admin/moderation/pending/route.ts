@@ -34,14 +34,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', user.id)
-      .single();
+    // Check role from app_metadata
+    const role = (user as any).app_metadata?.role || (user as any).user_metadata?.role || 'user';
+    const hasAdminAccess = ['super_admin', 'administrator', 'moderator'].includes(role);
 
-    if (userError || !userData || userData.role !== 'admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    if (!hasAdminAccess) {
+      return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 });
     }
 
     const [directoryResult, jobsResult, classifiedsResult] = await Promise.all([

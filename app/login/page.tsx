@@ -26,10 +26,28 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await signIn(email, password);
-      router.push(redirectTo || '/directory');
+      const userData = await signIn(email, password);
+      
+      if (!userData) {
+        setError('Login failed. Please try again.');
+        setLoading(false);
+        return;
+      }
+      
+      // Redirect based on role
+      const role = userData.role || 'user';
+      const isAdmin = ['super_admin', 'administrator', 'moderator'].includes(role);
+      
+      if (redirectTo && redirectTo !== '/directory') {
+        router.push(redirectTo);
+      } else if (isAdmin) {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.');
+      console.error('Login error:', err);
+      setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }

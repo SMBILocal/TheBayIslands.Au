@@ -15,9 +15,12 @@ const adminPaths = ['/admin']
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://jazreuartewyrmbfhtdz.supabase.co'
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+    supabaseUrl,
+    // Prefer publishable key (anon key deprecated)
+    supabaseKey,
     {
       cookies: {
         get: (name: string) => req.cookies.get(name)?.value,
@@ -54,13 +57,11 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(redirectUrl)
     }
 
-    const { data: userData } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', session.user.id)
-      .single()
+    // Check role from app_metadata (set during user creation)
+    const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
+    const hasAdminAccess = ['super_admin', 'administrator', 'moderator'].includes(role);
 
-    if (!userData || userData.role !== 'admin') {
+    if (!hasAdminAccess) {
       const redirectUrl = req.nextUrl.clone()
       redirectUrl.pathname = '/'
       return NextResponse.redirect(redirectUrl)

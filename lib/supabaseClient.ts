@@ -1,14 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-// Prefer the new publishable key; fall back to legacy anon for compatibility
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
-  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  || ''
+// Use the publishable default key (anon key is deprecated)
+const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || ''
 
 const isBrowser = typeof window !== 'undefined'
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
   auth: {
     persistSession: isBrowser,
     autoRefreshToken: isBrowser,

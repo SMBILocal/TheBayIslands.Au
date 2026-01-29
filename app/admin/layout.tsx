@@ -6,26 +6,35 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
+    
     if (!user) {
       router.push('/login?redirectTo=/admin');
       return;
     }
 
-    // For now, allow all authenticated users to access admin
-    // In production, check user role from auth metadata
-    setIsAdmin(true);
-    setLoading(false);
-  }, [user, router]);
+    // Check if user has admin role from app_metadata (set during user creation)
+    const role = user.role || 'user';
+    const hasAdminAccess = ['super_admin', 'administrator', 'moderator'].includes(role);
+    
+    console.log('Admin layout - User role:', role, 'Has admin access:', hasAdminAccess);
+    
+    if (hasAdminAccess) {
+      setIsAdmin(true);
+    } else {
+      console.log('User does not have admin access, redirecting to dashboard');
+      router.push('/dashboard');
+    }
+  }, [user, authLoading, router]);
 
-  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>Loading...</div>;
-  if (!isAdmin) return null;
+  if (authLoading) return <div style={{ padding: 40, textAlign: 'center' }}>Loading...</div>;
+  if (!user || !isAdmin) return null;
 
   const navItems = [
     { href: '/admin', label: '📊 Moderation Dashboard', icon: '📊' },

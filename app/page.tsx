@@ -9,6 +9,208 @@ import EventsCarousel from '@/components/EventsCarousel';
 import StatsCounter from '@/components/StatsCounter';
 import { ALL_LOCATIONS } from '@/lib/locations';
 
+// Testimonials Carousel Component
+function TestimonialsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
+
+  const testimonials = [
+    {
+      stars: '⭐⭐⭐⭐⭐',
+      text: 'Listed my plumbing business and got 5 new customers in the first month. The local focus really works!',
+      initials: 'JM',
+      name: 'John M.',
+      business: 'Russell Island Plumbing',
+      color: '#0066b3',
+      gradient: 'linear-gradient(135deg, #0066b3, #00a8e8)'
+    },
+    {
+      stars: '⭐⭐⭐⭐⭐',
+      text: 'Found our dream property on Macleay Island through a classified ad. Best decision we ever made!',
+      initials: 'ST',
+      name: 'Sarah T.',
+      business: 'New Island Resident',
+      color: '#c85a17',
+      gradient: 'linear-gradient(135deg, #c85a17, #ff8c42)'
+    },
+    {
+      stars: '⭐⭐⭐⭐⭐',
+      text: 'The event calendar keeps me connected to everything happening on the islands. Love this platform!',
+      initials: 'MK',
+      name: 'Maria K.',
+      business: 'Karragarra Island',
+      color: '#28a745',
+      gradient: 'linear-gradient(135deg, #28a745, #5cb85c)'
+    }
+  ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const renderTestimonialCard = (testimonial: any, index: number) => (
+    <div
+      key={index}
+      style={{
+        background: '#f8f9fa',
+        padding: 'clamp(32px, 5vw, 40px)',
+        borderRadius: 16,
+        borderLeft: `4px solid ${testimonial.color}`,
+        minWidth: isDesktop ? '30%' : '100%',
+        flex: isDesktop ? '0 0 30%' : '0 0 100%'
+      }}
+    >
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ fontSize: '2em', marginBottom: 12 }}>{testimonial.stars}</div>
+        <p style={{ fontStyle: 'italic', color: '#333', lineHeight: 1.7, marginBottom: 16 }}>
+          "{testimonial.text}"
+        </p>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: '50%',
+            background: testimonial.gradient,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontWeight: 700,
+            fontSize: '1.2em'
+          }}
+        >
+          {testimonial.initials}
+        </div>
+        <div>
+          <div style={{ fontWeight: 700 }}>{testimonial.name}</div>
+          <div style={{ fontSize: '0.9em', color: '#666' }}>{testimonial.business}</div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      {/* Desktop Grid View (1024px+) */}
+      {isDesktop && (
+        <div style={{ display: 'flex', gap: 'clamp(16px, 3vw, 24px)' }}>
+          {testimonials.map((t, i) => renderTestimonialCard(t, i))}
+        </div>
+      )}
+
+      {/* Tablet/Mobile Carousel View (<1024px) */}
+      {!isDesktop && (
+        <div>
+          <div style={{ position: 'relative', marginBottom: 24 }}>
+            {renderTestimonialCard(testimonials[currentIndex], currentIndex)}
+            
+            {/* Carousel Controls */}
+            <button
+              onClick={prevSlide}
+              style={{
+                position: 'absolute',
+                left: '-40px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: '#0066b3',
+                color: 'white',
+                border: 'none',
+                borderRadius: '50%',
+                width: 40,
+                height: 40,
+                cursor: 'pointer',
+                fontSize: '1.2em',
+                transition: 'all 0.3s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#004a99';
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#0066b3';
+                e.currentTarget.style.transform = 'translateY(-50%)';
+              }}
+            >
+              ← 
+            </button>
+
+            <button
+              onClick={nextSlide}
+              style={{
+                position: 'absolute',
+                right: '-40px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: '#0066b3',
+                color: 'white',
+                border: 'none',
+                borderRadius: '50%',
+                width: 40,
+                height: 40,
+                cursor: 'pointer',
+                fontSize: '1.2em',
+                transition: 'all 0.3s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#004a99';
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#0066b3';
+                e.currentTarget.style.transform = 'translateY(-50%)';
+              }}
+            >
+              →
+            </button>
+          </div>
+
+          {/* Dots Navigation */}
+          <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToSlide(i)}
+                style={{
+                  width: currentIndex === i ? 24 : 12,
+                  height: 12,
+                  borderRadius: 6,
+                  background: currentIndex === i ? '#0066b3' : '#d1d5db',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s'
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 interface HomepageData {
   featuredBusinesses: any[];
   subFeaturedBusinesses: any[];
@@ -533,46 +735,51 @@ export default function Home(){
       </section>
 
       {/* Browse by Location */}
-      <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'linear-gradient(135deg, #0066b3 0%, #00a8e8 100%)'}}>
+      <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'white'}}>
         <div className="container">
-          <div style={{textAlign:'center', marginBottom:'clamp(32px, 6vw, 48px)', color:'white'}}>
-            <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:12, color:'white'}}>
+          <div style={{textAlign:'center', marginBottom:'clamp(32px, 6vw, 48px)'}}>
+            <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:12}}>
               Browse by Location
             </h2>
-            <p style={{fontSize:'clamp(1em, 2vw, 1.2em)', opacity:0.95}}>
+            <p style={{fontSize:'clamp(1em, 2vw, 1.2em)', color:'#666'}}>
               Explore businesses across all islands and mainland suburbs
             </p>
           </div>
 
           <div style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))',
-            gap:'clamp(16px, 3vw, 24px)'
+            gridTemplateColumns:'repeat(4, 1fr)',
+            gap:'clamp(16px, 3vw, 24px)',
+            '@media (max-width: 1024px)': {
+              gridTemplateColumns:'repeat(2, 1fr)'
+            },
+            '@media (max-width: 768px)': {
+              gridTemplateColumns:'1fr'
+            }
           }}>
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}
                 href={`/directory?location=${location.slug}`}
                 style={{
-                  background:'rgba(255,255,255,0.15)',
-                  backdropFilter:'blur(10px)',
+                  background:'#f8f9fa',
                   padding:'clamp(24px, 4vw, 32px)',
                   borderRadius:12,
                   textDecoration:'none',
-                  color:'white',
-                  border:'2px solid rgba(255,255,255,0.2)',
+                  color:'#333',
+                  border:'2px solid #e2e8f0',
                   transition:'all 0.3s',
                   textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'white';
-                  e.currentTarget.style.color = '#0066b3';
+                  e.currentTarget.style.background = '#0066b3';
+                  e.currentTarget.style.color = 'white';
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.2)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                  e.currentTarget.style.color = 'white';
+                  e.currentTarget.style.background = '#f8f9fa';
+                  e.currentTarget.style.color = '#333';
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
@@ -583,7 +790,7 @@ export default function Home(){
                 <div style={{fontWeight:700, fontSize:'clamp(1em, 2vw, 1.1em)', marginBottom:4}}>
                   {location.name}
                 </div>
-                <div style={{fontSize:'0.9em', opacity:0.9}}>
+                <div style={{fontSize:'0.9em', color:'#666'}}>
                   View businesses →
                 </div>
               </a>
@@ -861,7 +1068,7 @@ export default function Home(){
             <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
-            <div style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap'}}>
+            <div style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'nowrap', minWidth:0}}>
               <a
                 href="/signup"
                 style={{
@@ -871,12 +1078,15 @@ export default function Home(){
                   textDecoration:'none',
                   borderRadius:'8px',
                   fontWeight:600,
-                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
                   display:'inline-flex',
                   alignItems:'center',
                   gap:'8px',
                   transition:'all 0.3s',
-                  boxShadow:'0 4px 12px rgba(0,0,0,0.15)'
+                  boxShadow:'0 4px 12px rgba(0,0,0,0.15)',
+                  flex:'1 1 auto',
+                  minWidth:0,
+                  whiteSpace:'nowrap'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
@@ -899,11 +1109,14 @@ export default function Home(){
                   border:'2px solid white',
                   borderRadius:'8px',
                   fontWeight:600,
-                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
                   display:'inline-flex',
                   alignItems:'center',
                   gap:'8px',
-                  transition:'all 0.3s'
+                  transition:'all 0.3s',
+                  flex:'1 1 auto',
+                  minWidth:0,
+                  whiteSpace:'nowrap'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -926,11 +1139,14 @@ export default function Home(){
                   border:'2px solid white',
                   borderRadius:'8px',
                   fontWeight:600,
-                  fontSize:'clamp(0.95rem, 2vw, 1.125rem)',
+                  fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
                   display:'inline-flex',
                   alignItems:'center',
                   gap:'8px',
-                  transition:'all 0.3s'
+                  transition:'all 0.3s',
+                  flex:'1 1 auto',
+                  minWidth:0,
+                  whiteSpace:'nowrap'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -983,92 +1199,6 @@ export default function Home(){
           </div>
         </section>
       )}
-
-      {/* Enhanced CTA Section */}
-      <section style={{padding:'clamp(30px, 6vw, 40px) 0', background:'linear-gradient(135deg, rgba(14,165,233,0.05) 0%, rgba(6,182,212,0.05) 100%)'}}>
-        <div className="container">
-          <div className="hero" style={{alignItems:'center', gap:'clamp(24px, 5vw, 48px)'}}>
-            <div style={{flex:1}}>
-              <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.25em)', marginBottom:16}}>Your Local Community Hub</h2>
-              <p className="muted" style={{maxWidth: '720px', marginBottom:12, fontSize:'clamp(1em, 2vw, 1.125em)', lineHeight:1.6}}>
-                Trusted guide for the South Moreton Bay Islands — Russell, Macleay, Lamb, Karragarra and Redland Bay. 
-                Discover verified local businesses, events, jobs, services, and classifieds with fresh listings posted weekly.
-              </p>
-              <div style={{display:'flex', flexWrap:'wrap', gap:8, marginTop:20, fontSize:'0.95em'}}>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>📰 Articles</span>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>💼 Jobs</span>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>🎉 Events</span>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>🏢 Directory</span>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>🛒 Classifieds</span>
-                <span style={{background:'rgba(0,102,179,0.1)', color:'#0066b3', padding:'6px 14px', borderRadius:20, fontWeight:600}}>🏝️ Island Guides</span>
-              </div>
-            </div>
-            <div style={{minWidth:'min(100%, 340px)'}}>
-              <div className="card" style={{background:'white', borderRadius:16, boxShadow:'0 8px 24px rgba(0,0,0,0.12)', border:'2px solid #e0f2fe'}}>
-                <h3 style={{fontSize:'clamp(1.25em, 3vw, 1.5em)', marginBottom:12}}>Get Started Free</h3>
-                <p className="muted" style={{marginBottom: '14px', lineHeight:1.6}}>
-                  Create free listings, post jobs, add events, and connect with locals across SMBI in minutes.
-                </p>
-                <p className="muted" style={{marginBottom: '20px', fontSize:'0.95em', lineHeight:1.5}}>
-                  Built for residents, tradies, small businesses, clubs, and visitors looking for trusted local information.
-                </p>
-                <div style={{display:'flex', gap:'12px', flexDirection:'column'}}>
-                  <a 
-                    href="/signup" 
-                    style={{
-                      background:'linear-gradient(135deg, #0066b3 0%, #0052a3 100%)', 
-                      color:'white', 
-                      padding:'14px 24px', 
-                      borderRadius:'10px', 
-                      textDecoration:'none', 
-                      fontWeight:700,
-                      textAlign:'center',
-                      boxShadow:'0 4px 14px rgba(0,102,179,0.3)',
-                      transition:'all 0.2s',
-                      display:'block'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,102,179,0.4)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,102,179,0.3)';
-                    }}
-                  >
-                    🚀 Sign up free
-                  </a>
-                  <a 
-                    href="/login" 
-                    style={{
-                      background:'transparent', 
-                      color:'#0066b3', 
-                      padding:'14px 24px', 
-                      borderRadius:'10px', 
-                      textDecoration:'none', 
-                      fontWeight:700, 
-                      border:'2px solid #0066b3',
-                      textAlign:'center',
-                      transition:'all 0.2s',
-                      display:'block'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#0066b3';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.color = '#0066b3';
-                    }}
-                  >
-                    Sign in
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Latest Content Tabs */}
       {homepageData && (
@@ -1336,7 +1466,7 @@ export default function Home(){
                 zIndex:1
               }} />
               <img 
-                src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=800&q=80" 
+                src="https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800&q=80" 
                 alt="Karragarra Island - Peaceful Bay Island, Queensland"
                 style={{width:'100%', height:320, objectFit:'cover'}}
               />
@@ -1834,113 +1964,7 @@ export default function Home(){
             </p>
           </div>
 
-          <div style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))',
-            gap:'clamp(24px, 4vw, 32px)'
-          }}>
-            <div style={{
-              background:'#f8f9fa',
-              padding:'clamp(32px, 5vw, 40px)',
-              borderRadius:16,
-              borderLeft:'4px solid #0066b3'
-            }}>
-              <div style={{marginBottom:20}}>
-                <div style={{fontSize:'2em', marginBottom:12}}>⭐⭐⭐⭐⭐</div>
-                <p style={{fontStyle:'italic', color:'#333', lineHeight:1.7, marginBottom:16}}>
-                  "Listed my plumbing business and got 5 new customers in the first month. The local focus really works!"
-                </p>
-              </div>
-              <div style={{display:'flex', alignItems:'center', gap:12}}>
-                <div style={{
-                  width:48,
-                  height:48,
-                  borderRadius:'50%',
-                  background:'linear-gradient(135deg, #0066b3, #00a8e8)',
-                  display:'flex',
-                  alignItems:'center',
-                  justifyContent:'center',
-                  color:'white',
-                  fontWeight:700,
-                  fontSize:'1.2em'
-                }}>
-                  JM
-                </div>
-                <div>
-                  <div style={{fontWeight:700}}>John M.</div>
-                  <div style={{fontSize:'0.9em', color:'#666'}}>Russell Island Plumbing</div>
-                </div>
-              </div>
-            </div>
-
-            <div style={{
-              background:'#f8f9fa',
-              padding:'clamp(32px, 5vw, 40px)',
-              borderRadius:16,
-              borderLeft:'4px solid #c85a17'
-            }}>
-              <div style={{marginBottom:20}}>
-                <div style={{fontSize:'2em', marginBottom:12}}>⭐⭐⭐⭐⭐</div>
-                <p style={{fontStyle:'italic', color:'#333', lineHeight:1.7, marginBottom:16}}>
-                  "Found our dream property on Macleay Island through a classified ad. Best decision we ever made!"
-                </p>
-              </div>
-              <div style={{display:'flex', alignItems:'center', gap:12}}>
-                <div style={{
-                  width:48,
-                  height:48,
-                  borderRadius:'50%',
-                  background:'linear-gradient(135deg, #c85a17, #ff8c42)',
-                  display:'flex',
-                  alignItems:'center',
-                  justifyContent:'center',
-                  color:'white',
-                  fontWeight:700,
-                  fontSize:'1.2em'
-                }}>
-                  ST
-                </div>
-                <div>
-                  <div style={{fontWeight:700}}>Sarah T.</div>
-                  <div style={{fontSize:'0.9em', color:'#666'}}>New Island Resident</div>
-                </div>
-              </div>
-            </div>
-
-            <div style={{
-              background:'#f8f9fa',
-              padding:'clamp(32px, 5vw, 40px)',
-              borderRadius:16,
-              borderLeft:'4px solid #28a745'
-            }}>
-              <div style={{marginBottom:20}}>
-                <div style={{fontSize:'2em', marginBottom:12}}>⭐⭐⭐⭐⭐</div>
-                <p style={{fontStyle:'italic', color:'#333', lineHeight:1.7, marginBottom:16}}>
-                  "The event calendar keeps me connected to everything happening on the islands. Love this platform!"
-                </p>
-              </div>
-              <div style={{display:'flex', alignItems:'center', gap:12}}>
-                <div style={{
-                  width:48,
-                  height:48,
-                  borderRadius:'50%',
-                  background:'linear-gradient(135deg, #28a745, #5cb85c)',
-                  display:'flex',
-                  alignItems:'center',
-                  justifyContent:'center',
-                  color:'white',
-                  fontWeight:700,
-                  fontSize:'1.2em'
-                }}>
-                  MK
-                </div>
-                <div>
-                  <div style={{fontWeight:700}}>Maria K.</div>
-                  <div style={{fontSize:'0.9em', color:'#666'}}>Karragarra Island</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <TestimonialsCarousel />
         </div>
       </section>
 

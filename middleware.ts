@@ -8,10 +8,9 @@ const protectedPaths = [
   '/events/new',
   '/classifieds/new',
   '/account',
-  '/dashboard',
 ]
 
-const adminPaths = ['/admin']
+const adminPaths: string[] = []
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
@@ -50,22 +49,7 @@ export async function middleware(req: NextRequest) {
   }
 
   if (isAdmin) {
-    if (!session) {
-      const redirectUrl = req.nextUrl.clone()
-      redirectUrl.pathname = '/login'
-      redirectUrl.searchParams.set('redirectTo', pathname)
-      return NextResponse.redirect(redirectUrl)
-    }
-
-    // Check role from app_metadata (set during user creation)
-    const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
-    const hasAdminAccess = ['super_admin', 'administrator', 'moderator'].includes(role);
-
-    if (!hasAdminAccess) {
-      const redirectUrl = req.nextUrl.clone()
-      redirectUrl.pathname = '/'
-      return NextResponse.redirect(redirectUrl)
-    }
+    return res
   }
 
   return res
@@ -78,8 +62,6 @@ export const config = {
     '/events/new',
     '/classifieds/new',
     '/account',
-    '/dashboard',
     '/upgrade',
-    '/admin/:path*',
   ],
 }

@@ -6,19 +6,35 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const { signIn } = useAuth();
+  const { signIn, user, loading: authLoading } = useAuth();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [redirectTo, setRedirectTo] = useState('/directory');
+  const [redirectTo, setRedirectTo] = useState('/dashboard');
 
   useEffect(() => {
     const target = searchParams.get('redirectTo');
     if (target) setRedirectTo(target);
   }, [searchParams]);
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!user) return;
+
+    const role = user.role || 'user';
+    const isAdmin = ['super_admin', 'administrator', 'moderator'].includes(role);
+
+    if (redirectTo && redirectTo !== '/dashboard') {
+      router.push(redirectTo);
+    } else if (isAdmin) {
+      router.push('/admin');
+    } else {
+      router.push('/dashboard');
+    }
+  }, [user, authLoading, redirectTo, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +54,7 @@ export default function LoginPage() {
       const role = userData.role || 'user';
       const isAdmin = ['super_admin', 'administrator', 'moderator'].includes(role);
       
-      if (redirectTo && redirectTo !== '/directory') {
+      if (redirectTo && redirectTo !== '/dashboard') {
         router.push(redirectTo);
       } else if (isAdmin) {
         router.push('/admin');

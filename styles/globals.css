@@ -167,18 +167,12 @@ input,button,textarea,select{font:inherit}
     top: 0 !important;
   }
   
-  .mobile-logo {
-    display: block;
-    flex-shrink: 0;
-  }
-  
   .nav {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
   
   .hamburger{
     display:flex;
-    order: 3;
     margin-left: auto;
   }
   
@@ -760,10 +754,6 @@ input,button,textarea,select{font:inherit}
 
   .brand img{
     height:36px;
-  }
-  
-  .mobile-logo img {
-    height: 36px;
   }
 
   h1{

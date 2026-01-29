@@ -24,8 +24,6 @@ export default function TopAuthBar() {
     }
   }, []);
 
-  if (isMobile) return null;
-
   const handleLogout = async () => {
     await signOut();
   };

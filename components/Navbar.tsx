@@ -19,19 +19,6 @@ export default function Navbar(){
   return (
     <header className="site-header">
       <div className="container nav">
-        <Link href="/" className="brand">
-          <span style={{
-            background: 'linear-gradient(135deg, #0066b3 0%, #00a8cc 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            fontSize: '22px',
-            fontWeight: '700',
-            letterSpacing: '-0.5px'
-          }}>
-            TheBayIslands.Au
-          </span>
-        </Link>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>

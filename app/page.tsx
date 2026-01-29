@@ -1,5 +1,6 @@
 'use client';
 
+// Build date: 2026-01-29T03:31:00Z - Force Vercel redeploy with ZodError fix
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import FeaturedBusinessCarousel from '@/components/FeaturedBusinessCarousel';

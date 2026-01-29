@@ -13,6 +13,13 @@ export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
     detectSessionInUrl: isBrowser,
     storage: isBrowser ? window.localStorage : undefined,
     storageKey: 'thebayislands-auth',
+    flowType: 'pkce',
+    lock: isBrowser,
+  },
+  global: {
+    headers: {
+      'x-client-info': 'thebayislands-web'
+    }
   }
 })
 

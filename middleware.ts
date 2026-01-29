@@ -57,13 +57,11 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(redirectUrl)
     }
 
-    const { data: userData } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', session.user.id)
-      .single()
+    // Check role from app_metadata (set during user creation)
+    const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
+    const hasAdminAccess = ['super_admin', 'administrator', 'moderator'].includes(role);
 
-    if (!userData || userData.role !== 'admin') {
+    if (!hasAdminAccess) {
       const redirectUrl = req.nextUrl.clone()
       redirectUrl.pathname = '/'
       return NextResponse.redirect(redirectUrl)

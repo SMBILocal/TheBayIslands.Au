@@ -78,24 +78,24 @@ export default function Footer(){
       
       {/* Bottom Section: Acknowledgment & Copyright */}
       <div style={{maxWidth: 1200, margin: '0 auto', padding: '0 20px 16px 20px', color: 'rgba(255,255,255,0.85)'}}>
-        <div style={{borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 12, fontSize: 14, lineHeight: 1.6}}>
+        <div style={{borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 12, fontSize: 'clamp(12px, 2.5vw, 14px)', lineHeight: 1.6}}>
           We acknowledge the Quandamooka people as the Traditional Custodians of the lands and waters of the Southern Moreton Bay Islands — including Canaipa/Kanopa (Russell Island) — and pay respect to Elders past and present.
         </div>
-        <div style={{paddingTop: 8, fontSize: 14, lineHeight: 1.6}}>
+        <div style={{paddingTop: 8, fontSize: 'clamp(12px, 2.5vw, 14px)', lineHeight: 1.6}}>
           thebayislands.au is created and operated by SMBI Local (smbilocal.au). Commercial transactions, donations, and fundraising are managed by SMBI Local Ltd (charitable). Consider supporting the community via the Donate link.
         </div>
         
         {/* Copyright and bottom links row */}
-        <div className="footer-bottom-links" style={{paddingTop: 12, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center', fontSize: 13, borderTop: '1px solid rgba(255,255,255,0.08)'}}>
-          <div style={{color: 'rgba(255,255,255,0.7)'}}>
+        <div className="footer-bottom-links" style={{paddingTop: 12, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center', fontSize: 'clamp(11px, 2vw, 13px)', borderTop: '1px solid rgba(255,255,255,0.08)'}}>
+          <div style={{color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(11px, 2vw, 13px)'}}>
             © {new Date().getFullYear()} thebayislands.au — All rights reserved.
           </div>
           <div style={{display: 'flex', gap: 16, justifyContent: 'flex-end'}}>
-            <Link href="/site-map" style={{...linkStyle, fontSize: 12}}>Sitemap</Link>
+            <Link href="/site-map" style={{...linkStyle, fontSize: 'clamp(10px, 2vw, 12px)'}}>Sitemap</Link>
             <span style={{color: 'rgba(255,255,255,0.3)'}}>•</span>
-            <Link href="/terms" style={{...linkStyle, fontSize: 12}}>Terms</Link>
+            <Link href="/terms" style={{...linkStyle, fontSize: 'clamp(10px, 2vw, 12px)'}}>Terms</Link>
             <span style={{color: 'rgba(255,255,255,0.3)'}}>•</span>
-            <Link href="/privacy" style={{...linkStyle, fontSize: 12}}>Policies</Link>
+            <Link href="/privacy" style={{...linkStyle, fontSize: 'clamp(10px, 2vw, 12px)'}}>Policies</Link>
           </div>
         </div>
       </div>

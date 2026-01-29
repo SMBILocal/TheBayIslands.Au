@@ -6,19 +6,16 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function UserDashboard() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
+    if (!authLoading && !user) {
       router.push('/login?redirectTo=/dashboard');
-    } else {
-      setLoading(false);
     }
-  }, [user, router]);
+  }, [user, authLoading, router]);
 
-  if (loading) return <div>Loading...</div>;
+  if (authLoading) return <div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>;
   if (!user) return null;
 
   const subscriptionTier = user.subscription_tier || 'free';

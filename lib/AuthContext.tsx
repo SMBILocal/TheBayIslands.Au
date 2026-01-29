@@ -11,6 +11,7 @@ interface AuthUser {
   user_metadata?: {
     full_name?: string;
     avatar_url?: string;
+    role?: string;
   };
 }
 
@@ -18,7 +19,7 @@ interface AuthContextType {
   user: AuthUser | null;
   loading: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<AuthUser | null>;
   signOut: () => Promise<void>;
   requestPasswordReset: (email: string) => Promise<void>;
   updatePassword: (newPassword: string) => Promise<void>;
@@ -42,18 +43,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
-          const { data: userData } = await supabase
-            .from('users')
-            .select('role, subscription_tier')
-            .eq('id', session.user.id)
-            .single();
+          // Get role from app_metadata (set during user creation)
+          const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
+          const plan = session.user.app_metadata?.plan || 'free';
 
           setUser({
             id: session.user.id,
             email: session.user.email || '',
-            role: userData?.role || 'user',
-            subscription_tier: userData?.subscription_tier || 'free',
-            user_metadata: session.user.user_metadata
+            role: role,
+            subscription_tier: plan,
+            user_metadata: {
+              ...session.user.user_metadata,
+              role: role
+            }
           });
         }
       } catch (err) {
@@ -68,18 +70,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         if (session?.user) {
-          const { data: userData } = await supabase
-            .from('users')
-            .select('role, subscription_tier')
-            .eq('id', session.user.id)
-            .single();
+          // Get role from app_metadata (set during user creation)
+          const role = session.user.app_metadata?.role || session.user.user_metadata?.role || 'user';
+          const plan = session.user.app_metadata?.plan || 'free';
 
           setUser({
             id: session.user.id,
             email: session.user.email || '',
-            role: userData?.role || 'user',
-            subscription_tier: userData?.subscription_tier || 'free',
-            user_metadata: session.user.user_metadata
+            role: role,
+            subscription_tier: plan,
+            user_metadata: {
+              ...session.user.user_metadata,
+              role: role
+            }
           });
         } else {
           setUser(null);
@@ -123,7 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (email: string, password: string): Promise<AuthUser | null> => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -132,20 +135,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
 
     if (data.user) {
-      const { data: userData } = await supabase
-        .from('users')
-        .select('role, subscription_tier')
-        .eq('id', data.user.id)
-        .single();
-
-      setUser({
+      // Get role from app_metadata (set during user creation)
+      const role = data.user.app_metadata?.role || data.user.user_metadata?.role || 'user';
+      const plan = data.user.app_metadata?.plan || 'free';
+      
+      const userData: AuthUser = {
         id: data.user.id,
         email: data.user.email || '',
-        role: userData?.role || 'user',
-        subscription_tier: userData?.subscription_tier || 'free',
-        user_metadata: data.user.user_metadata
-      });
+        role: role,
+        subscription_tier: plan,
+        user_metadata: {
+          ...data.user.user_metadata,
+          role: role
+        }
+      };
+
+      setUser(userData);
+      return userData;
     }
+    
+    return null;
   };
 
   const signOut = async () => {

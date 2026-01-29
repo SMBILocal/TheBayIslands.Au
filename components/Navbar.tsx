@@ -20,7 +20,7 @@ export default function Navbar(){
     <header className="site-header">
       <div className="container nav">
         <Link href="/" className="mobile-logo">
-          <Image src="/logo.png" alt="The Bay Islands" width={120} height={40} style={{height:'40px', width:'auto'}} priority />
+          <Image src="/logo.svg" alt="The Bay Islands" width={120} height={40} style={{height:'40px', width:'auto'}} priority />
         </Link>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>

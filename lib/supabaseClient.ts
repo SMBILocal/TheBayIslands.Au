@@ -14,7 +14,6 @@ export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
     storage: isBrowser ? window.localStorage : undefined,
     storageKey: 'thebayislands-auth',
     flowType: 'pkce',
-    lock: isBrowser,
   },
   global: {
     headers: {

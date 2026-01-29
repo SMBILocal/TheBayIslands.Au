@@ -19,6 +19,9 @@ export default function Navbar(){
   return (
     <header className="site-header">
       <div className="container nav">
+        <Link href="/" className="mobile-logo">
+          <Image src="/logo.png" alt="The Bay Islands" width={120} height={40} style={{height:'40px', width:'auto'}} priority />
+        </Link>
         <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>
@@ -222,6 +225,27 @@ export default function Navbar(){
           <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
             ⭐ Go Premium
           </Link>
+          
+          {/* Mobile Only: Auth & Radio Links */}
+          <div className="mobile-only-links">
+            <Link href="/radio" onClick={()=>setMenuOpen(false)} style={{ color: '#0066b3', fontWeight: '600' }}>
+              📻 Local Radio
+            </Link>
+            {!user ? (
+              <>
+                <Link href="/login" onClick={()=>setMenuOpen(false)} style={{ color: '#0066b3', fontWeight: '600' }}>
+                  🔐 Login
+                </Link>
+                <Link href="/signup" onClick={()=>setMenuOpen(false)} style={{ background: '#0066b3', color: 'white', fontWeight: '600', padding: '12px 20px', borderRadius: '8px', textAlign: 'center' }}>
+                  ✨ Sign Up Free
+                </Link>
+              </>
+            ) : (
+              <button onClick={handleLogout} style={{ background: '#dc2626', color: 'white', fontWeight: '600', padding: '12px 20px', borderRadius: '8px', textAlign: 'center', width: '100%', border: 'none', cursor: 'pointer' }}>
+                🚪 Logout
+              </button>
+            )}
+          </div>
         </nav>
       </div>
     </header>

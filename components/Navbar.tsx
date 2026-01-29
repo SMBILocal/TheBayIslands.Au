@@ -19,11 +19,6 @@ export default function Navbar(){
   return (
     <header className="site-header">
       <div className="container nav">
-        <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
         <nav className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
           <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           

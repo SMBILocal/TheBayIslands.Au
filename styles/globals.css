@@ -171,9 +171,8 @@ input,button,textarea,select{font:inherit}
     justify-content: flex-end;
   }
   
-  .hamburger{
-    display:flex;
-    margin-left: auto;
+  .site-header .hamburger {
+    display: none !important;
   }
   
   .nav-links{

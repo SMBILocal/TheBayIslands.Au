@@ -172,6 +172,80 @@ input,button,textarea,select{font:inherit}
   .user-menu-icon {
     display: flex !important;
   }
+
+  /* Position admin menu dropdown below header (same as hamburger menu) */
+  .user-menu-icon > div[style*="position: absolute"] {
+    position: fixed !important;
+    top: 70px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  }
+
+  /* Left align hamburger dropdown buttons with proper padding */
+  .nav-dropdown-toggle {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Hide radio from top bar on mobile portrait - it's now in UserMenu */
+  .radio-player-container {
+    display: none !important;
+  }
+
+  /* Increase logo size since radio is hidden */
+  .site-logo {
+    width: 160px;
+    height: 32px;
+  }
+  
+  .logo-text-the, .logo-text-bay, .logo-text-islands {
+    font-size: 22px;
+  }
+  
+  .logo-text-au {
+    font-size: 14px;
+  }
+
+  /* Left align dropdown menu items in mobile */
+  .nav-dropdown-menu a {
+    text-align: left !important;
+    padding-left: 20px !important;
+  }
+
+  /* Hide success stories carousel arrows on mobile portrait */
+  .carousel-arrow {
+    display: none !important;
+  }
+
+  /* Stack CTA buttons on mobile portrait */
+  [style*="display:flex"][style*="gap:'1rem'"][style*="justifyContent:'center'"] a,
+  [style*="display:flex"][style*="gap:'1rem'"][style*="justifyContent:'center'"] button {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    white-space: normal !important;
+  }
+
+  [style*="display:flex"][style*="gap:'1rem'"][style*="justifyContent:'center'"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  /* Stack CTA buttons on mobile portrait */
+  .cta-buttons-container {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .cta-buttons-container a {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    white-space: normal !important;
+  }
 }
 
 .nav{
@@ -180,6 +254,14 @@ input,button,textarea,select{font:inherit}
   justify-content:space-between;
   padding:14px 0;
   position:relative;
+}
+
+/* Success stories section padding for desktop/tablet */
+@media (min-width: 601px) {
+  section:has(> div > .carousel-with-arrows) {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
 }
 
 .brand{

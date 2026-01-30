@@ -124,6 +124,7 @@ function TestimonialsCarousel() {
             {/* Carousel Controls */}
             <button
               onClick={prevSlide}
+              className="carousel-arrow"
               style={{
                 position: 'absolute',
                 left: '-40px',
@@ -156,6 +157,7 @@ function TestimonialsCarousel() {
 
             <button
               onClick={nextSlide}
+              className="carousel-arrow"
               style={{
                 position: 'absolute',
                 right: '-40px',
@@ -1277,7 +1279,7 @@ export default function Home(){
             <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
-            <div style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'nowrap', minWidth:0}}>
+            <div className="cta-buttons-container" style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'nowrap', minWidth:0}}>
               <a
                 href="/signup"
                 style={{

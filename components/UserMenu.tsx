@@ -7,9 +7,11 @@ import { useRouter } from 'next/navigation';
 
 interface UserMenuProps {
   showIconOnly?: boolean;
+  isRadioPlaying?: boolean;
+  onRadioToggle?: () => void;
 }
 
-export default function UserMenu({ showIconOnly = false }: UserMenuProps = {}) {
+export default function UserMenu({ showIconOnly = false, isRadioPlaying = false, onRadioToggle = () => {} }: UserMenuProps = {}) {
   const { user, signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -115,12 +117,38 @@ export default function UserMenu({ showIconOnly = false }: UserMenuProps = {}) {
                   borderRadius: '6px',
                   textAlign: 'center',
                   transition: 'all 0.2s',
+                  marginBottom: '6px',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = '#005299'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = '#0066b3'; }}
               >
                 ✨ Sign Up
               </Link>
+
+              <button
+                onClick={() => {
+                  onRadioToggle();
+                  setIsOpen(false);
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '8px 12px',
+                  fontSize: '13px',
+                  fontWeight: '500',
+                  color: '#333',
+                  background: '#f8f9fa',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '6px',
+                  textAlign: 'center',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = '#eff6ff'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = '#f8f9fa'; }}
+              >
+                {isRadioPlaying ? '⏸ Stop Radio' : '📻 Listen 88.0 FM'}
+              </button>
             </div>
           )}
         </div>

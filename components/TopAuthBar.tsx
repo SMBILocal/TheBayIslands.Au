@@ -108,7 +108,7 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
         {/* Right side - UserMenu and hamburger */}
         <div className="auth-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
           {/* UserMenu - always rendered, but shows different content via CSS and props */}
-          <UserMenu showIconOnly={false} />
+          <UserMenu showIconOnly={false} isRadioPlaying={isPlaying} onRadioToggle={handleRadioToggle} />
 
           {/* Hamburger menu button - only on mobile portrait */}
           <button

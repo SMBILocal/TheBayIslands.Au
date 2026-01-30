@@ -41,6 +41,131 @@ input,button,textarea,select{font:inherit}
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
 }
 
+/* Top Auth Bar - Logo Responsive Sizing */
+.top-auth-bar {
+  /* Prevent layout shift by ensuring consistent dimensions */
+  will-change: auto;
+}
+
+.top-auth-bar-inner {
+  /* Static padding and gap for all breakpoints */
+  padding: 0 20px !important;
+  gap: 24px !important;
+  min-height: 32px !important;
+}
+
+.logo-link {
+  flex-shrink: 0 !important;
+}
+
+/* Logo SVG - responsive sizing with CSS */
+.site-logo {
+  width: 160px;
+  height: 32px;
+  /* Prevent hydration shifts by not changing dimensions */
+}
+
+/* Logo text styling - font sizes controlled via CSS not inline */
+.logo-text-the, .logo-text-bay, .logo-text-islands {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.logo-text-au {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Radio player - visible on all but mobile portrait */
+.radio-player-container {
+  display: flex !important;
+}
+
+.radio-button {
+  display: flex !important;
+}
+
+.radio-label {
+  display: flex !important;
+}
+
+/* UserMenu styling */
+.auth-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+/* UserMenu - show buttons by default, hide icon */
+.user-menu-buttons {
+  display: flex !important;
+}
+
+.user-menu-icon {
+  display: none !important;
+}
+
+/* Hamburger button - hidden by default, only show on mobile portrait */
+.hamburger-mobile-portrait {
+  display: none !important;
+}
+
+/* ===== MOBILE PORTRAIT: <= 600px AND PORTRAIT ORIENTATION ===== */
+@media (max-width: 600px) and (orientation: portrait) {
+  .site-logo {
+    width: 130px;
+    height: 26px;
+  }
+  
+  .logo-text-the, .logo-text-bay, .logo-text-islands {
+    font-size: 18px;
+  }
+  
+  .logo-text-au {
+    font-size: 12px;
+  }
+  
+  .top-auth-bar-inner {
+    padding: 0 12px !important;
+    gap: 8px !important;
+    min-height: 40px !important;
+  }
+  
+  /* Compact radio on mobile portrait */
+  .radio-player-container {
+    flex: 0 !important;
+  }
+  
+  .radio-label {
+    display: none !important;
+  }
+  
+  .radio-button {
+    gap: 2px !important;
+    padding: 4px 6px !important;
+    font-size: 11px !important;
+  }
+  
+  .radio-control {
+    font-size: 14px !important;
+  }
+  
+  /* Show hamburger menu on mobile portrait */
+  .hamburger-mobile-portrait {
+    display: flex !important;
+  }
+  
+  /* Show UserMenu as icon only on mobile portrait */
+  .user-menu-buttons {
+    display: none !important;
+  }
+  
+  .user-menu-icon {
+    display: flex !important;
+  }
+}
+
 .nav{
   display:flex;
   align-items:center;

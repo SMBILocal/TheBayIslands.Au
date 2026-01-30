@@ -13,11 +13,26 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
   const [internalMenuOpen, setInternalMenuOpen] = useState(false)
   const menuOpen = externalMenuOpen ?? internalMenuOpen;
   const setMenuOpen = externalSetMenuOpen ?? setInternalMenuOpen;
+  const navRef = React.useRef<HTMLDivElement>(null);
+  const hamburgerRef = React.useRef<HTMLButtonElement>(null);
   
   const [areasOpen, setAreasOpen] = useState(false)
   const [articlesOpen, setArticlesOpen] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)
   const { user, signOut } = useAuth()
+  
+  // Close menu when clicking outside (but not when clicking hamburger)
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (navRef.current && !navRef.current.contains(target) && 
+          hamburgerRef.current && !hamburgerRef.current.contains(target)) {
+        if (menuOpen) setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [menuOpen, setMenuOpen])
 
   const handleLogout = async () => {
     await signOut()
@@ -27,12 +42,12 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
   return (
     <header className="site-header">
       <div className="container nav">
-        <button className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+        <button ref={hamburgerRef} className="hamburger" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <nav className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
+        <nav ref={navRef} className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
           <Link href="/" onClick={()=>setMenuOpen(false)}>🏠 Home</Link>
           
           {/* Areas Dropdown */}
@@ -227,9 +242,29 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
           <Link href="/jobs" onClick={()=>setMenuOpen(false)}>💼 Jobs</Link>
           <Link href="/directory" onClick={()=>setMenuOpen(false)}>📍 Directory</Link>
           <Link href="/classifieds" onClick={()=>setMenuOpen(false)}>🛒 Buy & Sell</Link>
-          <Link href="/upgrade" onClick={()=>setMenuOpen(false)} style={{ color: '#c85a17', fontWeight: '600' }}>
+          <Link
+            href="/upgrade"
+            onClick={()=>setMenuOpen(false)}
+            className="desktop-go-premium-link"
+            style={{ color: '#c85a17', fontWeight: '600' }}
+          >
             ⭐ Go Premium
           </Link>
+
+          <div className="mobile-go-premium-cta">
+            <div>
+              <div style={{ fontWeight: 600, marginBottom: 6 }}>Need more visibility?</div>
+              <p style={{ margin: 0, color: '#7a3411', fontSize: '0.9em' }}>
+                Unlock featured placements, richer listings, and concierge support.
+              </p>
+            </div>
+            <Link
+              href="/upgrade"
+              onClick={()=>setMenuOpen(false)}
+            >
+              ⭐ Go Premium
+            </Link>
+          </div>
         </nav>
       </div>
     </header>

@@ -107,7 +107,7 @@ function TestimonialsCarousel() {
   );
 
   return (
-    <div>
+    <div className="carousel-with-arrows">
       {/* Desktop Grid View (1024px+) */}
       {isDesktop && (
         <div style={{ display: 'flex', gap: 'clamp(16px, 3vw, 24px)' }}>
@@ -1514,7 +1514,7 @@ export default function Home(){
       )}
 
       {/* Discover the Islands Section - Enhanced with SEO & Local Images */}
-      <section style={{padding:'clamp(50px, 10vw, 80px) 0', background:'white'}}>
+      <section className="discover-islands-section">
         <div className="container">
           <div style={{textAlign:'center', marginBottom:'clamp(40px, 8vw, 60px)'}}>
             <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:16}}>
@@ -2176,7 +2176,7 @@ export default function Home(){
       </section>
 
       {/* Success Stories / Testimonials */}
-      <section style={{padding:'clamp(50px, 10vw, 80px) 0', background:'white'}}>
+      <section className="success-stories-section">
         <div className="container">
           <div style={{textAlign:'center', marginBottom:'clamp(40px, 8vw, 60px)'}}>
             <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:16}}>

@@ -184,7 +184,8 @@ input,button,textarea,select{font:inherit}
     box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
   }
 
-  /* Left align hamburger dropdown buttons with proper padding */
+  /* Left align all nav buttons and links on mobile */
+  .nav-links a,
   .nav-dropdown-toggle {
     text-align: left !important;
     justify-content: flex-start !important;
@@ -248,6 +249,28 @@ input,button,textarea,select{font:inherit}
   }
 }
 
+/* ===== MOBILE LANDSCAPE: <= 600px HEIGHT AND LANDSCAPE ORIENTATION ===== */
+@media (max-height: 600px) and (orientation: landscape) {
+  /* Show hamburger in mobile landscape mode */
+  .hamburger-mobile-portrait {
+    display: flex !important;
+  }
+
+  /* Hide radio in landscape mode */
+  .radio-player-container {
+    display: none !important;
+  }
+
+  /* Keep buttons visible in landscape */
+  .user-menu-buttons {
+    display: flex !important;
+  }
+
+  .user-menu-icon {
+    display: none !important;
+  }
+}
+
 .nav{
   display:flex;
   align-items:center;
@@ -256,13 +279,6 @@ input,button,textarea,select{font:inherit}
   position:relative;
 }
 
-/* Success stories section padding for desktop/tablet */
-@media (min-width: 601px) {
-  section:has(> div > .carousel-with-arrows) {
-    padding-left: 40px !important;
-    padding-right: 40px !important;
-  }
-}
 
 .brand{
   display:flex;
@@ -346,6 +362,16 @@ input,button,textarea,select{font:inherit}
   color:var(--color-accent);
 }
 
+.desktop-go-premium-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.mobile-go-premium-cta{
+  display:none;
+}
+
 /* Hamburger Menu */
 .hamburger{
   display:none;
@@ -405,6 +431,46 @@ input,button,textarea,select{font:inherit}
   .nav-links a{
     width:100%;
   }
+
+  .nav-links .nav-dropdown{
+    width:100%;
+  }
+
+  .nav-links .nav-dropdown button{
+    width:100%;
+    justify-content:flex-start;
+    text-align:left;
+    padding:14px 20px;
+  }
+
+  .nav-links .nav-dropdown button span{
+    text-align:left;
+  }
+
+  .mobile-go-premium-cta{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:20px;
+    background:#fff7f2;
+    border-top:1px solid var(--color-border);
+    width:100%;
+  }
+
+  .mobile-go-premium-cta a{
+    background:#c85a17;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:10px;
+    font-weight:600;
+    text-align:center;
+    border:none;
+    display:block;
+  }
+
+  .desktop-go-premium-link{
+    display:none !important;
+  }
 }
 
 /* Hero Section */
@@ -440,6 +506,30 @@ input,button,textarea,select{font:inherit}
   padding:24px;
   border:1px solid var(--color-border);
   transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.success-stories-section{
+  background:#fff;
+  padding:clamp(50px, 10vw, 80px) clamp(20px, 6vw, 60px);
+}
+
+@media (max-width: 600px) and (orientation: portrait){
+  .success-stories-section{
+    padding:clamp(40px, 12vw, 60px) 0;
+  }
+}
+
+.carousel-with-arrows{
+  width:100%;
+}
+
+@media (min-width: 601px){
+  .success-stories-section .carousel-with-arrows{
+    max-width:960px;
+    margin:0 auto;
+    padding-left:clamp(24px, 5vw, 60px);
+    padding-right:clamp(24px, 5vw, 60px);
+  }
 }
 
 .card:hover{

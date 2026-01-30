@@ -89,6 +89,10 @@ input,button,textarea,select{font:inherit}
   display: flex !important;
 }
 
+.radio-label-mobile {
+  display: none !important;
+}
+
 /* UserMenu styling */
 .auth-controls {
   display: flex !important;
@@ -139,6 +143,10 @@ input,button,textarea,select{font:inherit}
   
   .radio-label {
     display: none !important;
+  }
+  
+  .radio-label-mobile {
+    display: flex !important;
   }
   
   .radio-button {
@@ -874,6 +882,12 @@ input,button,textarea,select{font:inherit}
   .modal-content{
     width:95%;
     padding:20px;
+  }
+
+  /* Hero section - remove outer spacing */
+  [style*="linear-gradient(135deg, rgba(0,102,179"] {
+    margin-top: -20px !important;
+    margin-bottom: 0 !important;
   }
 
   .form-group input,

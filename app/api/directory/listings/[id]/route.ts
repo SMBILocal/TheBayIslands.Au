@@ -38,6 +38,8 @@ const directoryListingUpdateSchema = z.object({
   hours: z.string().optional(),
   logo_url: z.string().optional(),
   images: z.array(z.string()).optional(),
+  image_urls: z.array(z.string()).optional(),
+  featured: z.boolean().optional(),
   status: z.enum(['pending', 'active', 'inactive', 'suspended']).optional(),
 });
 
@@ -85,10 +87,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
+    const { images, image_urls, ...rest } = validatedData as any;
+
     const { data, error } = await supabase
       .from('directory_listings')
       .update({
-        ...validatedData,
+        ...rest,
+        image_urls: image_urls || images || undefined,
         updated_at: new Date().toISOString()
       })
       .eq('id', params.id)

@@ -91,7 +91,7 @@ export default function DirectoryListingsPage() {
             </p>
           </div>
           {canCreate ? (
-            <Link href="/directory">
+            <Link href="/dashboard/directory/new">
               <button style={{
                 backgroundColor: '#0070f3',
                 color: 'white',
@@ -149,7 +149,7 @@ export default function DirectoryListingsPage() {
               You haven't created any directory listings yet.
             </p>
             {canCreate && (
-              <Link href="/directory">
+              <Link href="/dashboard/directory/new">
                 <button style={{
                   backgroundColor: '#0070f3',
                   color: 'white',
@@ -161,6 +161,47 @@ export default function DirectoryListingsPage() {
                   Create Your First Listing
                 </button>
               </Link>
+            )}
+            {user?.email === 'smbilocal@gmail.com' && (
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch('/api/directory/listings', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        business_name: 'SMBI Local - The Bay Islands .Au',
+                        description: 'The official local news and community portal for the Southern Moreton Bay Islands. Share updates, promote services, and connect with locals across SMBI.',
+                        category: 'Media & Community',
+                        location: 'Russell Island',
+                        address: 'Russell Island QLD 4184',
+                        phone: '0420 000 000',
+                        email: 'smbilocal@gmail.com',
+                        website: 'https://thebayislands.au',
+                        hours: 'Mon-Fri: 9am-5pm\nWeekend community updates as needed',
+                        image_urls: [],
+                        featured: true
+                      })
+                    });
+                    const json = await res.json();
+                    if (!res.ok) throw new Error(json.error || 'Failed to create SMBI Local listing');
+                    await fetchListings();
+                  } catch (err: any) {
+                    alert(err.message || 'Failed to create SMBI Local listing');
+                  }
+                }}
+                style={{
+                  marginTop: '16px',
+                  backgroundColor: '#10b981',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '4px',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                Create SMBI Local Featured Listing
+              </button>
             )}
           </div>
         ) : (

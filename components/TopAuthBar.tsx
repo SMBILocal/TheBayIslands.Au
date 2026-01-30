@@ -13,9 +13,15 @@ interface TopAuthBarProps {
 export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }: TopAuthBarProps = {}) {
   const { user, signOut } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
-  const [isPortrait, setIsPortrait] = useState(true);
+  const [isPortrait, setIsPortrait] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Set mounted on first client render to prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -62,7 +68,9 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
     }
   };
 
-  const showIconsOnly = isMobile && isPortrait;
+  // Prevent hydration mismatch by using default layout until mounted
+  const showIconsOnly = mounted && isMobile && isPortrait;
+  const effectiveIsMobile = mounted ? isMobile : false;
 
   return (
     <div
@@ -88,16 +96,16 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
       >
         {/* Logo on left */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-          <svg width={isMobile ? '130' : '160'} height={isMobile ? '26' : '32'} viewBox="0 0 160 32" style={{ display: 'block' }}>
-            <text x="0" y="24" fontSize={isMobile ? '18' : '20'} fontWeight="800" fill="#0066b3">the</text>
-            <text x="35" y="24" fontSize={isMobile ? '18' : '20'} fontWeight="800" fill="#c85a17">bay</text>
-            <text x="70" y="24" fontSize={isMobile ? '18' : '20'} fontWeight="800" fill="#0066b3">islands</text>
-            <text x="140" y="24" fontSize={isMobile ? '12' : '14'} fill="#64748b" fontWeight="600">.au</text>
+          <svg width={effectiveIsMobile ? '130' : '160'} height={effectiveIsMobile ? '26' : '32'} viewBox="0 0 160 32" style={{ display: 'block' }}>
+            <text x="0" y="24" fontSize={effectiveIsMobile ? '18' : '20'} fontWeight="800" fill="#0066b3">the</text>
+            <text x="35" y="24" fontSize={effectiveIsMobile ? '18' : '20'} fontWeight="800" fill="#c85a17">bay</text>
+            <text x="70" y="24" fontSize={effectiveIsMobile ? '18' : '20'} fontWeight="800" fill="#0066b3">islands</text>
+            <text x="140" y="24" fontSize={effectiveIsMobile ? '12' : '14'} fill="#64748b" fontWeight="600">.au</text>
           </svg>
         </Link>
 
         {/* Mobile: Show icons layout on portrait, hamburger + buttons on landscape */}
-        {isMobile ? (
+        {effectiveIsMobile ? (
           <div style={{
             display: 'flex',
             alignItems: 'center',

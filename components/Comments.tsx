@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useAuth } from '@/lib/AuthContext';
+import supabase from '@/lib/supabaseClient';
 
 interface Comment {
   id: string;
@@ -33,9 +33,9 @@ export default function Comments({ contentType, contentId, allowRating = false }
   const [submitting, setSubmitting] = useState(false);
   const [replyTo, setReplyTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState('');
+  const [isDemoContent, setIsDemoContent] = useState(false);
   
   const { user } = useAuth();
-  const supabase = createClientComponentClient();
 
   useEffect(() => {
     fetchComments();
@@ -43,6 +43,44 @@ export default function Comments({ contentType, contentId, allowRating = false }
 
   async function fetchComments() {
     setLoading(true);
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+    if (!uuidRegex.test(contentId)) {
+      setIsDemoContent(true);
+      setComments([
+        {
+          id: 'demo-1',
+          user_id: 'demo-user',
+          content: 'SMBI Local is proud to support our island community. Let us know what you’d like to see covered next!',
+          rating: allowRating ? 5 : undefined,
+          created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+          updated_at: new Date().toISOString(),
+          parent_id: null,
+          users: {
+            username: 'SMBI Local - The Bay Islands .Au',
+            avatar_url: undefined,
+          },
+          replies: [],
+        },
+        {
+          id: 'demo-2',
+          user_id: 'demo-user',
+          content: 'Thanks for the great feedback. We’re adding more local services and featured listings this week!',
+          created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+          updated_at: new Date().toISOString(),
+          parent_id: null,
+          users: {
+            username: 'SMBI Local - The Bay Islands .Au',
+            avatar_url: undefined,
+          },
+          replies: [],
+        },
+      ]);
+      setLoading(false);
+      return;
+    }
+
+    setIsDemoContent(false);
     const { data, error } = await supabase
       .from('comments')
       .select(`
@@ -87,6 +125,7 @@ export default function Comments({ contentType, contentId, allowRating = false }
   async function handleSubmitComment(e: React.FormEvent) {
     e.preventDefault();
     if (!user || !newComment.trim()) return;
+    if (isDemoContent) return;
 
     setSubmitting(true);
     const { error } = await supabase
@@ -113,6 +152,7 @@ export default function Comments({ contentType, contentId, allowRating = false }
 
   async function handleSubmitReply(parentId: string) {
     if (!user || !replyContent.trim()) return;
+    if (isDemoContent) return;
 
     setSubmitting(true);
     const { error } = await supabase
@@ -255,8 +295,14 @@ export default function Comments({ contentType, contentId, allowRating = false }
         Comments ({comments.reduce((acc, c) => acc + 1 + (c.replies?.length || 0), 0)})
       </h2>
 
+      {isDemoContent && (
+        <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+          This is demo content. To enable live comments, publish this item from your dashboard so it has a real UUID.
+        </div>
+      )}
+
       {/* Comment form */}
-      {user ? (
+      {user && !isDemoContent ? (
         <form onSubmit={handleSubmitComment} className="mb-8">
           <textarea
             value={newComment}
@@ -284,7 +330,11 @@ export default function Comments({ contentType, contentId, allowRating = false }
       ) : (
         <div className="mb-8 p-4 bg-gray-50 rounded-lg text-center">
           <p className="text-gray-600">
-            <a href="/login" className="text-blue-600 hover:underline">Sign in</a> to leave a comment
+            {isDemoContent ? 'Publish this item to enable comments.' : (
+              <>
+                <a href="/login" className="text-blue-600 hover:underline">Sign in</a> to leave a comment
+              </>
+            )}
           </p>
         </div>
       )}

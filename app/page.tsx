@@ -264,13 +264,13 @@ export default function Home(){
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    
+
     const params = new URLSearchParams();
     params.set('q', searchQuery);
     if (selectedCategory !== 'all') {
       params.set('category', selectedCategory);
     }
-    
+
     // Route to directory/search
     router.push(`/directory?${params.toString()}`);
   };
@@ -440,6 +440,201 @@ export default function Home(){
           </form>
         </div>
       </div>
+
+      {/* Popular Sections - Quick Links */}
+      <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'white'}}>
+        <div className="container">
+          <div style={{textAlign:'center', marginBottom:'clamp(32px, 6vw, 48px)'}}>
+            <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:12}}>
+              Explore Our Platform
+            </h2>
+            <p style={{color:'#666', fontSize:'clamp(1em, 2vw, 1.2em)'}}>
+              Everything you need for island life in one place
+            </p>
+          </div>
+          
+          <div className="quick-links-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(3, 1fr)',
+            gap:'clamp(16px, 3vw, 24px)'
+          }}>
+          <style jsx>{`
+            @media (max-width: 768px) {
+              .quick-links-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+              }
+            }
+          `}</style>
+            <a href="/articles" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>📰</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Articles</div>
+            </a>
+
+            <a href="/jobs" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>💼</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Jobs</div>
+            </a>
+
+            <a href="/events" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🎉</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Events</div>
+            </a>
+
+            <a href="/directory" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🏢</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Directory</div>
+            </a>
+
+            <a href="/classifieds" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🛒</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Classifieds</div>
+            </a>
+
+            <a href="/islands" style={{
+              textDecoration:'none',
+              background:'#f8f9fa',
+              padding:'clamp(20px, 4vw, 28px)',
+              borderRadius:12,
+              textAlign:'center',
+              transition:'all 0.3s',
+              border:'2px solid transparent',
+              cursor:'pointer',
+              display:'flex',
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+              e.currentTarget.style.borderColor = '#0066b3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'transparent';
+            }}>
+              <div style={{fontSize:'clamp(2em, 4vw, 2.5em)', marginBottom:8}}>🏝️</div>
+              <div style={{fontWeight:700, color:'#333', fontSize:'clamp(0.85em, 2vw, 1em)'}}>Island Guides</div>
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Quick Category Navigation Grid */}
       <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'#f8f9fa', margin:0}}>
@@ -746,17 +941,18 @@ export default function Home(){
             </p>
           </div>
 
-          <div style={{
+          <div className="location-grid" style={{
             display:'grid',
             gridTemplateColumns:'repeat(4, 1fr)',
-            gap:'clamp(16px, 3vw, 24px)',
-            '@media (max-width: 1024px)': {
-              gridTemplateColumns:'repeat(2, 1fr)'
-            },
-            '@media (max-width: 768px)': {
-              gridTemplateColumns:'1fr'
-            }
+            gap:'clamp(16px, 3vw, 24px)'
           }}>
+          <style jsx>{`
+            @media (max-width: 768px) {
+              .location-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+          `}</style>
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}
@@ -856,13 +1052,20 @@ export default function Home(){
           </div>
 
           {/* Quick Links Grid - One Row on Tablet Portrait */}
-          <div style={{
+          <div className="community-quick-links" style={{
             display:'grid',
             gridTemplateColumns:'repeat(6, 1fr)',
             gap:'clamp(12px, 2vw, 16px)',
             maxWidth:'1000px',
             margin:'0 auto'
           }}>
+          <style jsx>{`
+            @media (max-width: 768px) {
+              .community-quick-links {
+                grid-template-columns: repeat(3, 1fr) !important;
+              }
+            }
+          `}</style>
             <a href="/news" style={{
               background:'#f8f9fa',
               padding:'clamp(16px, 3vw, 20px)',
@@ -1609,66 +1812,6 @@ export default function Home(){
         </div>
       </section>
 
-      <section style={{padding:'24px 0'}}>
-        <div className="container">
-          <h2>Popular sections</h2>
-          <div className="grid" style={{marginTop:12}}>
-            <a href="/articles" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-               }}
-            >
-              <h3>📰 Articles</h3>
-              <p className="muted">Local news and guides for SMBI residents and visitors.</p>
-            </a>
-            <a href="/jobs" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-               }}
-            >
-              <h3>💼 Jobs</h3>
-              <p className="muted">Jobs in hospitality, retail and services across the islands.</p>
-            </a>
-            <a href="/events" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-               }}
-            >
-              <h3>🎉 Events</h3>
-              <p className="muted">Community events, markets, and island gatherings.</p>
-            </a>
-            <a href="/classifieds" className="card" style={{textDecoration: 'none', color: 'inherit', cursor: 'pointer', transition:'all 0.3s'}}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.transform = 'translateY(-4px)';
-                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.transform = 'translateY(0)';
-                 e.currentTarget.style.boxShadow = '';
-               }}
-            >
-              <h3>🛒 Buy & Sell</h3>
-              <p className="muted">Classifieds marketplace for furniture, boats, cars and more.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Content Section */}
       <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'#fff'}}>
         <div className="container">
@@ -1714,97 +1857,169 @@ export default function Home(){
             color:'white',
             textAlign:'center'
           }}>
-          <h2 style={{color:'white', marginBottom:16, fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800}}>Ready to Explore Island Living?</h2>
-          <p style={{opacity:0.95, marginBottom:40, maxWidth:700, marginLeft:'auto', marginRight:'auto', fontSize:'clamp(1em, 2vw, 1.2em)'}}>
-            Browse properties, find your dream job, connect with local businesses, and discover what makes our island community special
-          </p>
-          
-          <div style={{display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap', maxWidth:800, margin:'0 auto'}}>
-            <a 
-              href="/directory" 
-              style={{
-                background:'white', 
-                color:'#0066b3', 
-                padding:'16px 32px', 
-                borderRadius:12, 
-                textDecoration:'none', 
-                fontWeight:700, 
-                cursor:'pointer', 
-                minHeight:'52px', 
-                display:'flex', 
-                alignItems:'center',
-                fontSize:'clamp(0.95em, 2vw, 1.1em)',
-                boxShadow:'0 4px 16px rgba(0,0,0,0.2)',
-                transition:'all 0.3s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,0,0,0.3)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)';
-              }}
-            >
-              🏢 Explore Businesses
-            </a>
-            <a 
-              href="/classifieds" 
-              style={{
-                background:'rgba(255,255,255,0.15)', 
-                color:'white', 
-                padding:'16px 32px', 
-                borderRadius:12, 
-                textDecoration:'none', 
-                fontWeight:700, 
-                border:'2px solid white', 
-                cursor:'pointer', 
-                minHeight:'52px', 
-                display:'flex', 
-                alignItems:'center',
-                fontSize:'clamp(0.95em, 2vw, 1.1em)',
-                transition:'all 0.3s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'white';
-                e.currentTarget.style.color = '#0066b3';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                e.currentTarget.style.color = 'white';
-              }}
-            >
-              🏘️ View Properties
-            </a>
-            <a 
-              href="/jobs" 
-              style={{
-                background:'rgba(255,255,255,0.15)', 
-                color:'white', 
-                padding:'16px 32px', 
-                borderRadius:12, 
-                textDecoration:'none', 
-                fontWeight:700, 
-                border:'2px solid white', 
-                cursor:'pointer', 
-                minHeight:'52px', 
-                display:'flex', 
-                alignItems:'center',
-                fontSize:'clamp(0.95em, 2vw, 1.1em)',
-                transition:'all 0.3s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'white';
-                e.currentTarget.style.color = '#0066b3';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                e.currentTarget.style.color = 'white';
-              }}
-            >
-              💼 Browse Jobs
-            </a>
+            <h2 style={{color:'white', marginBottom:16, fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800}}>Ready to Explore Island Living?</h2>
+            <p style={{opacity:0.95, marginBottom:40, maxWidth:700, marginLeft:'auto', marginRight:'auto', fontSize:'clamp(1em, 2vw, 1.2em)'}}>
+              Browse properties, find your dream job, connect with local businesses, and discover what makes our island community special
+            </p>
+            
+            <div style={{display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap', maxWidth:800, margin:'0 auto'}}>
+              <a 
+                href="/directory" 
+                style={{
+                  background:'white', 
+                  color:'#0066b3', 
+                  padding:'16px 32px', 
+                  borderRadius:12, 
+                  textDecoration:'none', 
+                  fontWeight:700, 
+                  cursor:'pointer', 
+                  minHeight:'52px', 
+                  display:'flex', 
+                  alignItems:'center',
+                  fontSize:'clamp(0.95em, 2vw, 1.1em)',
+                  boxShadow:'0 4px 16px rgba(0,0,0,0.2)',
+                  transition:'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                  e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)';
+                }}
+              >
+                🏢 Explore Businesses
+              </a>
+              <a 
+                href="/classifieds" 
+                style={{
+                  background:'rgba(255,255,255,0.15)', 
+                  color:'white', 
+                  padding:'16px 32px', 
+                  borderRadius:12, 
+                  textDecoration:'none', 
+                  fontWeight:700, 
+                  border:'2px solid white', 
+                  cursor:'pointer', 
+                  minHeight:'52px', 
+                  display:'flex', 
+                  alignItems:'center',
+                  fontSize:'clamp(0.95em, 2vw, 1.1em)',
+                  transition:'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.color = '#0066b3';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.color = 'white';
+                }}
+              >
+                🏘️ View Properties
+              </a>
+              <a 
+                href="/jobs" 
+                style={{
+                  background:'rgba(255,255,255,0.15)', 
+                  color:'white', 
+                  padding:'16px 32px', 
+                  borderRadius:12, 
+                  textDecoration:'none', 
+                  fontWeight:700, 
+                  border:'2px solid white', 
+                  cursor:'pointer', 
+                  minHeight:'52px', 
+                  display:'flex', 
+                  alignItems:'center',
+                  fontSize:'clamp(0.95em, 2vw, 1.1em)',
+                  transition:'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.color = '#0066b3';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.color = 'white';
+                }}
+              >
+                💼 Browse Jobs
+              </a>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Featured Local Services */}
+      <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'#f8fafc'}}>
+        <div className="container">
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, marginBottom:32}}>
+            <div>
+              <h2 style={{marginBottom:8}}>Featured Local Services</h2>
+              <p className="muted" style={{margin:0}}>Trusted island essentials, services, and community facilities.</p>
+            </div>
+            <a href="/upgrade" style={{color:'#0066b3', fontWeight:600, textDecoration:'none'}}>Feature your business →</a>
+          </div>
+
+          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:'16px'}}>
+            {[
+              {
+                icon: '⛴️',
+                title: 'Sealink Ferry Service',
+                description: 'Daily passenger & vehicle ferry service to Southern Moreton Bay Islands. Check timetables and book online.',
+                cta: 'View Details →',
+                href: '/directory/sealink-ferry'
+              },
+              {
+                icon: '🏥',
+                title: 'Redland Hospital',
+                description: 'Emergency & healthcare in Cleveland',
+                cta: 'View →',
+                href: '/directory/redland-hospital'
+              },
+              {
+                icon: '🚨',
+                title: 'Emergency Services',
+                description: 'Dial 000 for Police, Fire, Ambulance',
+                cta: 'Learn More →',
+                href: '/directory/emergency-services'
+              },
+              {
+                icon: '🎳',
+                title: 'Russell Bowls Club',
+                description: 'Bistro, barefoot bowls & events',
+                cta: 'Visit →',
+                href: '/directory/russell-bowls-club'
+              },
+              {
+                icon: '🏫',
+                title: 'Russell Island School',
+                description: 'Local primary education',
+                cta: 'Learn More →',
+                href: '/directory/russell-island-school'
+              }
+            ].map((service) => (
+              <a key={service.title} href={service.href} style={{textDecoration:'none', color:'inherit'}}>
+                <div style={{
+                  background:'white',
+                  border:'1px solid #e2e8f0',
+                  borderRadius:12,
+                  padding:'18px',
+                  height:'100%',
+                  display:'flex',
+                  flexDirection:'column',
+                  gap:8,
+                  boxShadow:'0 1px 3px rgba(0,0,0,0.08)'
+                }}>
+                  <div style={{fontSize:'2rem'}}>{service.icon}</div>
+                  <h3 style={{margin:'0 0 4px 0'}}>{service.title}</h3>
+                  <p className="muted" style={{margin:0, flex:1}}>{service.description}</p>
+                  <span style={{color:'#0066b3', fontWeight:600}}>{service.cta}</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FormModal from '@/components/FormModal';
+import Comments from '@/components/Comments';
 
 interface Job {
   id: string;
@@ -157,6 +158,10 @@ export default function JobDetail({ params }: { params: { id: string } }) {
             <button style={{ width: '100%', padding: '12px', background: 'white', color: '#667eea', border: '2px solid #667eea', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', fontSize: 'clamp(0.95em, 1.5vw, 16px)', minHeight: '44px', boxSizing: 'border-box' }}>Share Job</button>
             <button style={{ width: '100%', padding: '12px', background: 'white', color: '#667eea', border: '2px solid #667eea', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', fontSize: 'clamp(0.95em, 1.5vw, 16px)', minHeight: '44px', boxSizing: 'border-box' }}>Save Job</button>
           </div>
+        </div>
+
+        <div style={{ marginTop: 40 }}>
+          <Comments contentType="job" contentId={job.id} />
         </div>
       </div>
     </main>

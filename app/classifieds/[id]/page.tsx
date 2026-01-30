@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FormModal from '@/components/FormModal';
+import Comments from '@/components/Comments';
 
 interface Classified {
   id: string;
@@ -171,6 +172,10 @@ export default function ClassifiedDetail({ params }: { params: { id: string } })
             </div>
           </div>
         </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 20px 60px' }}>
+        <Comments contentType="classified" contentId={item.id} />
       </div>
     </main>
   );

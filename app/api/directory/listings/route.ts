@@ -8,7 +8,7 @@ async function getSupabaseServer() {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || '',
     {
       cookies: {
         getAll() {
@@ -37,7 +37,9 @@ const directoryListingCreateSchema = z.object({
   email: z.string().email().optional(),
   website: z.string().url().optional(),
   hours: z.string().optional(),
+  logo_url: z.string().optional(),
   image_urls: z.array(z.string()).optional(),
+  featured: z.boolean().optional(),
 });
 
 export async function GET(request: NextRequest) {
@@ -87,6 +89,7 @@ export async function POST(request: NextRequest) {
           status: 'pending',
           moderation_status: 'pending',
           approval_status: 'pending',
+          featured: validatedData.featured || false,
           expires_at: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
         }
       ])

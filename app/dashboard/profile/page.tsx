@@ -9,6 +9,7 @@ interface UserProfile {
   id: string;
   email: string;
   username?: string;
+  full_name?: string;
   avatar_url?: string;
   bio?: string;
   is_premium: boolean;
@@ -21,8 +22,10 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+  const [profileSource, setProfileSource] = useState<'users' | 'user_profiles'>('users');
   const [formData, setFormData] = useState({
     username: '',
+    full_name: '',
     bio: '',
     avatar_url: ''
   });
@@ -43,19 +46,82 @@ export default function ProfilePage() {
   const fetchProfile = async () => {
     try {
       setLoading(true);
-      const { data, error: fetchError } = await supabase
+      const { data: usersData, error: usersError } = await supabase
         .from('users')
         .select('*')
         .eq('id', user?.id)
         .single();
 
-      if (fetchError) throw fetchError;
+      if (!usersError && usersData) {
+        setProfileSource('users');
+        setProfile(usersData as UserProfile);
+        setFormData({
+          username: usersData.username || '',
+          full_name: usersData.username || '',
+          bio: usersData.bio || '',
+          avatar_url: usersData.avatar_url || ''
+        });
+        return;
+      }
 
-      setProfile(data);
+      const usersTableMissing = usersError?.message?.includes("Could not find the table 'public.users'");
+
+      if (!usersTableMissing && usersError) {
+        throw usersError;
+      }
+
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .or(`auth_user_id.eq.${user?.id},user_id.eq.${user?.id}`)
+        .limit(1)
+        .maybeSingle();
+
+      if (profilesError) throw profilesError;
+
+      if (!profilesData) {
+        const { data: createdProfile, error: createError } = await supabase
+          .from('user_profiles')
+          .insert([
+            {
+              auth_user_id: user?.id,
+              user_id: user?.id,
+              email: user?.email,
+              full_name: user?.email || 'SMBI Local - The Bay Islands .Au'
+            }
+          ])
+          .select()
+          .single();
+
+        if (createError) throw createError;
+
+        setProfileSource('user_profiles');
+        setProfile(createdProfile as UserProfile);
+        setFormData({
+          username: createdProfile.full_name || '',
+          full_name: createdProfile.full_name || '',
+          bio: createdProfile.bio || '',
+          avatar_url: createdProfile.avatar_url || ''
+        });
+        return;
+      }
+
+      setProfileSource('user_profiles');
+      setProfile({
+        id: profilesData.id || user?.id || '',
+        email: profilesData.email || user?.email || '',
+        username: profilesData.full_name || profilesData.username || '',
+        full_name: profilesData.full_name || profilesData.username || '',
+        avatar_url: profilesData.avatar_url || '',
+        bio: profilesData.bio || '',
+        is_premium: Boolean(profilesData.is_premium),
+        created_at: profilesData.created_at || undefined
+      });
       setFormData({
-        username: data.username || '',
-        bio: data.bio || '',
-        avatar_url: data.avatar_url || ''
+        username: profilesData.full_name || profilesData.username || '',
+        full_name: profilesData.full_name || profilesData.username || '',
+        bio: profilesData.bio || '',
+        avatar_url: profilesData.avatar_url || ''
       });
     } catch (err: any) {
       setError(err.message || 'Failed to load profile');
@@ -70,15 +136,20 @@ export default function ProfilePage() {
     setSuccess('');
 
     try {
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({
-          username: formData.username,
-          bio: formData.bio,
-          avatar_url: formData.avatar_url,
-          updated_at: new Date()
-        })
-        .eq('id', user?.id);
+      const updateQuery = profileSource === 'users'
+        ? supabase.from('users').update({
+            username: formData.username,
+            bio: formData.bio,
+            avatar_url: formData.avatar_url,
+            updated_at: new Date()
+          }).eq('id', user?.id)
+        : supabase.from('user_profiles').update({
+            full_name: formData.full_name,
+            avatar_url: formData.avatar_url,
+            updated_at: new Date()
+          }).or(`auth_user_id.eq.${user?.id},user_id.eq.${user?.id}`);
+
+      const { error: updateError } = await updateQuery;
 
       if (updateError) throw updateError;
 
@@ -152,6 +223,24 @@ export default function ProfilePage() {
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '20px' }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                  Display Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.full_name}
+                  onChange={(e) => setFormData({ ...formData, full_name: e.target.value, username: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    borderRadius: '4px',
+                    border: '1px solid #ddd',
+                    boxSizing: 'border-box'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
                   Username
                 </label>
                 <input
@@ -221,6 +310,15 @@ export default function ProfilePage() {
             <>
               <div style={{ marginBottom: '20px' }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                  Display Name
+                </label>
+                <p style={{ margin: 0, color: '#666' }}>
+                  {profile.full_name || profile.username || '(Not set)'}
+                </p>
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
                   Username
                 </label>
                 <p style={{ margin: 0, color: '#666' }}>
@@ -275,6 +373,50 @@ export default function ProfilePage() {
             <li>Account status: Active</li>
             <li>Email verified: Yes</li>
           </ul>
+        </div>
+
+        <div style={{
+          backgroundColor: '#fff',
+          padding: '24px',
+          borderRadius: '8px',
+          border: '1px solid #e5e7eb'
+        }}>
+          <h2 style={{ marginTop: 0 }}>Manage My Content</h2>
+          <p style={{ color: '#666', marginBottom: '16px' }}>
+            Create, edit, and manage your articles and business listings.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+            <a href="/dashboard/articles" style={{
+              background: '#0070f3',
+              color: 'white',
+              padding: '10px 18px',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              fontWeight: 600
+            }}>
+              Manage Articles
+            </a>
+            <a href="/dashboard/directory" style={{
+              background: '#0ea5e9',
+              color: 'white',
+              padding: '10px 18px',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              fontWeight: 600
+            }}>
+              Manage Business Listings
+            </a>
+            <a href="/dashboard/listings" style={{
+              background: '#f59e0b',
+              color: 'white',
+              padding: '10px 18px',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              fontWeight: 600
+            }}>
+              Manage All Listings
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Comments from '@/components/Comments';
 
 interface Article {
   id: string;
+  slug?: string;
   title: string;
   excerpt: string;
   content: string;
@@ -24,7 +26,7 @@ export default function ArticleDetail({ params }: { params: { id: string } }) {
         const res = await fetch('/api/articles', { cache: 'no-store' });
         const json = await res.json();
         const articles = Array.isArray(json) ? json : (json.data || []);
-        const found = articles.find((a: any) => String(a.id) === String(params.id));
+        const found = articles.find((a: any) => String(a.id) === String(params.id) || String(a.slug) === String(params.id));
         setArticle(found || null);
         setLoading(false);
       } catch {
@@ -104,6 +106,10 @@ export default function ArticleDetail({ params }: { params: { id: string } }) {
             </div>
           </div>
         </article>
+
+        <div style={{ marginTop: 40 }}>
+          <Comments contentType="article" contentId={article.id} />
+        </div>
 
         <div style={{ marginTop: 40, textAlign: 'center' }}>
           <a href="/articles" style={{ display: 'inline-block', padding: '12px 24px', background: '#6366f1', color: 'white', borderRadius: 8, textDecoration: 'none', fontWeight: 600, cursor: 'pointer' }}>← Back to All Articles</a>

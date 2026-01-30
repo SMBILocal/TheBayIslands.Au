@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FormModal from '@/components/FormModal';
+import Comments from '@/components/Comments';
 
 interface Event {
   id: string;
@@ -150,6 +151,10 @@ export default function EventDetail({ params }: { params: { id: string } }) {
 
           <button style={{ width: '100%', padding: 12, background: 'white', color: '#ec4899', border: '2px solid #ec4899', borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>Share Event</button>
         </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 20px 60px' }}>
+        <Comments contentType="event" contentId={event.id} />
       </div>
     </main>
   );

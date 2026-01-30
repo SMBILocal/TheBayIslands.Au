@@ -97,6 +97,42 @@ export default function UserDashboard() {
             </div>
           </Link>
 
+          {/* Articles */}
+          <Link href="/dashboard/articles" style={{ textDecoration: 'none' }}>
+            <div style={{
+              padding: '20px',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+            >
+              <h3>My Articles</h3>
+              <p>Create and manage your articles</p>
+              <span style={{ color: '#0070f3' }}>Manage →</span>
+            </div>
+          </Link>
+
+          {/* Business Profile */}
+          <Link href="/dashboard/directory" style={{ textDecoration: 'none' }}>
+            <div style={{
+              padding: '20px',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+            >
+              <h3>Business Profile</h3>
+              <p>Manage your featured listing</p>
+              <span style={{ color: '#0070f3' }}>Manage →</span>
+            </div>
+          </Link>
+
           {/* Jobs Posted */}
           <Link href="/dashboard/jobs" style={{ textDecoration: 'none' }}>
             <div style={{

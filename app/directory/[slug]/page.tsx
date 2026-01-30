@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/AuthContext';
 import ReviewList from '@/components/ReviewList';
 import ReviewForm from '@/components/ReviewForm';
+import Comments from '@/components/Comments';
 
 interface Business {
   id: string;
@@ -202,6 +203,10 @@ export default function BusinessDetail({ params }: { params: { slug: string } })
         )}
 
         <ReviewList listingId={business.id} refreshTrigger={reviewRefresh} />
+      </div>
+
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 20px 60px' }}>
+        <Comments contentType="directory" contentId={business.id} allowRating />
       </div>
     </main>
   );

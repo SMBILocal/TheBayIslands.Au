@@ -1,18 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface Article {
   id: string;
+  slug?: string;
   title: string;
   excerpt: string;
   category: string;
   icon: string;
   url: string;
+  author?: string;
+  created_at?: string;
 }
 
-const articles: Article[] = [
+const fallbackArticles: Article[] = [
   {
     id: 'quandamooka-country',
     title: 'Quandamooka Country',
@@ -106,7 +109,35 @@ const articles: Article[] = [
 const categories = ['All', 'Culture & Heritage', 'Business & Services', 'Tourism & Recreation', 'Food & Dining', 'Sports & Recreation', 'Transport', 'Education', 'Services', 'Events']
 
 export default function ArticlesPage() {
+  const [articles, setArticles] = useState<Article[]>(fallbackArticles);
   const [selectedCategory, setSelectedCategory] = useState('All')
+
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        const res = await fetch('/api/articles', { cache: 'no-store' });
+        const json = await res.json();
+        const data = Array.isArray(json) ? json : (json.data || []);
+
+        if (data.length > 0) {
+          setArticles(data.map((article: any) => ({
+            id: article.id,
+            slug: article.slug,
+            title: article.title,
+            excerpt: article.excerpt || article.content?.slice(0, 160) || '',
+            category: article.category || 'News',
+            icon: '📰',
+            url: `/articles/${article.slug || article.id}`,
+            author: article.author,
+            created_at: article.created_at
+          })));
+        }
+      } catch {
+        setArticles(fallbackArticles);
+      }
+    }
+    fetchArticles();
+  }, []);
   
   const filteredArticles = selectedCategory === 'All' 
     ? articles 

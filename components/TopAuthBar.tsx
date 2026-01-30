@@ -94,7 +94,7 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
             title="Click to listen to Bay Islands Radio 88.0 FM"
           >
             <span className="radio-label" style={{ display: 'flex', alignItems: 'center', gap: '4px', transform: 'translateY(2px)' }}>
-              📻 88.0
+              📻 Bay Islands Radio 88.0
             </span>
             <span className="radio-control" style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '1px' }}>
               {isPlaying ? '⏸' : '▶'}

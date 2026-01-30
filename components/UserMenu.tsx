@@ -263,7 +263,7 @@ export default function UserMenu({ showIconOnly = false }: UserMenuProps = {}) {
       </div>
 
       {/* Button version - shown by default, hidden on mobile portrait via CSS */}
-      <div style={{ position: 'relative' }} className="user-menu-buttons">
+      <div ref={menuRef} style={{ position: 'relative' }} className="user-menu-buttons">
         <button
           onClick={() => setIsOpen(!isOpen)}
           style={{

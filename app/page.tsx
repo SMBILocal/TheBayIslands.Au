@@ -287,8 +287,14 @@ export default function Home(){
         justifyContent: 'center',
         color: 'white',
         textAlign: 'center',
-        padding: '40px 20px',
-        margin: 0
+        padding: '40px',
+        margin: '0',
+        width: '100vw',
+        position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw'
       }}>
         <div style={{ maxWidth: '900px', width: '100%' }}>
           <h1 style={{ fontSize: 'clamp(2em, 5vw, 3.5em)', margin: '0 0 20px 0', fontWeight: 800 }}>Welcome to the Bay Islands Hub</h1>

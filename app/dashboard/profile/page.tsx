@@ -86,7 +86,8 @@ export default function ProfilePage() {
       });
     } catch (err) {
       console.error('Error fetching profile:', err);
-      setError('Failed to load profile');
+      // Don't show error if it's just that the profile doesn't exist yet
+      // This is normal for new users
     } finally {
       setLoading(false);
     }

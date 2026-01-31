@@ -210,14 +210,8 @@ input,button,textarea,select{font:inherit}
     justify-content: flex-start !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-  }
-
-  .nav-links a,
-  .nav-dropdown-toggle,
-  .nav-dropdown-menu a {
-    font-size: 16px !important;
-    line-height: 1.45 !important;
-    font-weight: 600 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
   }
 
   /* Hide radio from top bar on mobile portrait - it's now in UserMenu */
@@ -243,6 +237,8 @@ input,button,textarea,select{font:inherit}
   .nav-dropdown-menu a {
     text-align: left !important;
     padding-left: 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
   }
 
   /* Hide success stories carousel arrows on mobile portrait */
@@ -273,6 +269,77 @@ input,button,textarea,select{font:inherit}
     flex: 1 1 100% !important;
     width: 100% !important;
     white-space: normal !important;
+  }
+}
+
+/* ===== MOBILE LANDSCAPE: <= 600px HEIGHT AND LANDSCAPE ORIENTATION ===== */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hamburger-mobile-portrait {
+    display: none !important;
+  }
+
+  /* Hide radio in landscape mode */
+  .radio-player-container {
+    display: none !important;
+  }
+
+  /* Keep buttons visible in landscape */
+  .user-menu-buttons {
+    display: flex !important;
+  }
+
+  .user-menu-icon {
+    display: none !important;
+  }
+
+  .nav-links {
+    position: static !important;
+    background: transparent !important;
+    flex-direction: row !important;
+    width: auto !important;
+    margin-left: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    gap: 2px !important;
+  }
+
+  .nav-links.open{
+    max-height: none !important;
+  }
+
+  .nav-links > a{
+    width: auto !important;
+    padding: 10px 10px !important;
+    border: none !important;
+  }
+
+  .nav-dropdown{
+    width: auto !important;
+  }
+
+  .nav-dropdown-toggle{
+    width: auto !important;
+    justify-content: center !important;
+    padding: 8px 10px !important;
+    border: none !important;
+    border-radius: 8px !important;
+  }
+
+  .nav-dropdown-menu{
+    position: absolute !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    max-height: 300px !important;
+    padding: 12px 0 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu-cta{
+    display: none !important;
   }
 }
 
@@ -578,11 +645,11 @@ input,button,textarea,select{font:inherit}
     margin:0;
   }
 
-    .nav-dropdown-menu a{
-      border-bottom:1px solid var(--color-border);
-      padding:16px 22px;
-      font-size:16px;
-    }
+  .nav-dropdown-menu a{
+    border-bottom:1px solid var(--color-border);
+    padding:14px 20px;
+    font-size:14px;
+  }
 
   .nav-dropdown-menu a:last-child{
     border-bottom:none;

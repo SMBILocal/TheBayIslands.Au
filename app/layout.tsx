@@ -23,7 +23,7 @@ export default function RootLayout({children}: {children: ReactNode}){
       <body>
         <AuthProvider>
           <HeaderWrapper />
-          <main className="container" style={{paddingTop:20}}>
+          <main className="container" style={{paddingTop:0, paddingLeft:0, paddingRight:0}}>
             {children}
           </main>
           <Footer />

@@ -289,8 +289,9 @@ export default function Home(){
         justifyContent: 'center',
         color: 'white',
         textAlign: 'center',
-        padding: '40px',
+        padding: '40px 40px',
         margin: '0',
+        marginTop: '0',
         width: '100vw',
         position: 'relative',
         left: '50%',
@@ -1276,10 +1277,10 @@ export default function Home(){
             <h2 style={{fontSize:'clamp(1.75rem, 4vw, 2.25rem)', fontWeight:700, marginBottom:'1rem', color:'white'}}>
               Ready to Join Our Community?
             </h2>
-            <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95}}>
+            <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95, paddingLeft:'0', paddingRight:'0'}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
-            <div className="cta-buttons-container" style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'nowrap', minWidth:0}}>
+            <div className="cta-buttons-container" style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap', maxWidth:'800px', margin:'0 auto', '@media (max-width: 768px)': {flexDirection: 'column'}}}>
               <a
                 href="/signup"
                 style={{
@@ -1290,14 +1291,15 @@ export default function Home(){
                   borderRadius:'8px',
                   fontWeight:600,
                   fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
-                  display:'inline-flex',
+                  display:'flex',
                   alignItems:'center',
+                  justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
                   boxShadow:'0 4px 12px rgba(0,0,0,0.15)',
                   flex:'1 1 auto',
-                  minWidth:0,
-                  whiteSpace:'nowrap'
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
@@ -1321,13 +1323,14 @@ export default function Home(){
                   borderRadius:'8px',
                   fontWeight:600,
                   fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
-                  display:'inline-flex',
+                  display:'flex',
                   alignItems:'center',
+                  justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
                   flex:'1 1 auto',
-                  minWidth:0,
-                  whiteSpace:'nowrap'
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -1351,13 +1354,14 @@ export default function Home(){
                   borderRadius:'8px',
                   fontWeight:600,
                   fontSize:'clamp(0.85rem, 2vw, 1.125rem)',
-                  display:'inline-flex',
+                  display:'flex',
                   alignItems:'center',
+                  justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
                   flex:'1 1 auto',
-                  minWidth:0,
-                  whiteSpace:'nowrap'
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -1866,11 +1870,11 @@ export default function Home(){
             textAlign:'center'
           }}>
             <h2 style={{color:'white', marginBottom:16, fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800}}>Ready to Explore Island Living?</h2>
-            <p style={{opacity:0.95, marginBottom:40, maxWidth:700, marginLeft:'auto', marginRight:'auto', fontSize:'clamp(1em, 2vw, 1.2em)'}}>
+            <p style={{opacity:0.95, marginBottom:40, maxWidth:700, marginLeft:'auto', marginRight:'auto', fontSize:'clamp(1em, 2vw, 1.2em)', paddingLeft:'0', paddingRight:'0'}}>
               Browse properties, find your dream job, connect with local businesses, and discover what makes our island community special
             </p>
             
-            <div style={{display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap', maxWidth:800, margin:'0 auto'}}>
+            <div style={{display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap', maxWidth:'100%', margin:'0 auto'}}>
               <a 
                 href="/directory" 
                 style={{
@@ -1884,9 +1888,13 @@ export default function Home(){
                   minHeight:'52px', 
                   display:'flex', 
                   alignItems:'center',
+                  justifyContent:'center',
                   fontSize:'clamp(0.95em, 2vw, 1.1em)',
                   boxShadow:'0 4px 16px rgba(0,0,0,0.2)',
-                  transition:'all 0.3s'
+                  transition:'all 0.3s',
+                  flex:'1 1 auto',
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-3px)';
@@ -1913,8 +1921,12 @@ export default function Home(){
                   minHeight:'52px', 
                   display:'flex', 
                   alignItems:'center',
+                  justifyContent:'center',
                   fontSize:'clamp(0.95em, 2vw, 1.1em)',
-                  transition:'all 0.3s'
+                  transition:'all 0.3s',
+                  flex:'1 1 auto',
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'white';
@@ -1941,8 +1953,12 @@ export default function Home(){
                   minHeight:'52px', 
                   display:'flex', 
                   alignItems:'center',
+                  justifyContent:'center',
                   fontSize:'clamp(0.95em, 2vw, 1.1em)',
-                  transition:'all 0.3s'
+                  transition:'all 0.3s',
+                  flex:'1 1 auto',
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'white';
@@ -2325,46 +2341,60 @@ export default function Home(){
             <h2 style={{fontSize:'clamp(1.75em, 4vw, 2.5em)', fontWeight:800, marginBottom:16, color:'white'}}>
               Are You a Local Business Owner?
             </h2>
-            <p style={{fontSize:'clamp(1em, 2vw, 1.2em)', opacity:0.95, marginBottom:32, maxWidth:700, margin:'0 auto 32px'}}>
+            <p style={{fontSize:'clamp(1em, 2vw, 1.2em)', opacity:0.95, marginBottom:32, maxWidth:700, margin:'0 auto 32px', paddingLeft:'0', paddingRight:'0'}}>
               Join hundreds of island businesses already reaching local customers through SMBI Local
             </p>
             
-            <div style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap'}}>
+            <div style={{display:'flex', gap:'clamp(12px, 2vw, 16px)', justifyContent:'center', flexWrap:'wrap', maxWidth:'100%', margin:'0 auto'}}>
               <a 
                 href="/signup"
+                className="business-owner-cta-btn"
                 style={{
                   background:'white',
                   color:'#6f42c1',
-                  padding:'16px 40px',
+                  padding:'clamp(12px, 3vw, 16px) clamp(10px, 2vw, 20px)',
                   borderRadius:12,
                   textDecoration:'none',
                   fontWeight:700,
-                  fontSize:'clamp(1em, 2vw, 1.1em)',
+                  fontSize:'clamp(0.95em, 2vw, 1.05em)',
                   cursor:'pointer',
-                  display:'inline-block',
+                  display:'flex',
+                  alignItems:'center',
+                  justifyContent:'center',
+                  gap:'6px',
                   transition:'all 0.3s',
-                  boxShadow:'0 4px 16px rgba(0,0,0,0.2)'
+                  boxShadow:'0 4px 16px rgba(0,0,0,0.2)',
+                  flex:'1 1 calc(50% - 8px)',
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
               >
-                List Your Business Free
+                🚀 List Your Business Free
               </a>
               <a 
                 href="/upgrade"
+                className="business-owner-cta-btn"
                 style={{
                   background:'rgba(255,255,255,0.15)',
                   color:'white',
-                  padding:'16px 40px',
+                  padding:'clamp(12px, 3vw, 16px) clamp(10px, 2vw, 20px)',
                   borderRadius:12,
                   textDecoration:'none',
                   fontWeight:700,
-                  fontSize:'clamp(1em, 2vw, 1.1em)',
+                  fontSize:'clamp(0.95em, 2vw, 1.05em)',
                   border:'2px solid white',
                   cursor:'pointer',
-                  display:'inline-block',
-                  transition:'all 0.3s'
+                  display:'flex',
+                  alignItems:'center',
+                  justifyContent:'center',
+                  gap:'6px',
+                  transition:'all 0.3s',
+                  flex:'1 1 calc(50% - 8px)',
+                  minWidth:'0',
+                  textAlign:'center'
                 }}
               >
-                See Premium Features
+                ✨ See Premium Features
               </a>
             </div>
           </div>

@@ -70,7 +70,7 @@ export default function UserMenu({ showIconOnly = false, isRadioPlaying = false,
           {isOpen && (
             <div style={{
               position: 'absolute',
-              top: 'calc(100% + 8px)',
+              top: 'calc(100% + 4px)',
               right: 0,
               background: 'white',
               border: '1px solid #e5e7eb',
@@ -229,7 +229,7 @@ export default function UserMenu({ showIconOnly = false, isRadioPlaying = false,
         {isOpen && (
           <div style={{
             position: 'absolute',
-            top: 'calc(100% + 8px)',
+            top: 'calc(100% + 4px)',
             right: 0,
             background: 'white',
             border: '1px solid #e5e7eb',

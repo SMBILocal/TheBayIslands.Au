@@ -2,15 +2,16 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, RefObject } from 'react';
 import UserMenu from './UserMenu';
 
 interface TopAuthBarProps {
   menuOpen?: boolean;
   setMenuOpen?: (open: boolean) => void;
+  menuToggleRef?: RefObject<HTMLButtonElement>;
 }
 
-export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }: TopAuthBarProps = {}) {
+export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, menuToggleRef }: TopAuthBarProps = {}) {
   const { user, signOut } = useAuth();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -88,16 +89,19 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
               cursor: 'pointer',
               padding: '4px 8px',
               transition: 'opacity 0.2s',
+              transform: 'translateY(2px)'
             }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.6')}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             title="Click to listen to Bay Islands Radio 88.0 FM"
           >
-            <span className="radio-label" style={{ display: 'flex', alignItems: 'center', gap: '4px', transform: 'translateY(2px)' }}>
-              📻 Bay Islands Radio 88.0
+            <span className="radio-label" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ transform: 'translateY(-3px)' }}>📻</span>
+              <span>Bay Islands Radio 88.0</span>
             </span>
-            <span className="radio-label-mobile" style={{ display: 'none', alignItems: 'center', gap: '4px', transform: 'translateY(2px)' }}>
-              📻 88.0 FM
+            <span className="radio-label-mobile" style={{ display: 'none', alignItems: 'center', gap: '4px' }}>
+              <span style={{ transform: 'translateY(-3px)' }}>📻</span>
+              <span>88.0 FM</span>
             </span>
             <span className="radio-control" style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '1px' }}>
               {isPlaying ? '⏸' : '▶'}
@@ -105,13 +109,13 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
           </button>
         </div>
 
-        {/* Right side - UserMenu and hamburger */}
+        {/* Right side - UserMenu */}
         <div className="auth-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-          {/* UserMenu - always rendered, but shows different content via CSS and props */}
           <UserMenu showIconOnly={false} isRadioPlaying={isPlaying} onRadioToggle={handleRadioToggle} />
 
-          {/* Hamburger menu button - only on mobile portrait */}
+          {/* Mobile hamburger */}
           <button
+            ref={menuToggleRef}
             className="hamburger-mobile-portrait"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
@@ -128,6 +132,8 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {} }:
               alignItems: 'center',
             }}
             aria-label="Toggle menu"
+            aria-controls="site-primary-navigation"
+            aria-expanded={menuOpen}
           >
             <span style={{ width: '20px', height: '2px', background: '#333', display: 'block' }} />
             <span style={{ width: '20px', height: '2px', background: '#333', display: 'block' }} />

@@ -244,9 +244,49 @@ export default function TermsPage() {
         <h1 style={{fontSize: 42, fontWeight: 700, marginBottom: 12, color: '#0f172a'}}>Terms of Service</h1>
         <p style={{fontSize: 16, color: '#64748b', marginBottom: 40}}>Legal terms and conditions governing use of thebayislands.au</p>
 
-        <div style={{display: 'grid', gridTemplateColumns: '250px 1fr', gap: 32}}>
+        <style jsx>{`
+          .terms-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 32px;
+          }
+          
+          .terms-sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+          }
+          
+          @media (max-width: 1024px) and (orientation: portrait) {
+            .terms-layout {
+              grid-template-columns: 1fr;
+              gap: 24px;
+            }
+            
+            .terms-sidebar {
+              position: static;
+            }
+          }
+          
+          @media (max-width: 768px) {
+            .terms-layout {
+              grid-template-columns: 1fr;
+              gap: 20px;
+            }
+            
+            .terms-sidebar {
+              position: static;
+            }
+          }
+        `}</style>
+
+        <div className="terms-layout">
           {/* Navigation Sidebar */}
-          <div style={{background: 'white', borderRadius: 12, padding: 20, height: 'fit-content', position: 'sticky', top: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.08)'}}>
+          <div className="terms-sidebar">
             <div style={{fontWeight: 700, fontSize: 12, color: '#64748b', textTransform: 'uppercase', marginBottom: 12}}>Sections</div>
             <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
               {sections.map(section => (

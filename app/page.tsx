@@ -291,7 +291,7 @@ export default function Home(){
         textAlign: 'center',
         padding: '40px 40px',
         margin: '0',
-        marginTop: '0',
+        marginTop: '-1px',
         width: '100vw',
         position: 'relative',
         left: '50%',

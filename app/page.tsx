@@ -1,5 +1,6 @@
 'use client';
 
+// Build date: 2026-01-29T03:31:00Z - Force Vercel redeploy with ZodError fix
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import FeaturedBusinessCarousel from '@/components/FeaturedBusinessCarousel';
@@ -950,6 +951,7 @@ export default function Home(){
             </p>
           </div>
 
+<<<<<<< HEAD
           <div className="location-grid" style={{
             display:'grid',
             gridTemplateColumns:'repeat(4, 1fr)',
@@ -962,31 +964,33 @@ export default function Home(){
               }
             }
           `}</style>
+=======
+          <div className="location-grid">
+>>>>>>> origin/main
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}
                 href={`/directory?location=${location.slug}`}
                 style={{
-                  background:'#f8f9fa',
+                  background:'white',
                   padding:'clamp(24px, 4vw, 32px)',
                   borderRadius:12,
                   textDecoration:'none',
                   color:'#333',
-                  border:'2px solid #e2e8f0',
+                  border:'2px solid transparent',
                   transition:'all 0.3s',
-                  textAlign:'center'
+                  textAlign:'center',
+                  cursor:'pointer'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#0066b3';
-                  e.currentTarget.style.color = 'white';
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.2)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,102,179,0.15)';
+                  e.currentTarget.style.borderColor = '#0066b3';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#f8f9fa';
-                  e.currentTarget.style.color = '#333';
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.borderColor = 'transparent';
                 }}
               >
                 <div style={{fontSize:'clamp(1.8em, 4vw, 2.2em)', marginBottom:8}}>
@@ -1001,6 +1005,18 @@ export default function Home(){
               </a>
             ))}
           </div>
+          <style jsx>{`
+            .location-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: clamp(16px, 3vw, 24px);
+            }
+            @media (max-width: 480px) {
+              .location-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
 
@@ -1061,6 +1077,7 @@ export default function Home(){
           </div>
 
           {/* Quick Links Grid - One Row on Tablet Portrait */}
+<<<<<<< HEAD
           <div className="community-quick-links" style={{
             display:'grid',
             gridTemplateColumns:'repeat(6, 1fr)',
@@ -1075,6 +1092,9 @@ export default function Home(){
               }
             }
           `}</style>
+=======
+          <div className="quick-links-grid">
+>>>>>>> origin/main
             <a href="/news" style={{
               background:'#f8f9fa',
               padding:'clamp(16px, 3vw, 20px)',
@@ -1261,6 +1281,25 @@ export default function Home(){
               <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.8em, 2vw, 0.9em)', transition:'all 0.3s'}}>Island Guides</div>
             </a>
           </div>
+          <style jsx>{`
+            .quick-links-grid {
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+              gap: clamp(12px, 2vw, 16px);
+              max-width: 1000px;
+              margin: 0 auto;
+            }
+            @media (max-width: 768px) {
+              .quick-links-grid {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+            @media (max-width: 480px) {
+              .quick-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+          `}</style>
         </div>
       </section>
 
@@ -1280,7 +1319,11 @@ export default function Home(){
             <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95, paddingLeft:'0', paddingRight:'0'}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
+<<<<<<< HEAD
             <div className="cta-buttons-container" style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap', maxWidth:'800px', margin:'0 auto', '@media (max-width: 768px)': {flexDirection: 'column'}}}>
+=======
+            <div className="cta-buttons-grid">
+>>>>>>> origin/main
               <a
                 href="/signup"
                 style={{
@@ -1297,9 +1340,13 @@ export default function Home(){
                   gap:'8px',
                   transition:'all 0.3s',
                   boxShadow:'0 4px 12px rgba(0,0,0,0.15)',
+<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
+=======
+                  whiteSpace:'nowrap'
+>>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
@@ -1328,9 +1375,13 @@ export default function Home(){
                   justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
+<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
+=======
+                  whiteSpace:'nowrap'
+>>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -1359,9 +1410,13 @@ export default function Home(){
                   justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
+<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
+=======
+                  whiteSpace:'nowrap'
+>>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -1375,6 +1430,21 @@ export default function Home(){
                 🛒 Post a Classified
               </a>
             </div>
+            <style jsx>{`
+              .cta-buttons-grid {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: nowrap;
+              }
+              @media (max-width: 768px) {
+                .cta-buttons-grid {
+                  flex-direction: column;
+                  max-width: 400px;
+                  margin: 0 auto;
+                }
+              }
+            `}</style>
           </div>
         </div>
       </section>

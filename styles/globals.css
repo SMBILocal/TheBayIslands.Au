@@ -529,7 +529,7 @@ input,button,textarea,select{font:inherit}
   .nav-dropdown-toggle .nav-dropdown-label{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:4px;
     font-size:14px !important;
     font-weight:500 !important;
   }

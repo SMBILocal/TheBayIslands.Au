@@ -690,8 +690,6 @@ input,button,textarea,select{font:inherit}
   gap:6px;
 }
 
-<<<<<<< HEAD
-=======
 .hamburger span{
   width:24px;
   height:2.5px;
@@ -777,7 +775,6 @@ input,button,textarea,select{font:inherit}
     font-size: 14px !important;
   }
 }
->>>>>>> origin/main
 
 /* Hero Section */
 .hero{

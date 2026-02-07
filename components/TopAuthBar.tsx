@@ -2,11 +2,7 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
-<<<<<<< HEAD
 import { useEffect, useState, useRef, RefObject } from 'react';
-=======
-import { useEffect, useState, useRef } from 'react';
->>>>>>> origin/main
 import UserMenu from './UserMenu';
 
 // Set orientation class immediately on import - before React hydration
@@ -44,24 +40,7 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
     }
   }, [])
 
-<<<<<<< HEAD
   // Only track playing state for radio, not responsive sizing
-=======
-  const [isPortrait, setIsPortrait] = useState(true);
-  useEffect(() => {
-    const handleOrientationChange = () => {
-      setIsPortrait(window.matchMedia('(orientation: portrait)').matches);
-    };
-    handleOrientationChange();
-    window.addEventListener('orientationchange', handleOrientationChange);
-    window.addEventListener('resize', handleOrientationChange);
-    return () => {
-      window.removeEventListener('orientationchange', handleOrientationChange);
-      window.removeEventListener('resize', handleOrientationChange);
-    };
-  }, []);
-
->>>>>>> origin/main
   useEffect(() => {
     if (typeof window !== 'undefined' && !audioRef.current) {
       audioRef.current = new Audio('https://stream.example.com:8000/bayislands');
@@ -69,13 +48,6 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
     }
   }, []);
 
-<<<<<<< HEAD
-=======
-  const handleLogout = async () => {
-    await signOut();
-  };
-
->>>>>>> origin/main
   const handleRadioToggle = () => {
     if (!audioRef.current) return;
 
@@ -116,8 +88,7 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
         }}
         className="top-auth-bar-inner"
       >
-<<<<<<< HEAD
-        {/* Logo on left - uses CSS media queries for sizing */}
+        {/*Logo on left - uses CSS media queries for sizing */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }} className="logo-link">
           <div className="site-logo" style={{ display: 'flex', alignItems: 'baseline', gap: '0.3em', whiteSpace: 'nowrap' }}>
             <span className="logo-text-the">the</span>
@@ -194,9 +165,11 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
             <span style={{ width: '20px', height: '2px', background: '#333', display: 'block' }} />
             <span style={{ width: '20px', height: '2px', background: '#333', display: 'block' }} />
           </button>
-=======
-        {/* Logo on left - smaller on mobile portrait */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+        </div>
+      </div>
+    </div>
+  );
+}
           <svg width={showIconsOnly ? '100' : '160'} height={showIconsOnly ? '20' : '32'} viewBox="0 0 160 32" style={{ display: 'block' }}>
             <text x="0" y="24" fontSize={showIconsOnly ? '16' : '20'} fontWeight="800" fill="#0066b3">the</text>
             <text x="35" y="24" fontSize={showIconsOnly ? '16' : '20'} fontWeight="800" fill="#c85a17">bay</text>
@@ -317,7 +290,6 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
             // Desktop: UserMenu only
             <UserMenu />
           )}
->>>>>>> origin/main
         </div>
       </div>
     </div>

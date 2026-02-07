@@ -951,7 +951,6 @@ export default function Home(){
             </p>
           </div>
 
-<<<<<<< HEAD
           <div className="location-grid" style={{
             display:'grid',
             gridTemplateColumns:'repeat(4, 1fr)',
@@ -964,9 +963,6 @@ export default function Home(){
               }
             }
           `}</style>
-=======
-          <div className="location-grid">
->>>>>>> origin/main
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}
@@ -1077,7 +1073,6 @@ export default function Home(){
           </div>
 
           {/* Quick Links Grid - One Row on Tablet Portrait */}
-<<<<<<< HEAD
           <div className="community-quick-links" style={{
             display:'grid',
             gridTemplateColumns:'repeat(6, 1fr)',
@@ -1092,9 +1087,6 @@ export default function Home(){
               }
             }
           `}</style>
-=======
-          <div className="quick-links-grid">
->>>>>>> origin/main
             <a href="/news" style={{
               background:'#f8f9fa',
               padding:'clamp(16px, 3vw, 20px)',
@@ -1319,11 +1311,7 @@ export default function Home(){
             <p style={{fontSize:'clamp(1rem, 2vw, 1.125rem)', marginBottom:'2rem', maxWidth:'600px', margin:'0 auto 2rem', opacity:0.95, paddingLeft:'0', paddingRight:'0'}}>
               List your business, post classifieds, share events, or find your next opportunity on the Bay Islands
             </p>
-<<<<<<< HEAD
             <div className="cta-buttons-container" style={{display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap', maxWidth:'800px', margin:'0 auto', '@media (max-width: 768px)': {flexDirection: 'column'}}}>
-=======
-            <div className="cta-buttons-grid">
->>>>>>> origin/main
               <a
                 href="/signup"
                 style={{
@@ -1340,13 +1328,9 @@ export default function Home(){
                   gap:'8px',
                   transition:'all 0.3s',
                   boxShadow:'0 4px 12px rgba(0,0,0,0.15)',
-<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
-=======
-                  whiteSpace:'nowrap'
->>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
@@ -1375,13 +1359,9 @@ export default function Home(){
                   justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
-<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
-=======
-                  whiteSpace:'nowrap'
->>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';
@@ -1410,13 +1390,9 @@ export default function Home(){
                   justifyContent:'center',
                   gap:'8px',
                   transition:'all 0.3s',
-<<<<<<< HEAD
                   flex:'1 1 auto',
                   minWidth:'0',
                   textAlign:'center'
-=======
-                  whiteSpace:'nowrap'
->>>>>>> origin/main
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'white';

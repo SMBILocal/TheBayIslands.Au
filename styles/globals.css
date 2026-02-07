@@ -432,6 +432,24 @@ input,button,textarea,select{font:inherit}
   .mobile-menu-cta {
     display: none !important;
   }
+  
+  /* Ensure all nav links are visible including Home */
+  .nav-links {
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    gap: 2px !important;
+  }
+  
+  .nav-links > a {
+    display: flex !important;
+    padding: 8px 6px !important;
+    font-size: 12px !important;
+  }
+  
+  .nav-dropdown-toggle {
+    padding: 8px 6px !important;
+    font-size: 12px !important;
+  }
 }
 
 /* Medium to large screens - tighter spacing */

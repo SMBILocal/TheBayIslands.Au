@@ -3,6 +3,13 @@
 import Link from "next/link"
 import { RefObject, useEffect, useRef, useState } from "react"
 
+// Set orientation class immediately before React renders
+if (typeof window !== 'undefined') {
+  const isPortrait = window.matchMedia('(orientation: portrait)').matches
+  document.documentElement.classList.toggle('is-portrait', isPortrait)
+  document.documentElement.classList.toggle('is-landscape', !isPortrait)
+}
+
 interface NavbarProps {
 	menuOpen?: boolean;
 	setMenuOpen?: (open: boolean) => void;
@@ -29,57 +36,36 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 		}
 	}, [menuOpen])
 
-	// Prevent scroll jump when dropdowns open in mobile portrait
+	// Lock scroll to top when any dropdown is open in portrait
 	useEffect(() => {
 		const navContainer = navLinksRef.current
 		if (!navContainer) return
 		
 		const isPortraitMobile = window.matchMedia(PORTRAIT_MOBILE_QUERY).matches
-		if (isPortraitMobile && menuOpen && (areasOpen || articlesOpen || eventsOpen)) {
-			// Lock scroll to top when any dropdown is open
-			navContainer.scrollTop = 0
-		}
-	}, [areasOpen, articlesOpen, eventsOpen, menuOpen])
-
-	useEffect(() => {
-		const updateOrientation = () => {
-			const isPortrait = window.matchMedia('(orientation: portrait)').matches
-			const isLandscape = window.matchMedia('(orientation: landscape)').matches
-			
-			document.documentElement.classList.remove('is-portrait', 'is-landscape')
-			if (isPortrait) {
-				document.documentElement.classList.add('is-portrait')
-			} else if (isLandscape) {
-				document.documentElement.classList.add('is-landscape')
+		if (!isPortraitMobile) return
+		
+		if (menuOpen && (areasOpen || articlesOpen || eventsOpen)) {
+			// Continuously force scroll to top
+			const lockScroll = () => {
+				navContainer.scrollTop = 0
 			}
+			
+			lockScroll()
+			navContainer.addEventListener('scroll', lockScroll)
+			return () => navContainer.removeEventListener('scroll', lockScroll)
 		}
+	}, [menuOpen, areasOpen, articlesOpen, eventsOpen])
 
-		const handleViewportChange = () => {
-			updateOrientation()
+	// Close menu when switching from portrait to non-portrait
+	useEffect(() => {
+		const handleResize = () => {
 			const portraitMobile = window.matchMedia(PORTRAIT_MOBILE_QUERY).matches
 			if (!portraitMobile && menuOpen) {
 				setMenuOpen(false)
 			}
 		}
-
-		const handleOrientationChange = () => {
-			// Force style recalculation on orientation change
-			updateOrientation()
-			document.documentElement.classList.remove('force-recalc')
-			void document.documentElement.offsetHeight // Force reflow
-			document.documentElement.classList.add('force-recalc')
-			handleViewportChange()
-		}
-
-		window.addEventListener('resize', handleViewportChange)
-		window.addEventListener('orientationchange', handleOrientationChange)
-		updateOrientation()
-		handleViewportChange()
-		
-		return () => {
-			window.removeEventListener('resize', handleViewportChange)
-			window.removeEventListener('orientationchange', handleOrientationChange)
-		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
 	}, [menuOpen, setMenuOpen])
 
 	useEffect(() => {
@@ -121,14 +107,14 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 	const eventsMenuId = 'nav-events'
 
 	const handleDropdownToggle = (currentState: boolean, setState: (state: boolean) => void) => {
-		const navContainer = navLinksRef.current
-		
-		// When opening a dropdown, lock scroll to top to prevent jump
-		if (!currentState && navContainer) {
-			navContainer.scrollTop = 0
-		}
-		
 		setState(!currentState)
+		
+		// Force scroll to top after state change
+		requestAnimationFrame(() => {
+			if (navLinksRef.current) {
+				navLinksRef.current.scrollTop = 0
+			}
+		})
 	}
 
 	return (
@@ -284,18 +270,11 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 
 					<div className="mobile-menu-cta">
 						<Link
-							href="/upgrade"
-							className="mobile-menu-link"
-							onClick={() => setMenuOpen(false)}
-						>
-							⭐ Go Premium
-						</Link>
-						<Link
 							href="/upgrade?claim=1"
 							className="mobile-claim-link"
 							onClick={() => setMenuOpen(false)}
 						>
-							✅ Claim Listing
+							✅ Claim Your Listing
 						</Link>
 					</div>
 				</nav>

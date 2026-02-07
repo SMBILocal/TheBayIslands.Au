@@ -5,6 +5,13 @@ import { useAuth } from '@/lib/AuthContext';
 import { useEffect, useState, useRef, RefObject } from 'react';
 import UserMenu from './UserMenu';
 
+// Set orientation class immediately on import - before React hydration
+if (typeof window !== 'undefined') {
+  const isPortrait = window.matchMedia('(orientation: portrait)').matches
+  document.documentElement.classList.toggle('is-portrait', isPortrait)
+  document.documentElement.classList.toggle('is-landscape', !isPortrait)
+}
+
 interface TopAuthBarProps {
   menuOpen?: boolean;
   setMenuOpen?: (open: boolean) => void;
@@ -15,6 +22,22 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
   const { user, signOut } = useAuth();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Track orientation changes
+  useEffect(() => {
+    const updateOrientation = () => {
+      const isPortrait = window.matchMedia('(orientation: portrait)').matches
+      document.documentElement.classList.toggle('is-portrait', isPortrait)
+      document.documentElement.classList.toggle('is-landscape', !isPortrait)
+    }
+    
+    window.addEventListener('resize', updateOrientation)
+    window.addEventListener('orientationchange', updateOrientation)
+    return () => {
+      window.removeEventListener('resize', updateOrientation)
+      window.removeEventListener('orientationchange', updateOrientation)
+    }
+  }, [])
 
   // Only track playing state for radio, not responsive sizing
   useEffect(() => {

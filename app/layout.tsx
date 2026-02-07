@@ -20,6 +20,15 @@ export const metadata = {
 export default function RootLayout({children}: {children: ReactNode}){
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{__html: `
+          (function() {
+            var isPortrait = window.matchMedia('(orientation: portrait)').matches;
+            document.documentElement.classList.toggle('is-portrait', isPortrait);
+            document.documentElement.classList.toggle('is-landscape', !isPortrait);
+          })();
+        `}} />
+      </head>
       <body>
         <AuthProvider>
           <HeaderWrapper />

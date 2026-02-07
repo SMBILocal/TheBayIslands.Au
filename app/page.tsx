@@ -951,11 +951,6 @@ export default function Home(){
             </p>
           </div>
 
-          <div className="location-grid" style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(4, 1fr)',
-            gap:'clamp(16px, 3vw, 24px)'
-          }}>
           <style jsx>{`
             @media (max-width: 768px) {
               .location-grid {
@@ -963,6 +958,12 @@ export default function Home(){
               }
             }
           `}</style>
+
+          <div className="location-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(4, 1fr)',
+            gap:'clamp(16px, 3vw, 24px)'
+          }}>
             {ALL_LOCATIONS.map(location => (
               <a 
                 key={location.id}

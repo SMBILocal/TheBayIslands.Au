@@ -1,14 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
 // Support both new SECRET_KEY and legacy SERVICE_ROLE_KEY naming
-const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
 
-if(!supabaseUrl){
+if(!process.env.NEXT_PUBLIC_SUPABASE_URL){
   console.warn('NEXT_PUBLIC_SUPABASE_URL is not set in the environment')
 }
 
-if(!secretKey){
+if(!process.env.SUPABASE_SECRET_KEY && !process.env.SUPABASE_SERVICE_ROLE_KEY){
   console.warn('SUPABASE_SECRET_KEY is not set — server admin operations will fail')
 }
 

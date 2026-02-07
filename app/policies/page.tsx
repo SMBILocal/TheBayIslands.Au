@@ -624,7 +624,7 @@ export default function PoliciesPage() {
               <p style={{color: '#475569', marginBottom: 12}}>Refunds may be granted in the following circumstances:</p>
               <ul style={{paddingLeft: 20, color: '#475569', display: 'grid', gap: 8}}>
                 <li><strong>7-Day Cooling-Off (Annual/6-Month):</strong> Full refund if you cancel within 7 days and haven't meaningfully used premium features</li>
-                <li><strong>Service Failure:</strong> If we fail to deliver advertised features or experience extended downtime (>7 days)</li>
+                <li><strong>Service Failure:</strong> If we fail to deliver advertised features or experience extended downtime (&gt;7 days)</li>
                 <li><strong>Billing Error:</strong> Incorrect charges or unauthorized transactions</li>
                 <li><strong>Technical Issues:</strong> Persistent, unresolved technical problems preventing use</li>
                 <li><strong>Australian Consumer Law:</strong> Statutory guarantees and consumer rights always apply</li>

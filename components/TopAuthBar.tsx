@@ -64,12 +64,12 @@ export default function TopAuthBar({ menuOpen = false, setMenuOpen = () => {}, m
       >
         {/* Logo on left - uses CSS media queries for sizing */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }} className="logo-link">
-          <svg className="site-logo" viewBox="0 0 160 32" style={{ display: 'block' }}>
-            <text x="0" y="24" className="logo-text-the" fill="#0066b3">the</text>
-            <text x="35" y="24" className="logo-text-bay" fill="#c85a17">bay</text>
-            <text x="70" y="24" className="logo-text-islands" fill="#0066b3">islands</text>
-            <text x="140" y="24" className="logo-text-au" fill="#64748b">.au</text>
-          </svg>
+          <div className="site-logo" style={{ display: 'flex', alignItems: 'baseline', gap: '0.3em', whiteSpace: 'nowrap' }}>
+            <span className="logo-text-the">the</span>
+            <span className="logo-text-bay">bay</span>
+            <span className="logo-text-islands">islands</span>
+            <span className="logo-text-au">.au</span>
+          </div>
         </Link>
 
         {/* Radio Player - visible on desktop/landscape, compact on mobile portrait */}

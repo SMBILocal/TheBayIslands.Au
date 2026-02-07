@@ -74,20 +74,28 @@ input,button,textarea,select{font:inherit}
 
 /* Logo SVG - responsive sizing with CSS */
 .site-logo {
-  width: 160px;
-  height: 32px;
-  /* Prevent hydration shifts by not changing dimensions */
+  font-size: 20px;
+  line-height: 1;
 }
 
-/* Logo text styling - font sizes controlled via CSS not inline */
-.logo-text-the, .logo-text-bay, .logo-text-islands {
-  font-size: 20px;
+/* Logo text styling with consistent colors */
+.logo-text-the,
+.logo-text-bay,
+.logo-text-islands {
+  color: #0066b3;
   font-weight: 800;
+  font-size: 1em;
+}
+
+.logo-text-bay {
+  color: #c85a17;
 }
 
 .logo-text-au {
-  font-size: 14px;
+  color: #64748b;
+  font-size: 0.7em;
   font-weight: 600;
+  margin-left: -0.15em;
 }
 
 /* Radio player - visible on all but mobile portrait */
@@ -143,16 +151,7 @@ input,button,textarea,select{font:inherit}
 /* ===== MOBILE PORTRAIT: <= 600px AND PORTRAIT ORIENTATION ===== */
 @media (max-width: 600px) and (orientation: portrait) {
   .site-logo {
-    width: 130px;
-    height: 26px;
-  }
-  
-  .logo-text-the, .logo-text-bay, .logo-text-islands {
-    font-size: 18px;
-  }
-  
-  .logo-text-au {
-    font-size: 12px;
+    font-size: 17px;
   }
   
   .top-auth-bar-inner {
@@ -225,16 +224,7 @@ input,button,textarea,select{font:inherit}
 
   /* Increase logo size since radio is hidden */
   .site-logo {
-    width: 160px;
-    height: 32px;
-  }
-  
-  .logo-text-the, .logo-text-bay, .logo-text-islands {
     font-size: 22px;
-  }
-  
-  .logo-text-au {
-    font-size: 14px;
   }
 
   /* Left align dropdown menu items in mobile */
@@ -498,6 +488,23 @@ input,button,textarea,select{font:inherit}
     border-top:1px solid var(--color-border);
     border-bottom:1px solid var(--color-border);
     box-shadow:0 12px 30px rgba(15,23,36,0.12);
+    overflow-anchor: none;
+    overscroll-behavior: contain;
+    scroll-padding-top: 0;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
+  }
+  
+  /* Lock Home link at top to prevent scroll jump */
+  .nav-links.open > a:first-child {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  
+  /* Prevent parent dropdown container from causing scroll jumps */
+  .nav-links.open .nav-dropdown {
+    position: relative;
+    isolation: isolate;
   }
 
   .nav-links > a{
@@ -514,22 +521,25 @@ input,button,textarea,select{font:inherit}
 
   .nav-dropdown{
     width:100%;
+    position: relative;
   }
 
   .nav-dropdown-toggle{
     width:100%;
     justify-content:space-between;
-    padding:14px 20px;
+    padding:14px 20px !important;
     border-radius:0;
     border-bottom:1px solid var(--color-border);
     font-size:14px !important;
     font-weight:500 !important;
+    position: relative;
+    z-index: 2;
   }
 
   .nav-dropdown-toggle .nav-dropdown-label{
     display:flex;
     align-items:center;
-    gap:4px;
+    gap:4px !important;
     font-size:14px !important;
     font-weight:500 !important;
   }
@@ -545,15 +555,23 @@ input,button,textarea,select{font:inherit}
 
   .nav-dropdown-menu{
     position:static;
+    background:#fff;
     box-shadow:none;
     border-radius:0;
     border:0;
     border-top:1px solid var(--color-border);
-    max-height:400px;
-    overflow-y:auto;
-    border-bottom:1px solid var(--color-border);
+    max-height:0;
+    overflow:hidden;
+    border-bottom:none;
     padding:0;
     margin:0;
+    transition: max-height 0.3s ease, border-bottom 0.3s ease;
+    will-change: max-height;
+  }
+  
+  .nav-dropdown-menu.show {
+    max-height: 1000px;
+    border-bottom:1px solid var(--color-border);
   }
 
   .nav-dropdown-menu a,
@@ -666,6 +684,24 @@ input,button,textarea,select{font:inherit}
   padding:24px;
   border:1px solid var(--color-border);
   transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Force portrait mobile nav styles with class-based selectors for orientation change */
+html.is-portrait .nav-dropdown-toggle {
+  padding: 14px 20px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+html.is-portrait .nav-dropdown-toggle .nav-dropdown-label {
+  gap: 4px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+html.is-portrait .nav-dropdown-toggle .nav-dropdown-label span {
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 .success-stories-section{

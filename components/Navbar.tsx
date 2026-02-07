@@ -29,17 +29,57 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 		}
 	}, [menuOpen])
 
+	// Prevent scroll jump when dropdowns open in mobile portrait
 	useEffect(() => {
+		const navContainer = navLinksRef.current
+		if (!navContainer) return
+		
+		const isPortraitMobile = window.matchMedia(PORTRAIT_MOBILE_QUERY).matches
+		if (isPortraitMobile && menuOpen && (areasOpen || articlesOpen || eventsOpen)) {
+			// Lock scroll to top when any dropdown is open
+			navContainer.scrollTop = 0
+		}
+	}, [areasOpen, articlesOpen, eventsOpen, menuOpen])
+
+	useEffect(() => {
+		const updateOrientation = () => {
+			const isPortrait = window.matchMedia('(orientation: portrait)').matches
+			const isLandscape = window.matchMedia('(orientation: landscape)').matches
+			
+			document.documentElement.classList.remove('is-portrait', 'is-landscape')
+			if (isPortrait) {
+				document.documentElement.classList.add('is-portrait')
+			} else if (isLandscape) {
+				document.documentElement.classList.add('is-landscape')
+			}
+		}
+
 		const handleViewportChange = () => {
+			updateOrientation()
 			const portraitMobile = window.matchMedia(PORTRAIT_MOBILE_QUERY).matches
 			if (!portraitMobile && menuOpen) {
 				setMenuOpen(false)
 			}
 		}
 
+		const handleOrientationChange = () => {
+			// Force style recalculation on orientation change
+			updateOrientation()
+			document.documentElement.classList.remove('force-recalc')
+			void document.documentElement.offsetHeight // Force reflow
+			document.documentElement.classList.add('force-recalc')
+			handleViewportChange()
+		}
+
 		window.addEventListener('resize', handleViewportChange)
+		window.addEventListener('orientationchange', handleOrientationChange)
+		updateOrientation()
 		handleViewportChange()
-		return () => window.removeEventListener('resize', handleViewportChange)
+		
+		return () => {
+			window.removeEventListener('resize', handleViewportChange)
+			window.removeEventListener('orientationchange', handleOrientationChange)
+		}
 	}, [menuOpen, setMenuOpen])
 
 	useEffect(() => {
@@ -80,6 +120,17 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 	const articlesMenuId = 'nav-articles'
 	const eventsMenuId = 'nav-events'
 
+	const handleDropdownToggle = (currentState: boolean, setState: (state: boolean) => void) => {
+		const navContainer = navLinksRef.current
+		
+		// When opening a dropdown, lock scroll to top to prevent jump
+		if (!currentState && navContainer) {
+			navContainer.scrollTop = 0
+		}
+		
+		setState(!currentState)
+	}
+
 	return (
 		<header className="site-header">
 			<div className="container nav">
@@ -98,7 +149,7 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 							type="button"
 							aria-expanded={areasOpen}
 							aria-controls={areasMenuId}
-							onClick={() => setAreasOpen(!areasOpen)}
+						onClick={() => handleDropdownToggle(areasOpen, setAreasOpen)}
 							onMouseEnter={() => setAreasOpen(true)}
 						>
 							<span className="nav-dropdown-label" aria-hidden="true">
@@ -153,7 +204,7 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 							type="button"
 							aria-expanded={articlesOpen}
 							aria-controls={articlesMenuId}
-							onClick={() => setArticlesOpen(!articlesOpen)}
+						onClick={() => handleDropdownToggle(articlesOpen, setArticlesOpen)}
 							onMouseEnter={() => setArticlesOpen(true)}
 						>
 							<span className="nav-dropdown-label" aria-hidden="true">
@@ -191,7 +242,7 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 							type="button"
 							aria-expanded={eventsOpen}
 							aria-controls={eventsMenuId}
-							onClick={() => setEventsOpen(!eventsOpen)}
+						onClick={() => handleDropdownToggle(eventsOpen, setEventsOpen)}
 							onMouseEnter={() => setEventsOpen(true)}
 						>
 							<span className="nav-dropdown-label" aria-hidden="true">

@@ -463,11 +463,6 @@ export default function Home(){
             </p>
           </div>
           
-          <div className="quick-links-grid" style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(3, 1fr)',
-            gap:'clamp(16px, 3vw, 24px)'
-          }}>
           <style jsx>{`
             @media (max-width: 768px) {
               .quick-links-grid {
@@ -475,6 +470,12 @@ export default function Home(){
               }
             }
           `}</style>
+          
+          <div className="quick-links-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(3, 1fr)',
+            gap:'clamp(16px, 3vw, 24px)'
+          }}>
             <a href="/articles" style={{
               textDecoration:'none',
               background:'#f8f9fa',
@@ -658,12 +659,6 @@ export default function Home(){
             </p>
           </div>
 
-          <div className="category-grid" style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(4, 1fr)',
-            gap:'clamp(16px, 3vw, 24px)',
-            marginBottom:32
-          }}>
           <style jsx>{`
             @media (max-width: 480px) {
               .category-grid {
@@ -671,6 +666,13 @@ export default function Home(){
               }
             }
           `}</style>
+          
+          <div className="category-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(4, 1fr)',
+            gap:'clamp(16px, 3vw, 24px)',
+            marginBottom:32
+          }}>
             <a href="/directory?category=restaurants" style={{
               textDecoration:'none',
               background:'white',
@@ -1074,13 +1076,6 @@ export default function Home(){
           </div>
 
           {/* Quick Links Grid - One Row on Tablet Portrait */}
-          <div className="community-quick-links" style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(6, 1fr)',
-            gap:'clamp(12px, 2vw, 16px)',
-            maxWidth:'1000px',
-            margin:'0 auto'
-          }}>
           <style jsx>{`
             @media (max-width: 768px) {
               .community-quick-links {
@@ -1088,6 +1083,14 @@ export default function Home(){
               }
             }
           `}</style>
+          
+          <div className="community-quick-links" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(6, 1fr)',
+            gap:'clamp(12px, 2vw, 16px)',
+            maxWidth:'1000px',
+            margin:'0 auto'
+          }}>
             <a href="/news" style={{
               background:'#f8f9fa',
               padding:'clamp(16px, 3vw, 20px)',
@@ -1274,6 +1277,7 @@ export default function Home(){
               <div style={{fontWeight:600, color:'#333', fontSize:'clamp(0.8em, 2vw, 0.9em)', transition:'all 0.3s'}}>Island Guides</div>
             </a>
           </div>
+          
           <style jsx>{`
             .quick-links-grid {
               display: grid;
@@ -1407,6 +1411,7 @@ export default function Home(){
                 🛒 Post a Classified
               </a>
             </div>
+            
             <style jsx>{`
               .cta-buttons-grid {
                 display: flex;
@@ -1576,12 +1581,6 @@ export default function Home(){
             </p>
           </div>
 
-          <div className="islands-grid" style={{
-            display:'grid',
-            gridTemplateColumns:'1fr',
-            gap:'clamp(24px, 4vw, 32px)',
-            marginBottom:'clamp(32px, 6vw, 48px)'
-          }}>
           <style jsx>{`
             @media (min-width: 768px) and (max-width: 1023px) {
               .islands-grid {
@@ -1594,6 +1593,13 @@ export default function Home(){
               }
             }
           `}</style>
+          
+          <div className="islands-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'1fr',
+            gap:'clamp(24px, 4vw, 32px)',
+            marginBottom:'clamp(32px, 6vw, 48px)'
+          }}>
             <a href="/islands/russell" style={{
               textDecoration:'none',
               color:'inherit',
@@ -2323,12 +2329,6 @@ export default function Home(){
       {/* Quick Stats Bar */}
       <section style={{padding:'clamp(40px, 8vw, 60px) 0', background:'#f8f9fa'}}>
         <div className="container">
-          <div className="stats-grid" style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(4, 1fr)',
-            gap:'clamp(24px, 4vw, 32px)',
-            textAlign:'center'
-          }}>
           <style jsx>{`
             @media (max-width: 480px) {
               .stats-grid {
@@ -2336,6 +2336,13 @@ export default function Home(){
               }
             }
           `}</style>
+          
+          <div className="stats-grid" style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(4, 1fr)',
+            gap:'clamp(24px, 4vw, 32px)',
+            textAlign:'center'
+          }}>
             <div>
               <div style={{fontSize:'clamp(2.5em, 5vw, 3.5em)', fontWeight:800, color:'#0066b3', marginBottom:8}}>
                 {homepageData?.stats?.businesses || '250+'}

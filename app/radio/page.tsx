@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import Breadcrumb from '@/components/Breadcrumb';
 import RadioStreamPlayer from '@/components/RadioStreamPlayer';
+import { getStreamUrl, getFallbackUrl } from '@/lib/radioStreams';
 
 // Radio Station Data
 const radioStations = [
@@ -26,8 +27,8 @@ const radioStations = [
     website: '#',
     streaming: {
       available: true,
-      url: '#',
-      format: 'MP3 128kbps',
+      url: getStreamUrl('bay-islands-radio') || 'https://stream.radio.co/s8a3f8b3c4/listen',
+      format: 'AAC 128kbps',
     },
   },
   {
@@ -46,8 +47,8 @@ const radioStations = [
     website: 'https://bayfm.com.au',
     streaming: {
       available: true,
-      url: '#',
-      format: 'Stream available',
+      url: getStreamUrl('bay-fm') || 'https://stream.bayfm.org.au/bayfm',
+      format: 'MP3 128kbps',
     },
   },
   {
@@ -65,7 +66,8 @@ const radioStations = [
     website: 'https://96five.com.au',
     streaming: {
       available: true,
-      format: 'Stream available',
+      url: getStreamUrl('96five') || 'https://ice.streamcity.com.au/96five',
+      format: 'MP3 128kbps',
     },
   },
   {
@@ -84,7 +86,8 @@ const radioStations = [
     website: 'https://www.4aaa.org.au',
     streaming: {
       available: true,
-      format: 'Stream available',
+      url: getStreamUrl('4aaa') || 'https://stream.4aaa.org.au:8000/4aaa',
+      format: 'MP3 128kbps',
     },
   },
   {
@@ -102,7 +105,8 @@ const radioStations = [
     website: 'https://4eb.org.au',
     streaming: {
       available: true,
-      format: 'Stream available',
+      url: getStreamUrl('4eb') || 'https://stream.4eb.org.au/4eb',
+      format: 'MP3 128kbps',
     },
   },
   {
@@ -175,7 +179,8 @@ const radioStations = [
     website: 'https://www.triplej.com.au',
     streaming: {
       available: true,
-      format: 'Stream available',
+      url: getStreamUrl('triple-j') || 'https://live-radio01.mediahubaustralia.com/2TJW/mp3/',
+      format: 'MP3 128kbps',
     },
   },
   {
@@ -193,7 +198,8 @@ const radioStations = [
     website: 'https://nova.com.au',
     streaming: {
       available: true,
-      format: 'Stream available',
+      url: getStreamUrl('nova-1069') || 'https://playerservices.streamtheworld.com/api/livestream-redirect/NOVA_1069AAC.aac',
+      format: 'AAC 64kbps',
     },
   },
   {
@@ -258,13 +264,18 @@ export default function RadioStationsPage() {
   const [selectedStation, setSelectedStation] = useState(radioStations[0]);
   const [expandedStation, setExpandedStation] = useState<string | null>(null);
 
-  const streamingStations = radioStations
-    .filter(s => s.streaming?.available)
-    .map(s => ({
-      id: s.id,
-      name: `${s.name} - ${s.frequency} ${s.frequencyUnit}`,
-      streamUrl: s.streaming?.url || 'https://stream.example.com/bayislands'
-    }));
+  // Memoize streaming stations to prevent hydration mismatch
+  const streamingStations = useMemo(() => 
+    radioStations
+      .filter(s => s.streaming?.available)
+      .map(s => ({
+        id: s.id,
+        name: `${s.name} - ${s.frequency} ${s.frequencyUnit}`,
+        streamUrl: s.streaming?.url || 'https://stream.example.com/bayislands',
+        fallbackUrl: getFallbackUrl(s.id) || undefined
+      })),
+    [] // Empty dependency array - only calculate once
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Stream Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .stream-test {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stream-test h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .stream-url {
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #0284c7;
+        }
+        button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status.loading {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎵 Radio Stream Tester</h1>
+    <p>Click "Test" to verify if each stream URL works. Check your browser console (F12) for detailed error messages.</p>
+
+    <div id="streams"></div>
+
+    <script>
+        const streams = [
+            {
+                name: 'Bay Islands Radio 88.0 FM',
+                url: 'https://stream.radio.co/s8a3f8b3c4/listen'
+            },
+            {
+                name: 'Bay FM 100.3',
+                url: 'http://stream.bayfm.org.au:8000/bayfm'
+            },
+            {
+                name: 'Bay FM 100.3 (HTTPS)',
+                url: 'https://stream.bayfm.org.au:8443/bayfm'
+            },
+            {
+                name: 'Triple M Brisbane',
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/TRIPLEM_BRISAAC.aac'
+            },
+            {
+                name: 'Triple J Brisbane',
+                url: 'https://live-radio01.mediahubaustralia.com/2TJW/mp3/'
+            },
+            {
+                name: 'B105',
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/B105_BRISAAC.aac'
+            },
+            {
+                name: 'Nova 106.9',
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/NOVA_1069AAC.aac'
+            },
+            {
+                name: 'KIIS 97.3',
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/KIIS_973AAC.aac'
+            },
+            {
+                name: '96five',
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/96FIVE.mp3'
+            },
+            {
+                name: '4AAA',
+                url: 'http://stream.4aaa.org.au:8000/4aaa'
+            },
+            {
+                name: '4EB FM',
+                url: 'http://stream.4eb.org.au:8000/4eb'
+            },
+            {
+                name: 'BBC Radio 1 (Test Stream)',
+                url: 'http://stream.live.vc.bbcmedia.co.uk/bbc_radio_one'
+            }
+        ];
+
+        const container = document.getElementById('streams');
+
+        streams.forEach((stream, index) => {
+            const div = document.createElement('div');
+            div.className = 'stream-test';
+            div.innerHTML = `
+                <h3>${stream.name}</h3>
+                <div class="stream-url">${stream.url}</div>
+                <button onclick="testStream(${index})">▶ Test Stream</button>
+                <button onclick="stopStream(${index})">⏹ Stop</button>
+                <div id="status-${index}"></div>
+            `;
+            container.appendChild(div);
+        });
+
+        const audioPlayers = streams.map(() => null);
+
+        function testStream(index) {
+            const stream = streams[index];
+            const statusDiv = document.getElementById(`status-${index}`);
+            
+            console.log(`Testing stream: ${stream.name} - ${stream.url}`);
+            
+            // Stop any existing audio
+            if (audioPlayers[index]) {
+                audioPlayers[index].pause();
+                audioPlayers[index] = null;
+            }
+
+            statusDiv.className = 'status loading';
+            statusDiv.textContent = '⏳ Loading stream...';
+
+            const audio = new Audio(stream.url);
+            audio.crossOrigin = 'anonymous';
+            audio.volume = 0.5;
+            audioPlayers[index] = audio;
+
+            audio.addEventListener('loadstart', () => {
+                console.log(`${stream.name}: Load started`);
+            });
+
+            audio.addEventListener('canplay', () => {
+                console.log(`${stream.name}: Can play`);
+                statusDiv.className = 'status success';
+                statusDiv.textContent = '✅ Stream loaded successfully! Playing...';
+            });
+
+            audio.addEventListener('playing', () => {
+                console.log(`${stream.name}: Playing`);
+                statusDiv.className = 'status success';
+                statusDiv.textContent = '✅ Stream is playing!';
+            });
+
+            audio.addEventListener('error', (e) => {
+                console.error(`${stream.name}: Error`, e, audio.error);
+                statusDiv.className = 'status error';
+                let errorMsg = '❌ Stream failed: ';
+                if (audio.error) {
+                    switch(audio.error.code) {
+                        case 1:
+                            errorMsg += 'MEDIA_ERR_ABORTED - Playback aborted';
+                            break;
+                        case 2:
+                            errorMsg += 'MEDIA_ERR_NETWORK - Network error';
+                            break;
+                        case 3:
+                            errorMsg += 'MEDIA_ERR_DECODE - Decoding error';
+                            break;
+                        case 4:
+                            errorMsg += 'MEDIA_ERR_SRC_NOT_SUPPORTED - Source not supported / CORS issue';
+                            break;
+                        default:
+                            errorMsg += 'Unknown error';
+                    }
+                }
+                statusDiv.textContent = errorMsg;
+            });
+
+            audio.play().catch(err => {
+                console.error(`${stream.name}: Play error`, err);
+                statusDiv.className = 'status error';
+                statusDiv.textContent = `❌ Play failed: ${err.message}`;
+            });
+        }
+
+        function stopStream(index) {
+            if (audioPlayers[index]) {
+                audioPlayers[index].pause();
+                audioPlayers[index].currentTime = 0;
+                audioPlayers[index] = null;
+                const statusDiv = document.getElementById(`status-${index}`);
+                statusDiv.className = '';
+                statusDiv.textContent = '';
+                console.log(`Stopped stream ${index}`);
+            }
+        }
+    </script>
+</body>
+</html>

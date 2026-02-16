@@ -250,6 +250,9 @@ export default function Navbar({ menuOpen: externalMenuOpen, setMenuOpen: extern
 							<Link className="nav-dropdown-link" href="/sports" onClick={() => { setMenuOpen(false); setEventsOpen(false) }}>
 								Sports Events
 							</Link>
+							<Link className="nav-dropdown-link" href="/games" onClick={() => { setMenuOpen(false); setEventsOpen(false) }}>
+								Games & Puzzles
+							</Link>
 							<Link className="nav-dropdown-link" href="/radio" onClick={() => { setMenuOpen(false); setEventsOpen(false) }}>
 								Local Radio
 							</Link>

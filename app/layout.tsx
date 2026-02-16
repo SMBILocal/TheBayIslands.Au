@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import HeaderWrapper from '../components/HeaderWrapper'
 import Footer from '../components/Footer'
 import { AuthProvider } from '../lib/AuthContext'
+import { RadioProvider } from '../lib/RadioContext'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
@@ -31,11 +32,13 @@ export default function RootLayout({children}: {children: ReactNode}){
       </head>
       <body>
         <AuthProvider>
-          <HeaderWrapper />
-          <main className="container" style={{paddingTop:0, paddingLeft:0, paddingRight:0}}>
-            {children}
-          </main>
-          <Footer />
+          <RadioProvider>
+            <HeaderWrapper />
+            <main className="container" style={{paddingTop:0, paddingLeft:0, paddingRight:0}}>
+              {children}
+            </main>
+            <Footer />
+          </RadioProvider>
         </AuthProvider>
       </body>
     </html>
